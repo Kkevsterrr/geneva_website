@@ -1,0 +1,4 @@
+baseURL = "http://censorship.ai/"
+languageCode = "en-us"
+title = "Censorship.AI"
+theme = "ananke"
