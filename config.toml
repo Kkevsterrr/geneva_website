@@ -1,6 +1,6 @@
 baseURL = "http://censorship.ai/"
 languageCode = "en-us"
-title = "Censorship.AI"
+title = "Censorship.ai"
 theme = "ananke"
 SectionPagesMenu = "main"
 
