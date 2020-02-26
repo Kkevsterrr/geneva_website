@@ -2,3 +2,11 @@ baseURL = "http://censorship.ai/"
 languageCode = "en-us"
 title = "Censorship.AI"
 theme = "ananke"
+SectionPagesMenu = "main"
+
+[params]
+  favicon = ""
+  description = "The last theme you'll ever need. Maybe."
+  github = "https://github.com/kkevsterrr/geneva"
+  background_color_class = "bg-black"
+  recent_posts_number = 2
