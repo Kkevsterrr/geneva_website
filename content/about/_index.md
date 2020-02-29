@@ -1,5 +1,5 @@
 ---
 title: "About Us"
-featured_image: "test.jpg"
+featured_color: "blue"
 description: "How it Works"
 ---

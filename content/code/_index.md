@@ -1,5 +1,5 @@
 ---
 title: "Code & Data"
-featured_image: "test.jpg"
+featured_color: "green"
 description: "Download our code & data."
 ---
