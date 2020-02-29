@@ -1,10 +1,12 @@
 ---
-title: "Iran Whitelister"
+title: "Iran: A New Model for Censorship"
+summary: "Ahead of its February 21st elections, Iran redeployed its protocol whitelister and mass network degradation, rendering most anti-censorship tools incapacitated or unusably slow. Click read more to learn about how these systems works and how to defeat them."
 date: 2020-02-26T09:53:38-05:00
 draft: true
-facebook: ""
-twitter: ""
+featured_color: "black"
 ---
+
+# Iran: A New Model for Censorship
 
 **Summary: Ahead of its February 21st elections, Iran deployed two censorship systems: *protocol whitelisting* and *mass degradation,* significantly hindering free communication.** 
 
@@ -12,13 +14,13 @@ twitter: ""
 - These systems rendered almost all existing censorship-evasion tool deployments (VPNs, Tor, Proxies, etc) extremely/unusably slow in Iran.
 - Geneva has defeats for these systems: see our Github page [here](https://github.com/Kkevsterrr/geneva).
 
-In this article, we will describe these systems, how they work, and how they can be defeated. As of time of writing, the mass degradation has stopped, but the protocol whitelister is still in effect. (Last Sunday 12:46pm)
+In this article, we will describe the protocol whitelister, how it works, and how it can be defeated. As of time of writing, the mass degradation has stopped, but the protocol whitelister is still in effect. (Last Sunday 12:46pm)
 
 ---
 
 # Protocol Whitelisting
 
-- Iran's protocol whitelisting system works only over TCP on port 53, 80, 443, and has fingerprints it matches for DNS, HTTP, and HTTPS. Each protocol is not bound to is associated port; the whitelister will match all three protocols on amy of the three ports.
+- Iran's protocol whitelisting system works only over TCP on port 53, 80, 443, and has fingerprints it matches for DNS, HTTP, and HTTPS. Each protocol is not bound to is associated port; the whitelister will match all three protocols on any of the three ports.
 - It is not bidirectional. This means that it only affects connections where the client is inside Iran, making it more challenging for researchers to probe and study from outside the country.
 - The whitelister monitors the first two packets from the client. If any packet within that time window matches a protocol fingerprint, the flow is unharmed; if no packet does, the second packet and rest of the flow from the client is blackholed. Packets from the server are unharmed, but the client is unable to ACK any data.
 - The flow is blackholed by simply dropping all packets from the client after the first packet, while packets from the server are unimpacted (by "flow", we mean packets with the same source and destination IP:port). Although the server can communicate with the client, the client is unable to ACK any data. The whitelister remembers this flow for 30 seconds after the last matching packet is seen (and each additional packet sent in the flow resets the timer).
@@ -39,7 +41,7 @@ Like Iran's regular censorship systems, the whitelister does not check checksums
 
 ## Affected IP Space
 
-**Summary: Cloud providers are overwhelmingly targeted by the whitelister.**  
+**Summary:** 
 
 In order to identify which IPs are affected by the whitelister, we must try to trigger the whitelister to many IPs. The main limitation with the above approach (manually opening a port and sending short text segments) is that control over both client and server is required. Fortunately, we can also trigger the whitelister with normal web traffic by forcing repeated TCP segmentation. TCP segmentation is the process of splitting up the TCP stream across multiple packets. Since the whitelister only verifies the first two packets and cannot reassemble segments, we can segment the request into multiple smaller segments that do not match its fingerprint. Geneva's open-source strategy [engine](https://github.com/kkevsterrr/geneva) allows us to do this. Using this methodology, we can easily test many web servers to see which are affected by the whitelister. 
 
@@ -47,23 +49,20 @@ We performed an experiment to test the effects of the whitelister on the Alex to
 
 Of the Alexa top 20,000, 3,728 IP addresses responded with a timeout during the second condition but responded fine during the first condition in both experiments. Specifically, 4,266 IPs (21.3%) responded differently in the first experiment, 4,564 (22.8%) in the second experiment, with an overlap of 3,728 (18.6%). To determine ownership of these IPs, we performed reverse DNS lookups on each:
 
-       5 cloudwaysapps.com
-       5 scaleway.com
-       6 ovh.net
-       8 hwclouds-dns.com
-      15 cloudfront.net
-      16 vultr.com
-      27 poneytelecom.eu
-      66 linode.com
-     158 akamaitechnologies.com
-     159 your-server.de
     1540 amazonaws.com
-
-Overwhelmingly, cloud providers seem to be affected by the whitelister. 
+     159 your-server.de
+     158 akamaitechnologies.com
+      66 linode.com
+      27 poneytelecom.eu
+      16 vultr.com
+      15 cloudfront.net
+       8 hwclouds-dns.com
+       6 ovh.net
+       5 scaleway.com
 
 ## Fingerprints
 
-In this section, we describe the fingerprints matched by each whitelister. By injecting this fingerprinter at the start of a connection, the whitelister can be bypassed. 
+In this section, we describe the fingerprints matched by each whitelister. By injecting a fingerprint at the start of a connection, the whitelister can be bypassed. Since the whitelister will match any of these fingerprints on all three ports, any fingerprint can be used on any whitelisted ports. 
 
 ### DNS Fingerprint
 
@@ -89,7 +88,15 @@ Example: `GET aaaaa`
 
 ### HTTPS Fingerprint
 
-The HTTPS protocol matcher seems to OK the flow if some of the ciphersuites are present in the first packet. 
+The HTTPS protocol matcher seems to OK the flow if the following conditions are met:
+
+- The TCP payload must be ≥ 41 bytes, (5 bytes for the TLS header, 36 for the TLS Client Hello)
+- The length field of the TLS Header equals the length of the Client Hello
+- The TLS version header (bytes 2 and 3 of the TCP payload) is TLS 1.0, 1.1, or 1.2,  (`\x03\x01`, `\x03\x02`, `\x03\x03`, respectively). Note that real TLS 1.x Client Hellos all have TLS 1.0 in this field, so this criterion has no practical difference.
+
+After the first 5 bytes of the packet (the type, the version, and the length, 1, 2, and 2 bytes respectively), the whitelister does not look at any contents of the Client Hello. Writing garbage bytes to the remaining bytes of the Client Hello does not trip the whitelister.
+
+Example TCP Payload: `\x16\x03\x01\x02\x00...`, where `\x16` is the indication of a handshake, `\x03\x01` is TLS version (1.0), and `\x02\x00` is the length of the Client Hello (512 bytes)
 
 ## Bypassing the Whitelister
 
@@ -111,14 +118,6 @@ In this case, we used Geneva to defeat the whitelister for a simple netcat appli
 
 ---
 
-# Degradation
-
-Iran began all degrading traffic crossing its borders.  
-
-[https://map.internetintel.oracle.com/?root=traffic&country=IR&asn=49832](https://map.internetintel.oracle.com/?root=traffic&country=IR&asn=49832)
-
-![Iran%20A%20New%20Model%20for%20Censorship/Untitled.png](Iran%20A%20New%20Model%20for%20Censorship/Untitled.png)
-
 # Conclusion
 
 Censoring nations have greater capacity for censorship than they exercise on a daily basis, and often these systems can be highly effective at crippling existing censorship-evasion tools (VPNs, Tor, etc). The unidirectional and non-universal nature of the whitelister makes it more challenging for researchers outside of the country to identify it. Iran is likely to bring back protocol whitelisting and mass degradation again in the future, and the anti-censorship community should be prepared for it. 
@@ -127,4 +126,4 @@ Censoring nations have greater capacity for censorship than they exercise on a d
 
 [1] Protocol whitelisting was briefly described in 2013: [https://censorbib.nymity.ch/pdf/Aryan2013a.pdf](https://censorbib.nymity.ch/pdf/Aryan2013a.pdf), as a capability they turned off after the 2013 elections were over.
 
-[2] Researchers recently theorized that it would be challenging to accurately whitelist TLS: [https://www.ndss-symposium.org/wp-content/uploads/2019/02/ndss2019_03B-2-1_Frolov_paper.pdf](https://www.ndss-symposium.org/wp-content/uploads/2019/02/ndss2019_03B-2-1_Frolov_paper.pdf)
+[2] [https://www.ndss-symposium.org/wp-content/uploads/2019/02/ndss2019_03B-2-1_Frolov_paper.pdf](https://www.ndss-symposium.org/wp-content/uploads/2019/02/ndss2019_03B-2-1_Frolov_paper.pdf)
