@@ -1,0 +1,24 @@
+.bg-top {
+    background-position: center;
+}
+
+.flex-container {
+  display: flex;
+  display: -ms-flex;
+  display: -webkit-flex;
+}
+
+.flex-container > .flex-column {
+  flex: 1;
+  padding: 0 30px;
+}
+
+@media only screen and (max-width: 768px) {
+
+  .flex-container {
+    flex-direction: column;
+  }
+
+  .flex-container > .flex-column {
+    padding: 0;
+}
