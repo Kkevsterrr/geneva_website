@@ -6,8 +6,6 @@ draft: true
 featured_color: "black"
 ---
 
-# Iran: A New Model for Censorship
-
 **Summary: Ahead of its February 21st elections, Iran deployed two censorship systems: *protocol whitelisting* and *mass degradation,* significantly hindering free communication.** 
 
 - Almost all traffic crossing Iran's borders was degraded. Traffic that was not degraded was matched against a protocol whitelist if destined to certain IP ranges (and any connection that failed to meet the whitelist was dropped).

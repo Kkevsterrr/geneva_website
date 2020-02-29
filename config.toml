@@ -1,8 +1,9 @@
 baseURL = "http://censorship.ai/"
 languageCode = "en-us"
-title = "Censorship.ai"
+title = "censorship.ai"
 theme = "ananke"
 SectionPagesMenu = "main"
+
 
 [params]
   favicon = ""
