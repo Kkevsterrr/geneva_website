@@ -1,5 +1,5 @@
 ---
-title: "How it Works"
-description: "The last theme you'll ever need. Maybe."
+title: "About Us"
+featured_image: "test.jpg"
+description: "How it Works"
 ---
-Welcome to my blog with some of my work in progress. I've been working on this book idea. You can read some of the chapters below.
