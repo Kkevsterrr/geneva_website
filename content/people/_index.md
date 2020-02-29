@@ -1,5 +1,6 @@
 ---
 title: "People"
+weight: 20 
 featured_color: "yellow"
 description: "Meet the Team"
 ---
@@ -30,21 +31,25 @@ Want to be added to this list? Then swing by, get involved, and [drop Dave a lin
 ### Undergraduate Students
 
 {{< flex >}}
-{{< flex-column >}}
 
+{{< flex-column >}}
 {{< person name="Louis Henri-Merino" icon="avatar.png" >}}
 {{< /flex-column >}}
-{{< flex-column >}}
 
+{{< flex-column >}}
 {{< person name="Jasraj Singh" icon="avatar.png" >}}
 {{< /flex-column >}}
-{{< flex-column >}}
 
+{{< flex-column >}}
 {{< person name="Yair Fax" icon="avatar.png" >}}
 {{< /flex-column >}}
-{{< flex-column >}}
 
-{{< person name="Daniel L" icon="avatar.png" >}}
+{{< flex-column >}}
+{{< person name="Daniel Liscinsky" icon="avatar.png" >}}
+{{< /flex-column >}}
+
+{{< flex-column >}}
+{{< person name="Kyle Reese" icon="avatar.png" >}}
 {{< /flex-column >}}
 
 

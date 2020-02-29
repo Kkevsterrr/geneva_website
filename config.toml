@@ -9,7 +9,6 @@ SectionPagesMenu = "main"
   favicon = ""
   description = "The last theme you'll ever need. Maybe."
   github = "https://github.com/kkevsterrr/geneva"
-  images = ["images/back.jpg"]
   background_color_class = "bg-black-60"
   recent_posts_number = 2
   custom_css = ["css/style.css"]
