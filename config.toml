@@ -10,5 +10,5 @@ SectionPagesMenu = "main"
   description = "The last theme you'll ever need. Maybe."
   github = "https://github.com/kkevsterrr/geneva"
   background_color_class = "bg-black-60"
-  recent_posts_number = 2
+  recent_posts_number = 3
   custom_css = ["css/style.css"]
