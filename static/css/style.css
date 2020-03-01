@@ -13,6 +13,10 @@
   padding: 0 30px;
 }
 
+.lighter-gray {
+    background-color: rgb(24, 26, 27);
+}
+
 @media only screen and (max-width: 768px) {
 
   .flex-container {
