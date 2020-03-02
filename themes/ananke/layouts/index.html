@@ -18,10 +18,8 @@
           <h1 class="cf ph3 ph5-l pv3 pv4-l tc-l">
             {{ $.Param "recent_copy" | default (i18n "recentTitle" .) }}
           </h1>
-    <p class='tl-c'>
-    {{ $.Param "see_more" | default (i18n "seeMore" .) }}
-    </p>
-        {{ end }}
+    
+          {{ end }}
 
       {{ $n_posts := $.Param "recent_posts_number" | default 3 }}
 <section class="flex-ns flex-wrap justify-around">
@@ -36,6 +34,10 @@
 
     {{- template "_internal/pagination.html" . -}}
       </div>
+
+   <!-- <p class='tl-c'>
+    {{ $.Param "see_more" | default (i18n "seeMore" .) }}
+   </p>-->
 
   {{ end }}
 {{ end }}

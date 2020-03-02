@@ -1,0 +1,5 @@
+<div class ="" style='background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url({{ .Get "src" }}); height: 100vh; background-position:center; background-size: cover; background-repeat: no-repeat'>
+    <div style="padding-top: 10vh;">
+  {{ printf "%s" .Inner | safeHTML }}
+    </div>
+</div>

@@ -13,6 +13,10 @@
   padding: 0 30px;
 }
 
+.flex-column p {
+    text-align: justify;
+}
+
 .lighter-gray {
     background-color: rgb(24, 26, 27);
 }
