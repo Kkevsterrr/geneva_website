@@ -26,6 +26,7 @@ We developed Geneva (*Gen*etic *Eva*sion), a novel genetic algorithm that evolve
 {{< /flex >}}
 
 
+{{< center-me >}}
 {{% markdown %}}
 
 # How it works 
@@ -35,14 +36,17 @@ Geneva represents a _censorship evasion strategy_ as trees of packet modificatio
 
 {{% /markdown %}}
 
+{{< /center-me >}}
 {{< /padded >}}
 
 {{< section src="/flags_noborder.png" >}}
 
+{{< center-me >}}
 {{% markdown %}}
 # Real World Deployments
 
 Geneva has been deployed in countries around the world.
 {{% /markdown %}}
 
+{{< /center-me >}}
 {{< /section >}}
