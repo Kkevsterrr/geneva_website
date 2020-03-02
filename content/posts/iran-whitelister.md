@@ -4,6 +4,7 @@ summary: "Ahead of its February 21st elections, Iran redeployed its protocol whi
 date: 2020-02-26T09:53:38-05:00
 draft: true
 featured_color: "black"
+featured_image: "/laptop.jpeg"
 ---
 
 **Summary: Ahead of its February 21st elections, Iran deployed two censorship systems: *protocol whitelisting* and *mass degradation,* significantly hindering free communication.** 
