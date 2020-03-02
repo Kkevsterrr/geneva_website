@@ -4,6 +4,7 @@ featured_color: "red"
 description: "Join us and learn about our fight to defeat censorship around the world."
 ---
 
+{{< padded >}}
 {{< flex >}}
 
 {{% flex-column %}}
@@ -24,9 +25,17 @@ We developed Geneva (*Gen*etic *Eva*sion), a novel genetic algorithm that evolve
 
 {{< /flex >}}
 
+
+{{% markdown %}}
+
 # How it works 
 
 Geneva represents a _censorship evasion strategy_ as trees of packet modifications. Geneva composes four packet-level actions (drop, duplicate, fragment, tamper) together Geneva is a genetic algorithm 
+
+
+{{% /markdown %}}
+
+{{< /padded >}}
 
 {{< section src="/flags_noborder.png" >}}
 

@@ -21,18 +21,8 @@
     background-color: rgb(24, 26, 27);
 }
 
-.callout {
-    font-size: 4em;
-    margin-bottom: 0;
-}
-
-.grid-container {
-    grid-template-columns: 20fr;
-    grid-template-rows: 20fr;
-}
-.item1 {
-    grid-column: 1;
-    grid-row: 1;
+.section {
+    height: 100vh; 
 }
 
 @media only screen and (max-width: 768px) {

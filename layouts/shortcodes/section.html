@@ -1,5 +1,23 @@
-<div class ="" style='background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url({{ .Get "src" }}); height: 100vh; background-position:center; background-size: cover; background-repeat: no-repeat'>
-    <div style="padding-top: 10vh;">
-  {{ printf "%s" .Inner | safeHTML }}
+<script type='text/javascript'>
+    /*
+    $(document).ready(function() {
+
+        // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+        let vh = window.innerHeight;
+        // Then we set the value in the --vh custom property to the root of the document
+        var eles = document.getElementsByClassName("section")
+        console.log(eles)
+        var i;
+        for (i = 0; i < eles.length; i++) {
+            console.log(eles[i])
+            eles[i].style.height = vh.toString() + 'px';
+        }
+    })
+    */
+
+</script>
+<div class ="section" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ .Get "src" }}); background-repeat: no-repeat; background-size:cover; background-position:center; ">
+    <div class="ph3 ph5-l pv5" style="">
+        {{ printf "%s" .Inner | safeHTML }}
     </div>
 </div>
