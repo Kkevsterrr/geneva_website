@@ -1,6 +1,7 @@
 ---
 title: "Iran: A New Model for Censorship"
 summary: "Ahead of its February 21st elections, Iran redeployed its protocol whitelister and mass network degradation, rendering most anti-censorship tools incapacitated or unusably slow. Click read more to learn about how these systems works and how to defeat them."
+description: ""
 date: 2020-02-26T09:53:38-05:00
 draft: true
 featured_color: "black"

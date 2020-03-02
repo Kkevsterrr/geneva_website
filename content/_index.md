@@ -45,7 +45,7 @@ Geneva represents a _censorship evasion strategy_ as trees of packet modificatio
 {{% markdown %}}
 # Real World Deployments
 
-Geneva has been deployed in countries around the world.
+Geneva has been deployed against real-world censors in China, India, Iran, and Kazahkstan. It was discovered dozens of strategies to defeat censorship.
 {{% /markdown %}}
 
 {{< /center-me >}}
