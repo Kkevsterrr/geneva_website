@@ -12,7 +12,7 @@ Want to be added to this list? Then swing by, get involved, and [drop Dave a lin
 
 {{< flex-column >}}
 
-{{< person name="Dave Levin" icon="dave.png" >}} 
+{{< person name="Dave Levin" icon="dave.png" link="https://www.cs.umd.edu/~dml" >}} 
 
 {{< /flex-column >}}
 
