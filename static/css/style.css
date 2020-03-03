@@ -14,7 +14,7 @@
 }
 
 .flex-column p {
-    text-align: justify;
+    text-align: left;
 }
 
 .lighter-gray {
@@ -23,6 +23,10 @@
 
 .section {
     height: 100vh; 
+}
+
+.single-para p {
+    text-align: left;
 }
 
 @media only screen and (max-width: 768px) {
