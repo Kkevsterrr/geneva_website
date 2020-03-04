@@ -72,4 +72,6 @@ Want to be added to this list? Then swing by, get involved, and [drop Dave a lin
 
 {{< /flex >}}
 
-*A special thank you goes out to all of those who have contributed to the project whose names are not mentioned here for their privacy or security. We could not do this without you.*
+
+### Special Thanks
+*A special thank you goes out to all of those who have contributed to the project whose names are not mentioned here for their privacy or security.*
