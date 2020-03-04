@@ -28,6 +28,13 @@
 .single-para p {
     text-align: left;
 }
+a {
+    color: white;
+}
+.single-para li {
+    text-align: left;
+}
+
 
 @media only screen and (max-width: 768px) {
 

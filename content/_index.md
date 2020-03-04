@@ -47,7 +47,14 @@ Geneva composes four basic packet-level actions (drop, duplicate, fragment, tamp
 {{% markdown %}}
 # Real World Deployments
 
-Geneva has been deployed against real-world censors in China, India, Iran, and Kazahkstan. It was discovered dozens of strategies to defeat censorship.
+Geneva has been deployed against real-world censors in China, India, Iran, and Kazahkstan. It was discovered dozens of strategies to defeat censorship. 
+
+Since Geneva often identifies many strategies that defeat a censor, we created a _taxonomy_ to classify them.
+ - _Species_ describe the overarching bug in a censor that Geneva exploits to defeat censorship
+ - _Subspecies_ captures unique ways that Geneva exploits the bug
+ - _Variants_ are unique strategies that use the same attack vector, but do so differently
+
+Against China, India, and Kazahkstan, we describe 4 species (two of which are novel), 8 subspecies, and 21 variants in our first paper. See our [Github page](https://github.com/kkevsterrr/geneva) for more information on how to use these.  
 {{% /markdown %}}
 
 {{< /center-me >}}
