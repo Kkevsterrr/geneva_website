@@ -7,7 +7,7 @@
 	.st1{enable-background:new    ;}
 	.st2{fill:#FFFFFF;}
 	.st3{font-family:'Avenir-Medium';}
-	.st4{font-size:16px;}
+	.st4{font-size:12px;}
 	.st5{fill:#F4F4F4;}
 	.st6{fill:none;stroke:#FEFEFE;stroke-miterlimit:10;}
 	.st7{fill:#808080;}
@@ -17,11 +17,11 @@
 </style>
 <path class="st0" d="M245.5,156.3H131.4c-6.5,0-11.7-5.3-11.7-11.7v-17.8c0-6.5,5.3-11.7,11.7-11.7h114.1c6.5,0,11.7,5.3,11.7,11.7
 	v17.8C257.3,151,252,156.3,245.5,156.3z"/>
-<text transform="matrix(1 0 0 1 155.8278 131.0899)" class="st1"><tspan x="0" y="0" class="st2 st3 st4">Fragment</tspan><tspan x="-13.6" y="19.2" class="st2 st3 st4">tcp:4:inOrder</tspan></text>
+<text transform="matrix(1 0 0 1 164.6438 131.0899)" class="st1"><tspan x="0" y="0" class="st2 st3 st4">Fragment</tspan><tspan x="-10.2" y="14.4" class="st2 st3 st4">tcp:4:inOrder</tspan></text>
 <g>
 	<path class="st0" d="M167.8,84H53.7C47.2,84,42,78.8,42,72.3V54.5c0-6.5,5.3-11.7,11.7-11.7h114.1c6.5,0,11.7,5.3,11.7,11.7v17.8
 		C179.6,78.8,174.3,84,167.8,84z"/>
-	<text transform="matrix(1 0 0 1 78.146 58.8487)" class="st1"><tspan x="0" y="0" class="st2 st3 st4">Fragment</tspan><tspan x="-13.6" y="19.2" class="st2 st3 st4">tcp:8:inOrder</tspan></text>
+	<text transform="matrix(1 0 0 1 86.962 58.8487)" class="st1"><tspan x="0" y="0" class="st2 st3 st4">Fragment</tspan><tspan x="-10.2" y="14.4" class="st2 st3 st4">tcp:8:inOrder</tspan></text>
 </g>
 <g>
 	<line class="st2" x1="113.4" y1="13.5" x2="113.4" y2="42.7"/>
