@@ -6,6 +6,7 @@
   display: flex;
   display: -ms-flex;
   display: -webkit-flex;
+  align-items: center;
 }
 
 .flex-container > .flex-column {
@@ -13,12 +14,22 @@
   padding: 0 30px;
 }
 
+figure {
+    margin: 0;
+    padding: 10px;
+}
+
+
 .flex-column p {
     text-align: left;
 }
 
 .flex-column li {
     text-align: left;
+}
+
+.flex-column h1 {
+    /*margin: 0px;*/
 }
 
 

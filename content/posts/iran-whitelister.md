@@ -14,22 +14,26 @@ featured_image: "/laptop.jpeg"
 - These systems rendered almost all existing censorship-evasion tool deployments (VPNs, Tor, Proxies, etc) extremely/unusably slow in Iran.
 - Geneva has defeats for these systems: see our Github page [here](https://github.com/Kkevsterrr/geneva).
 
-In this article, we will describe the protocol whitelister, how it works, and how it can be defeated. As of time of writing, the mass degradation has stopped, but the protocol whitelister is still in effect. (Last Sunday 12:46pm)
+In this article, we will describe the protocol whitelister, how it works, and how it can be defeated. 
+
+Update: since this was written, the nature of degradation seems to have changed; previously, we could experience degradation across all of our vantage points in Iran, but whitelisted ports were not degraded. Currently, only vantage points in residential or cellular networks are degraded, and whitelisted ports are also affected. The protocol whitelister is still in effect. 
 
 ---
+
+{{< figure src="/iran-whitelister-darkmode.svg" class="ph6-l" caption="Test test test" >}}
 
 # Protocol Whitelisting
 
 - Iran's protocol whitelisting system works only over TCP on port 53, 80, 443, and has fingerprints it matches for DNS, HTTP, and HTTPS. Each protocol is not bound to is associated port; the whitelister will match all three protocols on any of the three ports.
 - It is not bidirectional. This means that it only affects connections where the client is inside Iran, making it more challenging for researchers to probe and study from outside the country.
 - The whitelister monitors the first two packets from the client. If any packet within that time window matches a protocol fingerprint, the flow is unharmed; if no packet does, the second packet and rest of the flow from the client is blackholed. Packets from the server are unharmed, but the client is unable to ACK any data.
-- The flow is blackholed by simply dropping all packets from the client after the first packet, while packets from the server are unimpacted (by "flow", we mean packets with the same source and destination IP:port). Although the server can communicate with the client, the client is unable to ACK any data. The whitelister remembers this flow for 30 seconds after the last matching packet is seen (and each additional packet sent in the flow resets the timer).
+- The flow is blackholed by simply dropping all packets from the client after the first packet, while packets from the server are unimpacted (by "flow", we mean packets with the same source and destination IP:port). Although the server can communicate with the client, the client is unable to ACK any data. The whitelister remembers this flow for ~60 seconds after the last matching packet is seen (and each additional packet sent in the flow resets this timer).
 - We have observed whitelisting active on port 80 while whitelisting was inactive on port 443. This suggests the whitelister is implemented in multiple distinct systems.
 - Not all destination IPs are affected by whitelisting - the whitelister predominantly filters IPs that belong to cloud hosting providers.
 
 In this section we will describe how to trigger the whitelister, which IPs it effects, the fingerprints it looks for, and how it can be defeated.
 
-Our experiments were performed across three vantage points in Iran; two in Tehran, one in Zanjan to machines we controlled in Amazon EC2 and DigitalOcean. Other external machines at University of Colorado and University of Maryland were not affected by whitelisting. 
+Our experiments were performed across five vantage points in Iran; four in various networks in Tehran, one in Zanjan to machines we controlled in Amazon EC2 and DigitalOcean. 
 
 ## Triggering the whitelister
 
@@ -39,15 +43,17 @@ The system is not bidirectional; if the client is located outside of Iran connec
 
 Like Iran's regular censorship systems, the whitelister does not check checksums and is incapable of reassembling TCP segments. 
 
-## Affected IP Space
-
-**Summary:** 
+## Affected IP Space - WIP ****
 
 In order to identify which IPs are affected by the whitelister, we must try to trigger the whitelister to many IPs. The main limitation with the above approach (manually opening a port and sending short text segments) is that control over both client and server is required. Fortunately, we can also trigger the whitelister with normal web traffic by forcing repeated TCP segmentation. TCP segmentation is the process of splitting up the TCP stream across multiple packets. Since the whitelister only verifies the first two packets and cannot reassemble segments, we can segment the request into multiple smaller segments that do not match its fingerprint. Geneva's open-source strategy [engine](https://github.com/kkevsterrr/geneva) allows us to do this. Using this methodology, we can easily test many web servers to see which are affected by the whitelister. 
 
-We performed an experiment to test the effects of the whitelister on the Alex top 20,000 list. To avoid the effects of DNS censorship or accidentally requesting IPs inside of Iran, we used `dig`outside of the Iran to get IP addresses for all 20,000. Inside if Iran, we wet up an experiment with two conditions. The first condition was a control: we made normal`GET` requests to all 20,000 IP addresses using `curl`, and the success or failure of the request was recorded. The second condition tested for the whitelister. We requested all 20,000 IP addresses again, this time with the Geneva engine was running in the background forcing all requests to be repeatedly segmented. IP addresses that responded successfully in the first condition but timed out in the second condition are potentially affected by the whitelister. We perform this experiment twice to validate the results.
+We performed an experiment to test the effects of the whitelister on the Alex top 20,000 list. To avoid the effects of DNS censorship or accidentally requesting IPs inside of Iran, we used `dig`outside of the Iran to get IP addresses for all 20,000. Inside if Iran, we wet up an experiment with two conditions. The first condition was a control: we made normal `GET` requests to all 20,000 IP addresses using `curl`, and the success or failure of the request was recorded. The second condition tested for the whitelister. We requested all 20,000 IP addresses again, this time with the Geneva engine was running in the background forcing all requests to be repeatedly segmented. IP addresses that we can connect to in the first condition - but time out in the second condition - are potentially affected by the whitelister. We perform this experiment twice to validate the results.
 
-Of the Alexa top 20,000, 3,728 IP addresses responded with a timeout during the second condition but responded fine during the first condition in both experiments. Specifically, 4,266 IPs (21.3%) responded differently in the first experiment, 4,564 (22.8%) in the second experiment, with an overlap of 3,728 (18.6%). To determine ownership of these IPs, we performed reverse DNS lookups on each:
+Out of 20,000 IPs, 3,728 IP addresses responded with a timeout during the second condition but responded fine during the first condition in both experiments. Specifically, 4,266 IPs (21.3%) responded differently in the first experiment, 4,564 (22.8%) in the second experiment, with an overlap of 3,728 (18.6%). 
+
+It appears Iran is applying the whitelister at the /24 level. 
+
+To determine ownership of these IPs, we performed reverse DNS lookups on each.
 
     1540 amazonaws.com
      159 your-server.de
@@ -59,6 +65,8 @@ Of the Alexa top 20,000, 3,728 IP addresses responded with a timeout during the 
        8 hwclouds-dns.com
        6 ovh.net
        5 scaleway.com
+
+<more info here>
 
 ## Fingerprints
 
@@ -118,9 +126,15 @@ In this case, we used Geneva to defeat the whitelister for a simple netcat appli
 
 ---
 
+# Collateral Damage
+
+Much censorship evasion design today is couched in this idea of maximizing *collateral damage* for the censor. The idea is that if a censor wants to shut down an anti-censorship tool, we should make it as costly as possible for them to do so, usually by designing the system in such a way that it forces censors to block much more than they need to - causing collateral damage. For example, running bridges/proxies/VPNs on EC2 has been popular under the assumption that a censor would have to block all of AWS in order to shut them down, which would cause enormous collateral damage due to all the websites that are hosted on AWS.
+
+The whitelister represents a way for Iran to sidestep some of this collateral damage. By only allowing content from specific protocols, they can shutdown or degrade most anti-censorship tools without negatively impacting regular websites or services.  
+
 # Conclusion
 
-Censoring nations have greater capacity for censorship than they exercise on a daily basis, and often these systems can be highly effective at crippling existing censorship-evasion tools (VPNs, Tor, etc). The unidirectional and non-universal nature of the whitelister makes it more challenging for researchers outside of the country to identify it. Iran is likely to bring back protocol whitelisting and mass degradation again in the future, and the anti-censorship community should be prepared for it. 
+Censoring nations have greater capacity for censorship than they exercise on a daily basis, and often these systems can be highly effective at crippling existing censorship-evasion tools (VPNs, Tor, etc).  The unidirectional and non-universal nature of the whitelister makes it more challenging for researchers outside of the country to identify it. 
 
 # Citations
 

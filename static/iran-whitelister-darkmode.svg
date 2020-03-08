@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xl="http://www.w3.org/1999/xlink" viewBox="121 248 499 292" width="499" height="292">
+  <defs>
+    <font-face font-family="Apple Color Emoji" font-size="53" units-per-em="1000" underline-position="-93.75018" underline-thickness="62.50012" slope="0" x-height="625.0012" cap-height="1000.0019" ascent="1000.0019" descent="-312.5006" font-weight="400">
+      <font-face-src>
+        <font-face-name name="AppleColorEmoji"/>
+      </font-face-src>
+    </font-face>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -3 7 6" markerWidth="7" markerHeight="6" color="white">
+      <g>
+        <path d="M 4.8 0 L 0 -1.8 L 0 1.8 Z" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="EmptyCenterBall_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -3 6 6" markerWidth="6" markerHeight="6" color="white">
+      <g>
+        <circle cx="1.7999992" cy="0" r="1.79999817186192" fill="none" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+    <font-face font-family="Avenir" font-size="16" panose-1="2 0 5 3 2 0 0 2 0 3" units-per-em="1000" underline-position="-75" underline-thickness="50" slope="0" x-height="468" cap-height="708" ascent="1e3" descent="-365.9973" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Avenir-Book"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="Avenir" font-size="16" panose-1="2 0 5 3 2 0 0 2 0 3" units-per-em="1000" underline-position="-75" underline-thickness="50" slope="-500" x-height="468" cap-height="708" ascent="1e3" descent="-365.9973" font-style="italic" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Avenir-BookOblique"/>
+      </font-face-src>
+    </font-face>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.13 
+    <dc:date>2020-03-08 18:27:59 +0000</dc:date>
+  </metadata>
+  <g id="Canvas_1" stroke-dasharray="none" fill="none" stroke-opacity="1" stroke="none" fill-opacity="1">
+    <title>Canvas 1</title>
+    <g id="Canvas_1: Layer 1">
+      <title>Layer 1</title>
+      <g id="Graphic_58">
+        <path d="M 216 282 L 502 282 C 505.3137 282 508 284.6863 508 288 L 508 533 C 508 536.3137 505.3137 539 502 539 L 216 539 C 212.6863 539 210 536.3137 210 533 L 210 288 C 210 284.6863 212.6863 282 216 282 Z" stroke="#dd2525" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8.0,8.0" stroke-width="2"/>
+      </g>
+      <g id="Graphic_4">
+        <text transform="translate(328.5 253)" fill="black">
+          <tspan font-family="Apple Color Emoji" font-size="53" font-weight="400" fill="black" x="0" y="53">🇮🇷</tspan>
+        </text>
+      </g>
+      <g id="Line_22">
+        <path d="M 333.67718 453 C 333.67718 453 331.1475 433.88195 387.33333 420 C 430.42195 409.354 492.5041 405.6267 519.10615 404.46745" marker-end="url(#FilledArrow_Marker)" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Line_23">
+        <path d="M 333.67718 453 C 333.67718 453 343.6863 469.56225 369.33333 482.1221 C 389.58547 492.04 412.0685 495.77947 420.6311 496.91384" marker-end="url(#EmptyCenterBall_Marker)" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Line_33">
+        <line x1="333.67718" y1="453" x2="190.27026" y2="453.57136" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Group_40">
+        <g id="Graphic_12">
+          <path d="M 237 325 L 314.93282 325 C 320.45567 325 324.93282 329.47715 324.93282 335 L 324.93282 365.1221 C 324.93282 370.64496 320.45567 375.1221 314.93282 375.1221 L 237 375.1221 C 231.47715 375.1221 227 370.64496 227 365.1221 L 227 335 C 227 329.47715 231.47715 325 237 325 Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </g>
+        <g id="Group_36">
+          <g id="Graphic_34">
+            <text transform="translate(246.1984 330)" fill="white">
+              <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x="2842171e-20" y="16">Protocol</tspan>
+            </text>
+          </g>
+          <g id="Graphic_35">
+            <text transform="translate(237.9344 348.1221)" fill="white">
+              <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x="0" y="16">Whitelister</tspan>
+            </text>
+          </g>
+        </g>
+      </g>
+      <g id="Group_39">
+        <g id="Group_38">
+          <g id="Graphic_21">
+            <path d="M 136.95378 432 L 179.27026 432 C 184.7931 432 189.27026 436.47715 189.27026 442 L 189.27026 465.399 C 189.27026 470.9218 184.7931 475.399 179.27026 475.399 L 136.95378 475.399 C 131.43093 475.399 126.95378 470.9218 126.95378 465.399 L 126.95378 442 C 126.95378 436.47715 131.43093 432 136.95378 432 C 136.95378 432 136.95378 432 136.95378 432 Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          </g>
+          <g id="Graphic_20">
+            <rect x="122" y="476.00174" width="73.33683" height="6.1203686" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          </g>
+        </g>
+        <g id="Graphic_37">
+          <text transform="translate(137.64442 443.0194)" fill="white">
+            <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x="0" y="16">Client</tspan>
+          </text>
+        </g>
+      </g>
+      <g id="Line_41">
+        <line x1="275.91645" y1="376.1221" x2="275.76862" y2="453.2307" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4.0,4.0" stroke-width="1"/>
+      </g>
+      <g id="Group_43">
+        <g id="Graphic_47">
+          <path d="M 393.86355 325 L 471.79637 325 C 477.3192 325 481.79637 329.47715 481.79637 335 L 481.79637 365.1221 C 481.79637 370.64496 477.3192 375.1221 471.79637 375.1221 L 393.86355 375.1221 C 388.3407 375.1221 383.86355 370.64496 383.86355 365.1221 L 383.86355 335 C 383.86355 329.47715 388.3407 325 393.86355 325 Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </g>
+        <g id="Group_44">
+          <g id="Graphic_46">
+            <text transform="translate(400.68596 330)" fill="white">
+              <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x="2344791e-19" y="16">Standard</tspan>
+            </text>
+          </g>
+          <g id="Graphic_45">
+            <text transform="translate(392.82996 348.1221)" fill="white">
+              <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x="0" y="16">Censorship</tspan>
+            </text>
+          </g>
+        </g>
+      </g>
+      <g id="Line_48">
+        <line x1="432.784" y1="376.1221" x2="432.72115" y2="411.76634" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4.0,4.0" stroke-width="1"/>
+      </g>
+      <g id="Group_51">
+        <g id="Graphic_53">
+          <path d="M 540.39184 409.00776 C 525.8518 406 531.65 380.6796 554.84464 385 C 556.9966 376.57816 583.96884 377.9451 583.7925 385 C 600.70494 375.9767 622.318 393.96896 607.8211 402.99224 C 625.2167 407.36696 607.6016 430.93736 593.32515 427 C 592.1826 433.56264 566.6606 435.8592 564.42046 427 C 549.96856 436.4612 519.83405 421.9141 540.39184 409.00776 Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </g>
+        <g id="Graphic_52">
+          <text transform="translate(545.6294 395)" fill="white">
+            <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x="0" y="16">Internet</tspan>
+          </text>
+        </g>
+      </g>
+      <g id="Graphic_54">
+        <text transform="translate(432.232 486.8779)" fill="white">
+          <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x=".9999989" y="16">Blackhole</tspan>
+        </text>
+      </g>
+      <g id="Graphic_55">
+        <text transform="translate(314.736 395)" fill="white">
+          <tspan font-family="Avenir" font-size="16" font-style="italic" font-weight="400" fill="white" x="0" y="16">Whitelisted</tspan>
+        </text>
+      </g>
+      <g id="Graphic_56">
+        <text transform="translate(300.664 498)" fill="white">
+          <tspan font-family="Avenir" font-size="16" font-style="italic" font-weight="400" fill="white" x="0" y="16">Not whitelisted</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>
