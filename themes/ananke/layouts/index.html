@@ -1,4 +1,19 @@
 {{ define "main" }}
+<script>
+    $(document).ready(function () {
+        $('#nav li').hover(
+            
+        function () {
+console.log("hit!");
+            console.log(this);
+            //show submenu
+            $('ul', this).show();
+        }, function () {
+            //hide submenu
+            $('ul', this).hide();
+        });
+    });
+</script>
   <article class="cf pv3 pv4-l f4 tc-l center  lh-copy light-gray">
     {{ .Content }}
   </article>

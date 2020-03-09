@@ -1,5 +1,6 @@
 baseURL = "http://censorship.ai/"
-languageCode = "en-us"
+languageCode = "en-US"
+DefaultContentLanguage = "en"
 title = "censorship.ai"
 theme = "ananke"
 SectionPagesMenu = "main"
@@ -16,4 +17,21 @@ SectionPagesMenu = "main"
 
 [markup.goldmark.renderer]
   unsafe= true
+
+[languages]
+  [languages.en]
+    title = "censorship.ai"
+    weight = 1
+  [languages.fr]
+    title = "censorship.ai"
+    weight = 2
+    [languages.fr.params]
+      [languages.fr.params.navigation]
+        help = "Aide"
+    [languages.cn]
+    title = "censorship.ai"
+    weight = 3
+    [languages.cn.params]
+      [languages.cn.params.navigation]
+        help = "Aide"
 

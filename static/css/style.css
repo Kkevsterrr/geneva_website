@@ -19,6 +19,15 @@ figure {
     padding: 10px;
 }
 
+#langnav {
+    position: absolute;
+}
+
+.dropdown {
+    position: relative;
+    display: block;
+    /*display: none;*/
+}
 
 .flex-column p {
     text-align: left;
