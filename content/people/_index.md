@@ -75,3 +75,22 @@ Want to be added to this list? Then swing by, get involved, and [drop Dave a lin
 
 ### Special Thanks
 *A special thank you goes out to all of those who have contributed to the project whose names are not mentioned here for their privacy or security.*
+
+*** 
+
+{{< padded >}}
+{{< center-me >}}
+{{% markdown %}}
+
+# Contact Us
+
+Interested in working with us, learning more, getting Geneva running in your country, or incorporating some of Geneva's strategies into your tool? 
+
+The easiest way to reach us is by email.
+ - Dave: dml (at) cs.umd.edu (PGP key [here](/keys/kevin_pgp.asc))
+ - Kevin: kbock (at) terpmail.umd.edu (PGP key [here](/keys/kevin_pgp.asc))
+{{% /markdown %}}
+
+{{< /center-me >}}
+{{< /padded >}}
+
