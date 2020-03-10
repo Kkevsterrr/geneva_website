@@ -21,15 +21,15 @@ its _genetic algorithm_ and _strategy engine_. The strategy engine runs a given 
 
 
 {{< flex >}}
-{{% flex-column %}}
+{{% nopad-flex-column %}}
 {{< figure src="/duplicate.svg" >}}
 {{< figure src="/tamper.svg" >}}
-{{% /flex-column %}}
+{{% /nopad-flex-column %}}
 
-{{% flex-column %}}
+{{% nopad-flex-column %}}
 {{< figure src="/fragment.svg" >}}
 {{< figure src="/drop.svg" >}}
-{{% /flex-column %}}
+{{% /nopad-flex-column %}}
 {{< /flex >}}
 
 {{% /flex-column %}}
