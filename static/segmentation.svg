@@ -12,7 +12,7 @@
 	.st6{fill:none;stroke:#FEFEFE;stroke-miterlimit:10;}
 	.st7{fill:#808080;}
 	.st8{fill:#D2D2D2;}
-	.st9{font-family:'Consolas';}
+	.st9{font-family:'Avenir-Light';}
 	.st10{font-size:13.2079px;}
 </style>
 <path class="st0" d="M245.5,156.3H131.4c-6.5,0-11.7-5.3-11.7-11.7v-17.8c0-6.5,5.3-11.7,11.7-11.7h114.1c6.5,0,11.7,5.3,11.7,11.7
@@ -94,5 +94,5 @@
 		</g>
 	</g>
 </g>
-<text transform="matrix(1 0 0 1 54.4999 10.8184)" class="st2 st9 st10">out:TCP:flags:PA</text>
+<text transform="matrix(1 0 0 1 67.4928 10.8187)" class="st2 st9 st10">out:TCP:flags:PA</text>
 </svg>

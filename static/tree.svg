@@ -14,7 +14,7 @@
 	.st8{fill:#808080;}
 	.st9{fill:#D2D2D2;}
 	.st10{fill:none;}
-	.st11{font-family:'Consolas';}
+	.st11{font-family:'Avenir-Light';}
 </style>
 <g>
 	<path class="st0" d="M165.1,232.4H51c-6.5,0-11.7-5.3-11.7-11.7v-17.8c0-6.5,5.3-11.7,11.7-11.7h114.1c6.5,0,11.7,5.3,11.7,11.7
@@ -122,5 +122,5 @@
 <g>
 	<polygon class="st10" points="119.1,0 136.2,0 136.2,0 119.1,0 	"/>
 </g>
-<text transform="matrix(1 0 0 1 136.1744 18.3441)" class="st1 st11 st3">out:TCP:flags:PA</text>
+<text transform="matrix(1 0 0 1 146.4321 18.3442)" class="st1 st11 st3">out:TCP:flags:PA</text>
 </svg>
