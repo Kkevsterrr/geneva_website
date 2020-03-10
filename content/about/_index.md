@@ -14,7 +14,7 @@ its _genetic algorithm_ and _strategy engine_. The strategy engine runs a given 
 {{% /markdown %}}
 {{< /padded >}}
 
-{{< padded >}}
+
 {{< flex >}}
 {{% flex-column %}}
 # Genetic Building Blocks
@@ -79,4 +79,3 @@ Sometimes, like with the strategy to the left, we conclude that Geneva has found
 To read more about how Geneva works, see our [papers](/papers). 
 
 {{% /markdown %}}
-{{< /padded >}}
