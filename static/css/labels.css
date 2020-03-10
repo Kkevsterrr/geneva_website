@@ -20,7 +20,19 @@
 }
 
 .label-info {
-        background-color: rgb(25, 102, 124);
+    background-color: rgb(25, 102, 124);
+}
+
+.label-warning {
+    background-color: rgb(145, 90, 12);
+}
+
+.label-danger {
+    background-color: rgb(129, 31, 28);
+}
+
+.label-default {
+    background-color: rgb(61, 64, 67);
 }
 
 td {
