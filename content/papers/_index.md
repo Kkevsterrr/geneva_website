@@ -2,7 +2,7 @@
     "title": "Papers",
     "weight": 0,
     "featured_color": "black",
-    "description": "Research papers",
+    "description": "Our papers and talks",
     "papers": {
         "2020": {
             "thing1" : "stuff" 
