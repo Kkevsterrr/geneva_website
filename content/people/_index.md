@@ -1,7 +1,8 @@
 ---
 title: "People"
 weight: 20 
-featured_color: "yellow"
+featured_color: "red"
+color_direction: "to top right"
 description: "Meet the Team"
 ---
 

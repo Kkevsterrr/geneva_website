@@ -1,9 +1,10 @@
 {{ $featured_color := .Param "featured_color"}}
+{{ $color_direction := .Params.color_direction | default "to bottom right" }}
 {{ if $featured_color }}
   {{/* Trimming the slash and adding absURL make sure the image works no matter where our site lives */}}
   <script src="/particles.js"></script>
   <!--<header class="cover bg-top" style="background-image: '{{ $featured_color }}';">-->
-  <header id='particle-container' class="bg-top" style="background-image: linear-gradient(to bottom right, {{$featured_color}}, purple)">
+  <header id='particle-container' class="bg-top" style="background-image: linear-gradient({{$color_direction}}, {{$featured_color}}, purple)">
       <div><div id="particles" style="width: 100%;position:  absolute;display: flex; overflow:hidden;z-index:0;pointer-events:none;"></div></div>
     <script type="text/javascript">
         particlesJS.load('particles', '/particles.json', function() {

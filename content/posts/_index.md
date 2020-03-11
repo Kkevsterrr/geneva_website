@@ -1,6 +1,6 @@
 ---
 title: "Posts"
-weight: 10
-featured_color: "orange"
+weight: 20
+featured_color: "black"
 description: "See our latest updates"
 ---

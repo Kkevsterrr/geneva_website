@@ -1,6 +1,6 @@
 ---
 title: "Code & Data"
-featured_color: "green"
+featured_color: "blue"
 description: "Download our code & data"
 ---
 

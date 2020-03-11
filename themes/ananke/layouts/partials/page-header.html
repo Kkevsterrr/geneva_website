@@ -1,5 +1,6 @@
 {{ $featured_image := .Params.featured_image }}
 {{ $featured_color := .Params.featured_color }}
+{{ $color_direction := .Params.color_direction | default "to bottom right" }}
 {{ if $featured_image }}
   {{/* Trimming the slash and adding absURL make sure the image works no matter where our site lives */}}
   {{ $featured_image := (trim $featured_image "/") | absURL }}
@@ -34,7 +35,7 @@
   <header>
 
   <script src="/particles.js"></script>
-    <div id='particle-container' class="{{ .Site.Params.background_color_class | default "bg-black-60" }}" style="background-image: linear-gradient(to bottom left, {{$featured_color}}, purple)">
+  <div id='particle-container' class="{{ .Site.Params.background_color_class | default "bg-black-60" }}" style="background-image: linear-gradient({{$color_direction}}, {{$featured_color}}, purple)">
       {{ partial "site-navigation.html" . }}
     </div>
   <div><div id="particles" style="top:0px;width: 100%;position:  absolute;display: flex; overflow:hidden;z-index:0;pointer-events:none;"></div></div>
