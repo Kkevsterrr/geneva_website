@@ -48,7 +48,7 @@ Geneva creates many random individual strategies and runs each of them against r
 
 The key to Geneva's success is its fitness function, which encourages the genetic algorithm to explore the space of strategies that does not damage the underlying TCP connection.
 
-Over many successive generations, if Geneva discovers a strategy that defeats censorship
+Over many successive generations, if Geneva discovers a strategy that defeats censorship, the fitness function encourages the genetic algorithm to refine and simplify the strategy. 
 
 {{% /flex-column %}}
 {{% flex-column %}}
@@ -70,7 +70,7 @@ Over many successive generations, if Geneva discovers a strategy that defeats ce
 
 Unlike prior work, we do not manually create censorship evasion strategies: Geneva finds them automatically. Then, _after_ Geneva finds how to evade censorship, we analyze its output to learn more about how censors work. This has led to interesting insights, like how China's great firewall synchronizes its state or how it processes packets. 
 
-Sometimes, like with the strategy to the left, we conclude that Geneva has found a bug in the censor. This strategy is an example of the _Segmentation_ species Geneva discovered in China against the Great Firewall by segmenting the forbidden request twice at specific indices. Though the Great Fireall can normally reassemble segments, by segmenting twice at these bounds, we can trick the Great Firewall into ignoring our request to evade censorship.
+Sometimes, like with the strategy to the left, we conclude that Geneva has found a bug in the censor. This strategy is an example of the _Segmentation_ species Geneva discovered in China against the Great Firewall by segmenting the forbidden request twice at specific indices. Though the Great Firewall can normally reassemble segments, by segmenting twice at these bounds, we can trick the Great Firewall into ignoring our request to evade censorship.
 
 {{% /flex-column %}}
 {{< /flex >}}
