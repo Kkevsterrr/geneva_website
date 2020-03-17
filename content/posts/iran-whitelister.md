@@ -8,10 +8,10 @@ featured_color: "black"
 featured_image: "/laptop.jpeg"
 ---
 
-**Summary: Ahead of its February 21st elections, Iran degraded internet traffic crossing its borders and subtly redeployed a second censorship system: a *protocol whitelister.*** 
+**Summary: Ahead of its February 21st elections, while Iran degraded internet traffic crossing its borders, it subtly deployed a secondary censorship system: a *protocol whitelister.*** 
 
-- The whitelister could pose a threat to almost all existing censorship-evasion tool deployments (VPNs, Tor, Proxies, etc) in the future.
-- Due to its design, this system is challenging to detect from outside the country.
+- The whitelister only allows a small list of protocols to be used, posing a threat to almost all existing censorship-evasion tool deployments (VPNs, Tor, Proxies, etc).
+- Due to its design, this system is challenging to detect, measure, or study from outside the country.
 - We deployed *Geneva* against the protocol whitelister and have discovered multiple ways to defeat it.
 
 In this article, we will describe the protocol whitelister, how it works, and how it can be defeated. As of time of writing, the whitelister is still in effect from all of our vantage points within Iran. 
@@ -22,15 +22,15 @@ All of our experiments were performed across five vantage points in Iran; four i
 
 # Deployment
 
-Ahead of the elections in Iran, Iran began degrading internet traffic crossing its borders, and this caught the attention of many in the online community within Iran.
+Ahead of the elections in Iran, Iran began degrading internet traffic crossing its borders, and this caught the attention of many in the online community within Iran.  
 
 {{< center-me >}}
 {{< tweet 1229834253866807298 >}} 
 {{< tweet 1234162649866362885 >}} 
-{{< tweet 1233844197276315648 >}}
+{{< tweet 1233844197276315648 >}} 
 {{< /center-me >}}
 
-However, while internet degradation was taking place, Iran subtly deployed a **secondary censorship system**, a *protocol whitelister*, which garnered much less attention. The protocol whitelister only affects traffic leaving Iran and is minimally invasive to most non-forbidden traffic, making it harder for researchers to detect (in fact, we only discovered the whitelister by accident while studying Iran's normal censorship systems.)
+However, while internet degradation was taking place, Iran subtly deployed a **secondary censorship system**, a *protocol whitelister*, which garnered much less attention. The protocol whitelister only affects traffic leaving Iran and is minimally invasive to most non-forbidden traffic, making it harder for researchers to detect (in fact, we discovered the whitelister by accident while studying Iran's normal censorship systems.)
 
 ---
 
@@ -45,9 +45,9 @@ The whitelister is challenging to detect for several reasons.
 
 At the start of a connection, the whitelister monitors the first two packets from the client. If either of those two packets matches a protocol fingerprint, the flow is unharmed; if no packet does, the second packet and rest of the flow from the client is blackholed. Once triggered, the whitelister remembers a flow for ~60 seconds after the last matching packet is seen (and each additional packet sent in the flow resets this timer).
 
-The system works in tandem with Iran's standard censorship system: the protocol whitelister ensures communication only occurs over certain protocols that the regular censorship system can verify. 
-
 {{< figure src="/iran-whitelister-darkmode2.svg" class="ph6-l" >}}
+
+The system works in tandem with Iran's standard censorship system: the protocol whitelister ensures communication only occurs over certain protocols that the regular censorship system can verify.   
 
 In our experiments with the whitelister, we identified that the whitelister is not all-or-nothing: we have observed whitelisting active on port 80 while whitelisting was inactive on port 443.
 
@@ -59,11 +59,13 @@ To trigger the whitelister, we can open port 53, 80, or 443 on a machine outside
 
 Like Iran's regular censorship systems, the whitelister does not check checksums and is incapable of reassembling TCP segments. 
 
-## Affected IP Space - WIP ****
+## Affected IP Space ****
 
-In order to identify which IPs are affected by the whitelister, we must try to trigger the whitelister to many IPs. The main limitation with the above approach (manually opening a port and sending short text segments) is that control over both client and server is required. Fortunately, we can also trigger the whitelister with normal web traffic by forcing repeated TCP segmentation. TCP segmentation is the process of splitting up the TCP stream across multiple packets. Since the whitelister only verifies the first two packets and cannot reassemble segments, we can segment the request into multiple smaller segments that do not match its fingerprint. Geneva's open-source strategy [engine](https://github.com/kkevsterrr/geneva) allows us to do this. Using this methodology, we can easily test many web servers to see which are affected by the whitelister. 
+In order to identify which IPs are affected by the whitelister, we performed an experiment to test the effects of the whitelister on the Alexa top 20,000 list. To avoid the effects of DNS censorship or  requesting IPs inside of Iran (thereby not crossing the whitelister), we used `dig` outside of Iran to get IP addresses for all 20,000. 
 
-We performed an experiment to test the effects of the whitelister on the Alexa top 20,000 list. To avoid the effects of DNS censorship or accidentally requesting IPs inside of Iran, we used `dig` outside of Iran to get IP addresses for all 20,000. Inside of Iran, we set up an experiment with two conditions. The first condition was a control: we made normal `GET` requests to all 20,000 IP addresses using `curl`, and the success or failure of the request was recorded. The second condition tested for the whitelister. We requested all 20,000 IP addresses again, this time with the Geneva engine running in the background forcing all requests to be repeatedly segmented. IP addresses that we can connect to in the first condition - but time out in the second condition - are potentially affected by the whitelister. We perform this experiment twice to validate the results.
+Inside of Iran, we set up an experiment with two conditions. The first condition was a control: we made normal `GET` requests to all 20,000 IP addresses using `curl`, and the success or failure of the request was recorded. The second condition tested for the whitelister. We requested all 20,000 IP addresses again, this time sending `G`, `E` and `T` in separate messages. 
+
+IP addresses that respond in the first condition but time out in the second condition are likely affected by the whitelister. We perform this experiment twice to validate the results.
 
 Out of 20,000 IPs, 3,728 IP addresses responded with a timeout during the second condition but responded fine during the first condition in both experiments. Specifically, 4,266 IPs (21.3%) responded differently in the first experiment, 4,564 (22.8%) in the second experiment, with an overlap of 3,728 (18.6%). 
 
