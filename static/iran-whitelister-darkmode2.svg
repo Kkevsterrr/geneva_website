@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="101 244 516 298" width="516" height="298">
+  <defs>
+    <font-face font-family="Apple Color Emoji" font-size="53" units-per-em="1000" underline-position="-93.75018" underline-thickness="62.50012" slope="0" x-height="625.0012" cap-height="1000.0019" ascent="1000.0019" descent="-312.5006" font-weight="400">
+      <font-face-src>
+        <font-face-name name="AppleColorEmoji"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="Avenir" font-size="16" panose-1="2 0 5 3 2 0 0 2 0 3" units-per-em="1000" underline-position="-75" underline-thickness="50" slope="0" x-height="468" cap-height="708" ascent="1e3" descent="-365.9973" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Avenir-Book"/>
+      </font-face-src>
+    </font-face>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.14 
+    <dc:date>2020-03-17 03:21:08 +0000</dc:date>
+  </metadata>
+  <g id="Canvas_1" stroke-opacity="1" stroke-dasharray="none" fill-opacity="1" fill="none" stroke="none">
+    <title>Canvas 1</title>
+    <g id="Canvas_1: Layer 1">
+      <title>Layer 1</title>
+      <g id="Group_51">
+        <title>Graphic_58</title>
+        <g id="Graphic_52">
+          <path d="M 110.93423 284 L 498.6658 284 C 503.1582 284 506.8 286.6863 506.8 290 L 506.8 535 C 506.8 538.3137 503.1582 541 498.6658 541 L 110.93423 541 C 106.44183 541 102.8 538.3137 102.8 535 L 102.8 290 C 102.8 286.6863 106.44183 284 110.93423 284 Z" stroke="#dd2525" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="16.0,10.0" stroke-width="2"/>
+        </g>
+      </g>
+      <g id="Group_49">
+        <title>Graphic_4</title>
+        <g id="Graphic_50">
+          <title>Text</title>
+          <text transform="translate(279.5 244)" fill="black">
+            <tspan font-family="Apple Color Emoji" font-size="53" font-weight="400" fill="black" x="0" y="53">🇮🇷</tspan>
+          </text>
+        </g>
+      </g>
+      <g id="Group_47">
+        <title>Line_22</title>
+        <g id="Graphic_48">
+          <path d="M 333.67718 453 C 333.67718 453 331.1475 433.88195 387.33333 420 C 430.42195 409.354 492.5041 405.6267 519.10615 404.46745" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </g>
+      </g>
+      <g id="Group_45">
+        <title>Line_23</title>
+        <g id="Graphic_46">
+          <path d="M 333.67718 453 C 333.67718 453 343.6863 469.56225 369.33333 482.1221 C 389.58547 492.04 412.0685 495.77947 420.6311 496.91384" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </g>
+      </g>
+      <g id="Group_43">
+        <title>Line_33</title>
+        <g id="Line_44">
+          <line x1="333.67718" y1="453" x2="190.27026" y2="453.57136" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </g>
+      </g>
+      <g id="Group_35">
+        <title>Group_40</title>
+        <g id="Group_41">
+          <title>Graphic_12</title>
+          <g id="Graphic_42">
+            <path d="M 237 325 L 314.93282 325 C 320.45567 325 324.93282 329.47715 324.93282 335 L 324.93282 365.1221 C 324.93282 370.64496 320.45567 375.1221 314.93282 375.1221 L 237 375.1221 C 231.47715 375.1221 227 370.64496 227 365.1221 L 227 335 C 227 329.47715 231.47715 325 237 325 Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          </g>
+        </g>
+        <g id="Group_36">
+          <title>Group_36</title>
+          <g id="Group_39">
+            <title>Graphic_34</title>
+            <g id="Graphic_40">
+              <title>Text</title>
+              <text transform="translate(246.1984 329.5)" fill="white">
+                <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x="2842171e-20" y="16">Protocol</tspan>
+              </text>
+            </g>
+          </g>
+          <g id="Group_37">
+            <title>Graphic_35</title>
+            <g id="Graphic_38">
+              <title>Text</title>
+              <text transform="translate(237.9344 347.6221)" fill="white">
+                <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x="0" y="16">Whitelister</tspan>
+              </text>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g id="Group_27">
+        <title>Group_39</title>
+        <g id="Group_30">
+          <title>Group_38</title>
+          <g id="Group_33">
+            <title>Graphic_21</title>
+            <g id="Graphic_34">
+              <path d="M 136.95378 432 L 179.27026 432 C 184.7931 432 189.27026 436.47715 189.27026 442 L 189.27026 465.399 C 189.27026 470.9218 184.7931 475.399 179.27026 475.399 L 136.95378 475.399 C 131.43093 475.399 126.95378 470.9218 126.95378 465.399 L 126.95378 442 C 126.95378 436.47715 131.43093 432 136.95378 432 Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+            </g>
+          </g>
+          <g id="Group_31">
+            <title>Graphic_20</title>
+            <g id="Graphic_32">
+              <rect x="122" y="476.00174" width="73.33683" height="6.1203686" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+            </g>
+          </g>
+        </g>
+        <g id="Group_28">
+          <title>Graphic_37</title>
+          <g id="Graphic_29">
+            <title>Text</title>
+            <text transform="translate(137.64442 442.5194)" fill="white">
+              <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x="0" y="16">Client</tspan>
+            </text>
+          </g>
+        </g>
+      </g>
+      <g id="Group_25">
+        <title>Line_41</title>
+        <g id="Line_26">
+          <line x1="275.91645" y1="376.1221" x2="275.76862" y2="453.2307" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4.0,4.0" stroke-width="1"/>
+        </g>
+      </g>
+      <g id="Group_17">
+        <title>Group_43</title>
+        <g id="Group_23">
+          <title>Graphic_47</title>
+          <g id="Graphic_24">
+            <path d="M 393.86355 325 L 471.79637 325 C 477.3192 325 481.79637 329.47715 481.79637 335 L 481.79637 365.1221 C 481.79637 370.64496 477.3192 375.1221 471.79637 375.1221 L 393.86355 375.1221 C 388.3407 375.1221 383.86355 370.64496 383.86355 365.1221 L 383.86355 335 C 383.86355 329.47715 388.3407 325 393.86355 325 Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          </g>
+        </g>
+        <g id="Group_18">
+          <title>Group_44</title>
+          <g id="Group_21">
+            <title>Graphic_46</title>
+            <g id="Graphic_22">
+              <title>Text</title>
+              <text transform="translate(400.68596 329.5)" fill="white">
+                <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x="2344791e-19" y="16">Standard</tspan>
+              </text>
+            </g>
+          </g>
+          <g id="Group_19">
+            <title>Graphic_45</title>
+            <g id="Graphic_20">
+              <title>Text</title>
+              <text transform="translate(392.82996 347.6221)" fill="white">
+                <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x="0" y="16">Censorship</tspan>
+              </text>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g id="Group_15">
+        <title>Line_48</title>
+        <g id="Line_16">
+          <line x1="432.784" y1="376.1221" x2="432.72115" y2="411.76634" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4.0,4.0" stroke-width="1"/>
+        </g>
+      </g>
+      <g id="Group_10">
+        <title>Group_51</title>
+        <g id="Group_13">
+          <title>Graphic_53</title>
+          <g id="Graphic_14">
+            <path d="M 540.39184 409.00776 C 525.8518 406 531.65 380.6796 554.84464 385 C 556.9966 376.57816 583.96884 377.9451 583.7925 385 C 600.70494 375.9767 622.318 393.96896 607.8211 402.99224 C 625.2167 407.36696 607.6016 430.93736 593.32515 427 C 592.1826 433.56264 566.6606 435.8592 564.42046 427 C 549.96856 436.4612 519.83405 421.9141 540.39184 409.00776 Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          </g>
+        </g>
+        <g id="Group_11">
+          <title>Graphic_52</title>
+          <g id="Graphic_12">
+            <title>Text</title>
+            <text transform="translate(545.6294 394.5)" fill="white">
+              <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x="0" y="16">Internet</tspan>
+            </text>
+          </g>
+        </g>
+      </g>
+      <g id="Group_8">
+        <title>Graphic_54</title>
+        <g id="Graphic_9">
+          <title>Text</title>
+          <text transform="translate(433.232 486.3779)" fill="white">
+            <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x="14210855e-21" y="16">Blackhole</tspan>
+          </text>
+        </g>
+      </g>
+      <g id="Group_6">
+        <title>Graphic_55</title>
+        <g id="Graphic_7">
+          <title>Text</title>
+          <text transform="translate(314.736 394.5)" fill="white">
+            <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x="0" y="16">Whitelisted</tspan>
+          </text>
+        </g>
+      </g>
+      <g id="Group_4">
+        <title>Graphic_56</title>
+        <g id="Graphic_5">
+          <title>Text</title>
+          <text transform="translate(300.664 497.5)" fill="white">
+            <tspan font-family="Avenir" font-size="16" font-weight="400" fill="white" x="0" y="16">Not whitelisted</tspan>
+          </text>
+        </g>
+      </g>
+      <g id="Graphic_53">
+        <circle cx="424.7" cy="497.1" r="3.7000059636461" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Graphic_54">
+        <path d="M 514.47545 401.0113 L 529.59544 404.18557 L 514.7337 408.4068 Z" fill="white"/>
+        <path d="M 514.47545 401.0113 L 529.59544 404.18557 L 514.7337 408.4068 Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+    </g>
+  </g>
+</svg>
