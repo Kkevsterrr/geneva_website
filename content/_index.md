@@ -31,7 +31,7 @@ We developed Geneva (*Gen*etic *Eva*sion), a novel experimental genetic algorith
 
 # How it works 
 
-Geneva runs _exclusively_ on one side of the connection: it does not require a proxy, bridge, or assistance from outside the censoring regime. It defeats censorship by modifying network traffic on the fly (by injecting traffic, modifying packets, etc) in such a way that censoring middleboxes are unable interfere with forbidden connections, but without otherwise affecting the flow. Since Geneva works at the network layer, it can be used with any application; with Geneva running in the background, any web browser can become a censorship evasion tool. However, Geneva cannot be used to circumvent blocking of IP addresses.  
+Geneva runs _exclusively_ on one side of the connection: it does not require a proxy, bridge, or assistance from outside the censoring regime. It defeats censorship by modifying network traffic on the fly (by injecting traffic, modifying packets, etc) in such a way that censoring middleboxes are unable interfere with forbidden connections, but without otherwise affecting the flow. Since Geneva works at the network layer, it can be used with any application; with Geneva running in the background, any web browser can become a censorship evasion tool. Geneva cannot be used to circumvent blocking of IP addresses.  
 
 Geneva composes four basic packet-level actions (drop, duplicate, fragment, tamper) together to represent _censorship evasion strategies_. By running directly against real censors, Geneva's genetic algorithm evolves strategies that evade the censor. 
 
