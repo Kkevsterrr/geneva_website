@@ -47,7 +47,7 @@ At the start of a connection, the whitelister monitors the first two packets fro
 
 {{< figure src="/iran-whitelister-darkmode2.svg" class="ph6-l" >}}
 
-The system works in tandem with Iran's standard censorship system: the protocol whitelister ensures communication only occurs over certain protocols that the regular censorship system can verify.   
+The system works in tandem with Iran's standard censorship system: the protocol whitelister ensures communication only occurs over certain protocols that the regular censorship system can verify.
 
 In our experiments with the whitelister, we identified that the whitelister is not all-or-nothing: we have observed whitelisting active on port 80 while whitelisting was inactive on port 443.
 
@@ -122,7 +122,7 @@ Example TCP Payload: `\x16\x03\x01\x02\x00...`, where `\x16` is the indication o
 
 ## Using Geneva to Bypass the Whitelister
 
-Geneva (*Gen*etic *Eva*sion) is a genetic algorithm that *evolves* censorship evasion strategies against a censor. Unlike most anti-censorship systems, it does not require deployment at both ends of the connection: it runs exclusively at one side (client or server) and defeats censorship by manipulating the packet stream to confuse the censor without impacting the underlying connection. A *censorship evasion strategy* describes how that traffic should be modified. Since Geneva will be evolving these strategies, they are expressed in a domain-specific language that comprises the DNA of each strategy. (For a full rundown of Geneva's strategy DNA syntax, see [our Github page](https://github.com/kkevsterrr/geneva)).
+Geneva (*Gen*etic *Eva*sion) is a genetic algorithm that *evolves* censorship evasion strategies against a censor. Unlike most anti-censorship systems, it does not require deployment at both ends of the connection: it runs exclusively at one side (client or server) and defeats censorship by manipulating the packet stream to confuse the censor without impacting the underlying connection. A *censorship evasion strategy* describes how that traffic should be modified. Since Geneva will be evolving these strategies, they are expressed in a domain-specific language that comprises the DNA of each strategy. For a full rundown of Geneva's strategy DNA syntax, see [our Github page](https://github.com/kkevsterrr/geneva).
 
 Geneva is comprised of two main components. First, the genetic algorithm, which can evolve new ways to defeat a censorship system given an application that experiences censorship and a fitness function. Second, the strategy engine, which applies a given strategy on the fly to modify active network traffic. 
 
@@ -162,7 +162,7 @@ Beyond exploiting the whitelister's shortcomings at the TCP layer, we can also u
 
 ### Using a strategy
 
-To deploy one of these strategies, we can use Geneva's strategy engine (open source on [our Github page](https://github.com/kkevsterrr/geneva))) to apply these strategies to our network traffic. Since the engine captures network traffic on a specified port, any application sending data on that port will be affected by the strategy. For example, we can test that these strategies work by trying to trigger the whitelister with `nc` as above with the engine running in the background.  
+To deploy one of these strategies, we can use Geneva's strategy engine (open source on [our Github page](https://github.com/kkevsterrr/geneva)) to apply these strategies to our network traffic. Since the engine captures network traffic on a specified port, any application sending data on that port will be affected by the strategy. For example, we can test that these strategies work by trying to trigger the whitelister with `nc` as above with the engine running in the background.  
 
     $ STRATEGY="[TCP:flags:PA]-duplicate(tamper{TCP:load:replace:GET%20aaaaaaaaaa}(tamper{TCP:chksum:corrupt},),)-| \/"
     $ sudo python3 engine.py --strategy "$STRATEGY" --server-port 80 --log info &
