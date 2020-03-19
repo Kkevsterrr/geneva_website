@@ -3,19 +3,19 @@
 }
 
 .flex-container {
-  display: flex;
-  display: -ms-flex;
-  display: -webkit-flex;
-  align-items: center;
+    display: flex;
+    display: -ms-flex;
+    display: -webkit-flex;
+    align-items: center;
 }
 
 .flex-container > .flex-column {
-  flex: 1;
-  padding: 0 30px;
+    flex: 1;
+    padding: 0 30px;
 }
 .flex-container > .nopad-flex-column {
-  flex: 1;
-  padding: 0px;
+    flex: 1;
+    padding: 0px;
 }
 
 p code {
@@ -30,6 +30,35 @@ li code {
     background:rgba(135,131,120,0.15);
     border-radius:3px;
     font-size:85%;
+}
+.callout {
+    background: #F9F9F9;
+    padding: 1.5em 1.25em;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+.callout-inner {
+    margin-left: 1em;
+}
+.callout-blue {
+    background-color: rgba(45, 170, 219, 0.3);
+}
+.callout-gray {
+    background-color: rgb(47, 52, 55); 
+}
+
+.callout p{
+    /*margin-top: 0px;*/
+}
+@media (max-width: 767px) {
+    .callout {
+        padding: 1.5em 0.75em 1.5em 0.6em;
+    }
+    .callout-inner {
+        margin-left: 0.5em;
+    }
 }
 
 figure {
@@ -50,7 +79,7 @@ figure {
     /*display: none;*/
 }
 
-.flex-column p {
+.flex-column p, thead {
     text-align: left;
 }
 
@@ -84,10 +113,10 @@ a {
 
 @media only screen and (max-width: 868px) {
 
-  .flex-container {
-    flex-direction: column;
-  }
+    .flex-container {
+        flex-direction: column;
+    }
 
-  .flex-container > .flex-column {
-    padding: 0;
-}
+    .flex-container > .flex-column {
+        padding: 0;
+    }
