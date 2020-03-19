@@ -7,5 +7,6 @@ featured_color: "black"
 ---
 
 Watch the full talk below.
+{{< wh w="50vh" h="500px" >}}
 {{< youtube R9TWLO5N7mc >}}
-
+{{< /wh >}}
