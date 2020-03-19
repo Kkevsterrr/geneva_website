@@ -169,7 +169,7 @@ We found that only 1 of Cloudflare's prefixes contained IPs that were affected b
 
 ### Summary
 
-Frankly, it is not clear why the whitelister affects the IP addresses it does. Anecdotally, all of our vantage points in Amazon EC2 and DigitalOcean around the world were affected by the whitelister, but according to our Alexa experiment, not all IP addresses managed by Amazon or DigitalOcean are affected. Which IPs are affected may be an artifact of the varied network routes taken from our vantage points, or that Iran selected specific regions of the IPv4 address space as more important to filter.  We leave a further investigation into why the whitelister affects what it does to future work. 
+Frankly, it is not clear why the whitelister affects the IP addresses it does. Anecdotally, all of our vantage points in Amazon EC2 and DigitalOcean around the world were affected by the whitelister, but our Alexa experiment suggests that not all IP addresses managed by Amazon or DigitalOcean are affected. Which IPs are affected may be an artifact of the varied network routes taken from our vantage points, or that Iran selected specific regions of the IPv4 address space as more important to filter.  We leave a further investigation into why the whitelister affects what it does to future work. 
 
 ---
 
