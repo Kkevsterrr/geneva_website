@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+<head>
+	<title> Alibi Routing </title>
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+	<meta name="description"
+	content="Alibi routing software and data">
+	<meta name="keywords"
+	content="alibi routing, boomerang routing, peer to peer, p2p, provable avoidance, censorship, source routing, security, Dave Levin, umd">
+
+	<!--<link rel="stylesheet" type="text/css" href="style.css" >-->
+	<link rel="stylesheet" type="text/css" href="design.css" >
+	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+<center>
+
+		<div id="heading">
+				<div id="heading_info">
+						<!--<div class="divider_30"></div>-->
+						<div id="c_info" class="container_left" style="margin-top: -21px;">
+								<br />
+								<h1 style="margin-bottom: 7px;"><a href="/" class="black">ALIBI ROUTING</a> &nbsp; | &nbsp; FAQ</h1>
+								</p><br />
+						</div>
+						<div class="clr"></div>
+				</div>
+		</div>
+
+		<div id="container_body">
+
+				<div id="c_tor" class="container">
+						<!--<div class="vdivider_20"></div>-->
+						<h2>Why not just use Tor?</h2>
+
+						<div id="b_tor" class="container_indent">
+								<p> Tor (onion routing) is a peer-to-peer
+								system for achieving anonymous communication.
+								At a high level, the idea is that, by
+								forwarding encrypted data through a sequence of
+								hops, a passive observer would not be able to
+								determine who the two end-points of the
+								communication are. Tor has become very popular
+								and successful at avoiding some kinds of attacks.
+								So successful, in fact, that some regions seek
+								to <a
+										href="https://metrics.torproject.org/userstats-censorship-events.html">block
+										all Tor traffic</a> altogether. </p>
+
+								<p> There is some precedence for avoidance in
+								Tor; it currently has a feature by which users
+								can explicitly exclude certain countries from
+								Tor's circuit construction algorithm, but
+								unfortunately this does not preclude those
+								countries from being on the path <i>between</i>
+								two hops on the circuit. </p>
+								
+								<p> We believe Alibi Routing can
+								<i>complement</i> Tor by choosing hops so that
+								the entire end-to-end path avoids regions that
+								users suspect are dropping Tor traffic. </p>
+								
+						</div>
+				</div>
+
+				<div id="c_knowroutes" class="container">
+						<div class="vdivider_20"></div>
+						<h2>How do you prove exactly where the packet went?</h2>
+
+						<div id="b_knowroutes" class="container_indent">
+								<p> Simple: we don't! </p>
+
+								<p> Instead, we prove two things:
+								<ol>
+										<li> That the packet went through an overlay
+										node (a peer).  This is proved by the
+										peer signing (or more simply adding a
+										MAC to) the packet.
+
+										<li> That the round-trip time of the
+										data (the time it takes to go from the
+										source, through the relay, to the
+										destination, and back) is less than the
+										time it would have taken a packet to go
+										through the relay <i>and</i> the
+										forbidden region.
+
+								</ol>
+
+								So, in other words, we use the signature (or
+								MAC) to know precisely one place in the world
+								the packet <i>did</i> go, and we use end-to-end
+								timing to figure out where else in the world it
+								<i>could not</i> have gone.  </p>
+
+						</div>
+				</div>
+
+
+				<div id="c_timing" class="container">
+						<div class="vdivider_20"></div>
+						<h2>How do you measure the minimal time it takes for a packet to travel?</h2>
+
+						<div id="b_timing" class="container_indent">
+								<p> One of the goals of Alibi Routing is to be
+								able to work without having to actively measure
+								the topology of the Internet, or even typical
+								latencies on the Internet, as both of these
+								could be manipulated by an active adversary. </p>
+
+								<p> Instead, we make use of something that no
+								adversary can manipulate: the fact that
+								information cannot travel faster than the speed
+								of light.  If we know that the shortest
+								possible distance to get to <i>any</i> point in
+								a forbidden region is <i>D</i>, then the
+								shortest possible round-trip time through that
+								point is 2*<i>D</i>/<i>c</i>. If we ever see a
+								round-trip time less than this, then we know it
+								could not have gone through the forbidden
+								region. </p>
+
+						</div>
+				</div>
+
+
+				<div id="c_speed" class="container">
+						<div class="vdivider_20"></div>
+						<h2>Is the speed of light enough to really factor into latencies?</h2>
+
+						<div id="b_speed" class="container_indent">
+
+								<p> Light (and information) can travel
+								<i>really</i> fast: in one second, it could
+								circle the world about 7.5 times. Over very
+								short distances (e.g., two laptops in the same
+								room), latencies are dominated by the time it
+								takes the computers to process the data. </p>
+
+								<p> But when considering longer paths -- paths
+								that traverse countries, not just rooms -- the
+								speed at which information can propagate does
+								indeed play a large role.  For example, the
+								minimum time it would take to cross the United
+								States and return is about 32 milliseconds
+								(assuming a distance of 3000 miles).  In
+								Internet latencies, this is significant and
+								easy for a program to measure. </p>
+
+						</div>
+				</div>
+
+				<div id="c_download" class="container">
+						<div class="vdivider_20"></div>
+						<h2>Where can I download Alibi Routing?</h2>
+
+						<div id="b_download" class="container_indent">
+
+								<p> You can download the research prototype
+							    at the <a href="/">Alibi Routing homepage</a>.
+								We are actively working on an easier-to-use
+								tool, and we hope to make it publicly available
+								by the end of the year.  Stay tuned!
+
+						</div>
+				</div>
+
+
+		<br />
+		&nbsp;
+
+                <p style="text-align: right;"><a href="https://www.umd.edu/web-accessibility" title="UMD Web Accessibility">Web Accessibility</a></p>
+                <br />
+		</div>
+
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-2453507-1";
+urchinTracker();
+</script>
+
+</div>
+</center>
+
+</body>
+</html>

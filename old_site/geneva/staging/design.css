@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#container_body {
+	max-width: 650px;
+	margin: 0 auto;
+	font-family: 'Oxygen', sans-serif;
+	font-size: 14px;
+	color: #000;
+}
+
+#heading {
+  width: 100%;
+  height: 100px;
+  background: #A35AD2;
+  font-family: 'Oxygen', sans-serif;
+	font-size: 14px;
+	color: #000;
+}
+
+#heading_info {
+  width: 100%;
+  max-width: 650px;
+  float: center;
+  position: relative;
+}
+
+.container {
+	clear: both;
+	position: relative;
+	text-align: left;
+}
+
+.container_indent {
+	clear: both;
+	position: relative;
+	left: 15px;
+	text-align: left;
+}
+
+.container_left {
+	float: left;
+	text-align: left;
+}
+
+.container_proj_img {
+	float: left;
+	text-align: left;
+	padding-right: 10px;
+}
+
+.container_proj_desc {
+	float: left;
+	text-align: left;
+	margin-top: -1px;
+}
+
+.container_right {
+	float: right;
+	text-align: left;
+}
+
+.clr {
+	clear: both;
+}
+
+.divider_5 {
+	float: left;
+	width: 10px;
+	height: 1px;
+}
+
+.divider_10 {
+	float: left;
+	width: 10px;
+	height: 1px;
+}
+
+.divider_15 {
+	float: left;
+	width: 15px;
+	height: 1px;
+}
+
+.divider_20 {
+	float: left;
+	width: 20px;
+	height: 1px;
+}
+
+.divider_30 {
+	float: left;
+	width: 30px;
+	height: 1px;
+}
+
+.vdivider_20 {
+  float: center;
+  width: 100%;
+  height: 20px;
+}
+
+#line {
+	clear: both;
+	background-color: #F4F4F4;
+	height: 1px;
+	width: 100%;
+}
+
+a:link, a:visited, a:hover, a:active {
+	text-decoration: none;
+	/*color: #FF4F20;*/
+	color: #0099C1;
+}
+
+a.black:link, a.black:visited, a.black:hover, a.black:active {
+  text-decoration: none;
+  color: #000000;
+}
+
+h1 {
+	font-family: 'Oxygen', sans-serif;
+	font-size: 30px;
+	color: #000;
+}
+
+h2 {
+	font-family: 'Oxygen', sans-serif;
+	font-size: 18px;
+	color: #000;
+}
+
+p {
+	font-family: 'Oxygen', sans-serif;
+	font-size: 14px;
+	color: #000;
+}
+
+p.links {
+	font-family: arial;
+	font-size: 11.5px;
+	color: #000;
+}
+
+.p_menu {
+	font-family: 'Oxygen', sans-serif;
+	font-size: 12px;
+	color: #000;
+	font-weight: bold;
+}
+
+.a_paper_img {
+}
+
+.show_more {
+  display: none;
+}
+
+a.show_link {
+  text-decoration: none;
+  color: #36f;
+  padding-left: 16px;
+  background: transparent url('images/arrow_down.png') no-repeat left;
+}
+
+a.hide_link {
+  text-decoration: none;
+  color: #36f;
+  padding-left: 16px;
+  background: transparent url('images/arrow_up.png') no-repeat left;
+}
+
+a.show_link:hover, a.hide_link:hover {
+  border-bottom: 1px dotted #36f;
+}
+
