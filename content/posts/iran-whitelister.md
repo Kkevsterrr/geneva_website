@@ -1,6 +1,6 @@
 ---
 title: "Iran: A New Model for Censorship"
-summary: "Ahead of its February 21st elections, subtly deployed a second censorship system: a protocol whitelister. Click read more to learn about how these systems works and how to defeat them."
+summary: "Ahead of its February 21st elections and amidst the chaos of COVID-19, Iran quietly deployed a second censorship system: a *protocol whitelister*. Click read more to learn about how the protocol whitelister works and how we can circumvent it."
 description: ""
 date: 2020-02-26T09:53:38-05:00
 draft: true
