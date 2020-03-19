@@ -67,6 +67,11 @@ Learn more about how we designed and built Geneva [here](/about).
 {{< padded >}}
 {{< center-me >}}
 {{% markdown %}}
+# Support
+This project is done by students in [Breakerspace](https://breakerspace.io), a lab at the University of Maryland dedicated to scaling-up undergraduate research in computer and network security.
+
+This work is supported by the Open Technology Fund and the National Science Foundation.
+
 
 # Contact Us
 
