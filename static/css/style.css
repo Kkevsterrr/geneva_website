@@ -120,6 +120,14 @@ a {
         flex-direction: column;
     }
 
+    .subtext {
+        font-weight: normal;
+    }
+
+    .hideonmobile {
+        display: none;
+    }
+
     .flex-container > .flex-column {
         padding: 0;
     }

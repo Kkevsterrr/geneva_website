@@ -1,5 +1,6 @@
 ---
 title: "About Geneva"
+shorttitle: "About"
 weight: 1
 featured_color: "purple"
 description: "How it Works"
