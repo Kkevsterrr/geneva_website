@@ -6,7 +6,6 @@ description: "Join us and learn about our fight to defeat censorship around the 
 
 {{< padded >}}
 {{< flex >}}
-
 {{% flex-column %}}
 
 # Automating Evasion

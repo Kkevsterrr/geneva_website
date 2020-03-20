@@ -91,6 +91,9 @@ figure {
     margin: 0px;
 }
 
+a {
+    color: white;
+}
 
 .lighter-gray {
     background-color: rgb(24, 26, 27);

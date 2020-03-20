@@ -5,14 +5,12 @@ featured_color: "purple"
 description: "How it Works"
 ---
 
-{{< padded >}}
 {{% markdown %}}
 # What is Geneva? 
 Geneva is a novel experimental genetic algorithm that evades censorship by manipulating the packet stream on one end of the connection to confuse the censor. Geneva is comprised of two components:
 its _genetic algorithm_ and _strategy engine_. The strategy engine runs a given censorship evasion strategy over active network traffic; the genetic algorithm is the learning component that evolves new strategies (using the engine) against a given censor.
 
 {{% /markdown %}}
-{{< /padded >}}
 
 
 {{< flex >}}

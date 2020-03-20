@@ -256,7 +256,7 @@ Beyond exploiting the whitelister's shortcomings at the TCP layer, we can also u
 
 ### Using a Geneva Strategy
 
-To deploy one of these strategies, we can use Geneva's strategy engine (open source on [our Github page](https://github.com/kkevsterrr/geneva))) to apply these strategies to our network traffic. Since the engine captures network traffic on a specified port, any application sending data on that port will be affected by the strategy. For example, we can test that these strategies work by trying to trigger the whitelister with `nc` as above with the engine running in the background.  
+To deploy one of these strategies, we can use Geneva's strategy engine (open source on [our Github page](https://github.com/kkevsterrr/geneva)) to apply these strategies to our network traffic. Since the engine captures network traffic on a specified port, any application sending data on that port will be affected by the strategy. For example, we can test that these strategies work by trying to trigger the whitelister with `nc` as above with the engine running in the background.  
 
     $ STRATEGY="[TCP:flags:PA]-duplicate(tamper{TCP:load:replace:GET%20aaaaaaaaaa}(tamper{TCP:chksum:corrupt},),)-| \/"
     $ sudo python3 engine.py --strategy "$STRATEGY" --server-port 80 --log info &
