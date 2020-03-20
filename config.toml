@@ -1,4 +1,4 @@
-baseURL = "http://censorship.ai/"
+baseURL = "https://geneva.cs.umd.edu"
 languageCode = "en-US"
 DefaultContentLanguage = "en"
 title = "censorship.ai"

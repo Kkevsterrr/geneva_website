@@ -5,7 +5,7 @@ description: ""
 date: 2020-02-26T09:53:38-05:00
 draft: false
 featured_color: "black"
-featured_image: "/laptop.jpeg"
+featured_image: "laptop.jpeg"
 ---
 
 **Summary: Ahead of its February 21st elections, Iran subtly deployed a second censorship system: a *protocol whitelister.*** 
