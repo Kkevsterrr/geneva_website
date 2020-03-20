@@ -91,7 +91,7 @@ figure {
     margin: 0px;
 }
 
-a {
+.nested-links a {
     color: white;
 }
 
