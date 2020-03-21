@@ -8,6 +8,16 @@ featured_color: "black"
 featured_image: "laptop.jpeg"
 ---
 
+**Update (3/21/2020):** Since this post was written, the Shatel ISP in Iran has announced the right to restrict access to **any ports or protocols** without informing the network. Combined with the whitelisting system, this poses a potentially threat to anti-censorship tools if only whitelisted ports are available.
+
+{{< center-text >}}
+{{< shrink size="350px" >}}
+{{< tweet 1240246443895652352 >}}
+{{< /shrink >}}
+{{< /center-text >}}
+
+---
+
 **Summary: Ahead of its February 21st elections, Iran subtly deployed a second censorship system: a *protocol whitelister.*** 
 
 In this article, we will describe the protocol whitelister, how it works, and **how it can be defeated**.
@@ -19,7 +29,7 @@ In this article, we will describe the protocol whitelister, how it works, and **
 As of time of writing, the whitelister is still in effect from all of our vantage points within Iran.
 
 {{% callout color="gray" emoji="" %}}
-All of our experiments were performed across five vantage points in Iran; four in various networks in Tehran and one in Zanjan to machines we controlled in Amazon EC2 and DigitalOcean. While this is representative, it is possible that we are not seeing the full picture; if you would like to help broaden our measurements, please contact us.
+All of our experiments were performed across six vantage points in Iran, located in Isfahan, Razavi Khorasan, Fars, Tehran, and Zanjan to machines we controlled in Microsoft Azure, Amazon EC2, and DigitalOcean. While this is representative, it is possible that we are not seeing the full picture; if you would like to help broaden our measurements, please contact us.
 {{% /callout %}}
 
 ---
@@ -85,7 +95,7 @@ The system works in tandem with Iran's standard censorship system: the protocol 
 
 ## How to Trigger the Whitelister
 
-To trigger the whitelister, one can open port 53, 80, or 443 on a machine outside of Iran (`nc -lvp 80`) and then connect to it from inside of Iran (`nc <ip> 80`). Sending a simple message twice  (`hi<Enter>hi`) is sufficient to trigger the whitelister—if the whitelister is running and affects the destination IP, only the first message will reach the server. 
+To trigger the whitelister, one can open port 53, 80, or 443 on a machine outside of Iran (`nc -lvp 80`) and then connect to it from inside of Iran (`nc <ip> 80`). Sending a simple message twice  (`test<Enter>test`) is sufficient to trigger the whitelister—if the whitelister is running and affects the destination IP, only the first message will reach the server. 
 
 Like Iran's regular censorship systems, the whitelister does not check checksums and is incapable of reassembling TCP segments.
 
@@ -195,7 +205,7 @@ The HTTP protocol matcher seems to OK flows if the following conditions are met:
 - The payload must start with a specific HTTP verb followed by one space; e.g. `"GET "`  or `"POST "`
 - The whitelister can match GET, POST, HEAD, CONNECT, OPTIONS, DELETE, and PUT. TRACE and PATCH do not work.
 
-Example: `GET aaaaa`
+Example: `GET testing123`
 
 ### HTTPS Fingerprint
 
@@ -228,15 +238,15 @@ Note that Geneva is *not* designed as a general purpose evasion tool, and does n
 
 ### Circumvention Strategy 1
 
-The first strategy works by simply sending one additional packet before the 3-way handshake: an empty packet with the `PSH/ACK` flags set. 
+The first strategy works by simply sending two additional packets before the 3-way handshake: two empty packets with the `FIN` flag set. 
 
 In Geneva's strategy DNA syntax, this strategy looks like this:
 
-`[TCP:flags:S]-duplicate(tamper{TCP:flags:replace:PA,)-|`
+`[TCP:flags:S]-duplicate(tamper{TCP:flags:replace:F}(duplicate,),)-|`
 
-This triggers on all outbound TCP `SYN` packets and duplicates them; to the first duplicate, the TCP `flags` field is set to `PSH/ACK`, and the second duplicate is unchanged. Both packets are sent on the wire. When the packets arrive at the server, the server ignores the `PSH/ACK` packet, since it is not associated with any connection yet, but the whitelister processes it, causing it to ignore the rest of our connection. The `SYN` arrives as normal and our connection can start unchanged. 
+This triggers on all outbound TCP `SYN` packets and duplicates them; to the first duplicate, the TCP `flags` field is set to `FIN`, and a second copy of this packet is made. The second duplicate of the `SYN` is unchanged. All three packets are sent on the wire. When the packets arrive at the server, the server ignores the `FIN` packets, since they are not associated with any connection yet, but the whitelister processes them, causing it to ignore the rest of our connection. The `SYN` arrives as normal and our connection can start unchanged. 
 
-We do not understand why this strategy works, though we hypothesize the `PSH/ACK` packet tricks the whitelister into thinking it has already missed the relevant data packets, causing it to ignore the rest of the flow.
+We do not understand why this strategy works, though we hypothesize the `FIN` packets tricks the whitelister into thinking it has already missed the relevant data packets, causing it to ignore the rest of the flow.
 
 ### Circumvention Strategy 2
 
@@ -252,17 +262,17 @@ By sending nine ACKs during the 3-way handshake, the whitelister ignores the res
 
 Beyond exploiting the whitelister's shortcomings at the TCP layer, we can also use Geneva's strategy engine to bypass the whitelister by simply injecting one of the protocol fingerprints into the start of the connection. Here is one such strategy that injects the HTTP fingerprint into the connection stream before each data packet in the connection:
 
-`[TCP:flags:PA]-duplicate(tamper{TCP:load:replace:GET%20aaaaaaaaaa}(tamper{TCP:chksum:corrupt},),)-| \/`
+`[TCP:flags:PA]-duplicate(tamper{TCP:load:replace:GET%20testing123}(tamper{TCP:chksum:corrupt},),)-| \/`
 
 ### Using a Geneva Strategy
 
 To deploy one of these strategies, we can use Geneva's strategy engine (open source on [our Github page](https://github.com/kkevsterrr/geneva)) to apply these strategies to our network traffic. Since the engine captures network traffic on a specified port, any application sending data on that port will be affected by the strategy. For example, we can test that these strategies work by trying to trigger the whitelister with `nc` as above with the engine running in the background.  
 
-    $ STRATEGY="[TCP:flags:PA]-duplicate(tamper{TCP:load:replace:GET%20aaaaaaaaaa}(tamper{TCP:chksum:corrupt},),)-| \/"
+    $ STRATEGY="[TCP:flags:PA]-duplicate(tamper{TCP:load:replace:GET%20testing123}(tamper{TCP:chksum:corrupt},),)-| \/"
     $ sudo python3 engine.py --strategy "$STRATEGY" --server-port 80 --log info &
     $ nc <ip> 80
-    hi
-    hi
+    test
+    test
     # connection is still successful
     
 
