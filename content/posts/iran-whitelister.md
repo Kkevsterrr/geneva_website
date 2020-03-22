@@ -8,16 +8,6 @@ featured_color: "black"
 featured_image: "laptop.jpeg"
 ---
 
-**Update (3/21/2020):** Since this post was written, the Shatel ISP in Iran has announced the right to restrict access to **any ports or protocols** without informing the network. Combined with the whitelisting system, this poses a potentially threat to anti-censorship tools if only whitelisted ports are available.
-
-{{< center-text >}}
-{{< shrink size="350px" >}}
-{{< tweet 1240246443895652352 >}}
-{{< /shrink >}}
-{{< /center-text >}}
-
----
-
 **Summary: Ahead of its February 21st elections, Iran subtly deployed a second censorship system: a *protocol whitelister.*** 
 
 In this article, we will describe the protocol whitelister, how it works, and **how it can be defeated**.
@@ -127,6 +117,7 @@ We explored whether the provider for an IP address was correlated with whether t
 
 {{< flex align="start" >}}
 {{< flex-column >}}
+{{< rightjustifysecondcolumn >}}
 {{% markdown %}}
 Top 10 providers for affected IP addresses
 
@@ -144,26 +135,29 @@ Top 10 providers for affected IP addresses
 | Amazon Data Services      | 60   |    |
 
 {{% /markdown %}}
+{{< /rightjustifysecondcolumn >}}
 {{< /flex-column >}}
 
 {{< flex-column >}}
+{{< rightjustifysecondcolumn >}}
 {{% markdown %}}
 Top 10 providers for unaffected IP addresses
 
 | Provider                  | Count |   |
 |---------------------------|-------|---|
 | Cloudflare, Inc.          | 4541  |   |
-| Unknown                   | 1465  |   |
+| _Unknown_                   | 1465  |   |
 | Google LLC                | 657   |   |
 | ALISOFT                   | 657   |   |
 | Amazon Technologies Inc.  | 580   |   |
-| Asia Pacific Network Information Centre |  544 |  |
+| Asia Pacific NIC |  544 |  |
 | RIPE Network Coordination Centre |  537 |   |
 | Alibaba.com LLC           | 287  |   |
 | Amazon.com, Inc.          | 277  |   |
 | Akamai Technologies, Inc. | 253  |   |
 
 {{% /markdown %}}
+{{< /rightjustifysecondcolumn >}}
 {{< /flex-column >}}
 {{< /flex >}}
 
@@ -293,3 +287,15 @@ Iran has had a greater capacity for censorship than they have exercised in the p
 # Citations
 
 [1] Protocol whitelisting was briefly described in 2013: [https://censorbib.nymity.ch/pdf/Aryan2013a.pdf](https://censorbib.nymity.ch/pdf/Aryan2013a.pdf), as a capability they turned off after the 2013 elections were over.
+
+---
+
+**Update (3/21/2020):** Since this post was written, we were informed the Shatel ISP in Iran has announced the right to restrict access to **any ports or protocols** without informing the network. Combined with the whitelisting system, this poses a potentially threat to anti-censorship tools if only whitelisted ports are available.
+
+{{< center-text >}}
+{{< shrink size="350px" >}}
+{{< tweet 1240246443895652352 >}}
+{{< /shrink >}}
+{{< /center-text >}}
+
+**Update 3/22/2020):** @narimangharib noted that Shatel have been doing this since 2018.
