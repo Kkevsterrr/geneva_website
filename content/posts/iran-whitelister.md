@@ -169,7 +169,7 @@ As Cloudflare appears on both lists, we next explored how much of its infrastruc
 
 We performed a similar experiment to the above: given a Cloudflare IP address, we make two requests to it (first normally, second segmented); IP addresses that respond in the first condition but time out in the second condition are likely affected by the whitelister.  We repeated this experiment 5 times for each prefix. 
 
-We found that only 1 of Cloudflare's prefixes contained IPs that were affected by the whitelister: `104.18.0.0/16`. This entire prefix appears affected, but none of the other prefixes on Cloudflare's website contained IP addresses in our experiments that appeared affected by the whitelister. 
+We found that only 2 of Cloudflare's prefixes contained IPs that were affected by the whitelister: `104.18.0.0/16` and `104.31.82.0/24`. Both these entire prefixes appear affected, but none of the other prefixes on Cloudflare's website contained IP addresses in our experiments that appeared affected by the whitelister. 
 
 ### Summary
 
