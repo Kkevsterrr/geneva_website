@@ -19,6 +19,10 @@
     background-color: #5cb85c;
 }
 
+.label-black {
+    background-color: #ffffff;
+}
+
 .label-info {
     background-color: rgb(25, 102, 124);
 }
