@@ -48,13 +48,18 @@ Around the time of Iran's parliamentary elections, reports began surfacing that 
 {{< flex-column >}}
 {{< center-text >}}
 {{< shrink size="350px" >}}
+{{< tweetsize >}}
 
 {{% markdown %}}
+*Content of link to tweet is unavailable or may have been removed by the author.*
 
+سرعت اینترنت #وی_پی_ان #ایران #اندروید #سرعت #اینترنت #فیلترشکن #پروکسی #eclipsevpn #vpn #iran #internet pic.twitter.com/aplRfTizpb
 
-{{< tweet 1229834253866807298 >}}
+— Kamran M (@MKami823) February 18, 2020
 
 {{% /markdown %}}
+
+{{< /tweetsize >}}
 {{< /shrink >}}
 {{< /center-text >}}
 {{< /flex-column >}}
