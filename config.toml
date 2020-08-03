@@ -23,3 +23,7 @@ SectionPagesMenu = "main"
   [languages.en]
     title = "censorship.ai"
     weight = 1
+  [languages.zh]
+    title = "censorship.ai"
+    weight = 2
+
