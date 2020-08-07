@@ -22,7 +22,7 @@
       </h1>
       {{ end }}
       {{ with .Params.author }}
-      <p class="tracked">
+      <p class="light-gray tracked">
           By <strong>
           {{ if reflect.IsSlice . }}
               {{ delimit . ", " | markdownify }}
