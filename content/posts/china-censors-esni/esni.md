@@ -5,7 +5,7 @@ date = 2020-08-07
 tag = []
 featured_image = "red_locks.jpeg"
 summary = "The Great Firewall (GFW) of China has recently begun blocking ESNI—one of the foundational features of TLS 1.3 and HTTPS. We empirically demonstrate what triggers this censorship and how long residual censorship lasts. We also present several evasion strategies discovered by Geneva that can be run either client-side or server-side to evade blocking."
-authors = "Kevin Bock, iyouport, Anonymous, Louis-Henri Merino, David Fifield, Amir Houmansadr, Dave Levin"
+author = "Kevin Bock, iyouport, Anonymous, Louis-Henri Merino, David Fifield, Amir Houmansadr, Dave Levin"
 +++
 
 On 2020-07-30, [iyouport](https://www.iyouport.org/) [reported](https://mailarchive.ietf.org/arch/msg/tls/YzT5LjLJ_6WWhdnU2wVsKNKR6_I/) ([archive](https://web.archive.org/web/20200801221253/https://mailarchive.ietf.org/arch/msg/tls/YzT5LjLJ_6WWhdnU2wVsKNKR6_I/)) the apparent blocking of TLS connections with the encrypted SNI (ESNI) extension in China.

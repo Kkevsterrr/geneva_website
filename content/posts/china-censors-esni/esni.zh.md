@@ -6,7 +6,7 @@ riqi = "2020年8月7日，星期五"
 tag = []
 featured_image = "red_locks.jpeg"
 description = ""
-authors = "Kevin Bock, iyouport, Anonymous, Louis-Henri Merino, David Fifield, Amir Houmansadr, Dave Levin"
+author = "Kevin Bock, iyouport, Anonymous, Louis-Henri Merino, David Fifield, Amir Houmansadr, Dave Levin"
 +++
 
 [iyouport](https://www.iyouport.org)于2020年7月30日[报告](https://mailarchive.ietf.org/arch/msg/tls/YzT5LjLJ_6WWhdnU2wVsKNKR6_I/) ([存档](https://web.archive.org/web/20200801221253/https://mailarchive.ietf.org/arch/msg/tls/YzT5LjLJ_6WWhdnU2wVsKNKR6_I/))中国封锁了带有ESNI扩展的TLS连接。
