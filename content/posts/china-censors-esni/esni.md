@@ -370,7 +370,7 @@ We are also thankful to the OONI and OTF community for all of their support.
 
 ## Contacts
 
-Geneva team:
+[Geneva team](https://geneva.cs.umd.edu/people/):
 * Kevin Bock ([PGP key](https://geneva.cs.umd.edu/keys/kevin_pgp.asc))
 * [Dave Levin](https://www.cs.umd.edu/~dml) ([PGP key](https://geneva.cs.umd.edu/keys/dave_pgp.asc))
 

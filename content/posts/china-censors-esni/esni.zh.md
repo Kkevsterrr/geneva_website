@@ -246,7 +246,7 @@ Geneva的语法是这样的 `[TCP:flags:A]-duplicate(tamper{TCP:load:replace:AAA
 
 ## 联系我们
 
-Geneva团队:
+[Geneva团队](https://geneva.cs.umd.edu/people/):
 * Kevin Bock ([PGP key](https://geneva.cs.umd.edu/keys/kevin_pgp.asc))
 * [Dave Levin](https://www.cs.umd.edu/~dml) ([PGP key](https://geneva.cs.umd.edu/keys/dave_pgp.asc))
 
