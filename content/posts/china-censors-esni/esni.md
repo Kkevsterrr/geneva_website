@@ -59,7 +59,7 @@ We have made a simple Python program that performs the following:
 The program sends ClientHellos with ESNI both inside-out and outside-in, while
 capturing traffic on both sides for analysis. The servers to which we send
 ClientHellos complete the TCP handshake, but they do not send any data packets
-back to the client, nor do  they are first to close the connection.  All
+back to the client, nor are they first to close the connection.  All
 experiments were conducted between July 30th and August 6st.
 
 ## Details About the Blocking
