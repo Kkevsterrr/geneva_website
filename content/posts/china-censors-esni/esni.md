@@ -211,12 +211,11 @@ a custom plugin that performs the following steps:
 With this, Geneva discovered multiple evasion strategies *in just a few hours*.
 We describe them in detail below.
 
-The Geneva strategy engine is open source on [our
-Github](http://github.com/kkevsterrr/geneva).
-
-All of these strategies can be run with our open-source Geneva strategy engine ([repository](http://github.com/kkevsterrr/geneva)).  Since they operate at the TCP layer, they can be
-applied to any application that needs to use ESNI: with Geneva running, even an
-unmodified web browser can become a simple censorship evasion tool.
+All of these strategies can be run with our open-source Geneva strategy engine
+(available at our [Github repository](http://github.com/kkevsterrr/geneva)). Since they operate at the
+TCP layer, they can be applied to any application that needs to use ESNI: with
+Geneva running, even an unmodified web browser can become a simple censorship
+evasion tool.
 
 
 Note that Geneva is *not* designed as a general purpose evasion tool, and does
@@ -290,7 +289,7 @@ their request. In Geneva's syntax, this can be accomplished with:
 
 **Strategy 3: TCB Teardown**
 
-The next strategy is a classic TCB (TCP Control Block) Teardown: the client injects a `RST` packet
+The next strategy is a classic TCB (Transmission Control Block) Teardown: the client injects a `RST` packet
 with a broken checksum into the connection. This tricks the GFW into thinking
 the connection has been torn down.
 
@@ -306,7 +305,7 @@ Surprisingly, this strategy also can be induced from the server-side.
 During the three-way handshake, the server can send a `SYN+ACK` packet with a
 corrupt acknowledgement number, thereby inducing the client to send a `RST`.
 This causes the `RST` to have an incorrect sequence number (and an
-acknowledgement number of 0, but it still is sufficient to cause a TCB Teardown.
+acknowledgement number of 0), but it still is sufficient to cause a TCB Teardown.
 
 **Strategy 4: `FIN+SYN`**
 
