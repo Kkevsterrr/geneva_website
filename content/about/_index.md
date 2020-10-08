@@ -75,6 +75,6 @@ Sometimes, like with the strategy to the left, we conclude that Geneva has found
 {{< /flex >}}
 
 {{% markdown %}}
-To read more about how Geneva works, see our [papers](/papers). 
+To read more about how Geneva works, see our [papers](/papers/). 
 
 {{% /markdown %}}
