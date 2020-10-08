@@ -23,7 +23,7 @@ We're happy to announce that the full code base of Geneva is now [public](https:
 Our code base is comprised of two key components:
 
 - **Genetic Algorithm:** The logic underlying Geneva is its genetic algorithm, which comprises multiple "packet manipulation" primitives (duplicate, tamper, fragment, and drop) to form sophisticated censorship evasion strategies. The genetic algorithm trains against *live* censors to discover new evasion strategies. If you wish to discover new evasion strategies, this is the code to use.
-- **Engine:** The Geneva "engine" executes packet manipulation strategies by capturing and modifying inbound and outbound on the fly. The genetic algorithm uses the engine while training against live censors, but the engine does not need the genetic algorithm. If you simply wish to apply known evasion strategies, this is the code to use. The engine uses our domain-specific language to specify packet manipulation strategies; you can copy-paste the strategies directly from our [papers](https://geneva.cs.umd.edu/papers) (the code also includes many examples).
+- **Engine:** The Geneva "engine" executes packet manipulation strategies by capturing and modifying inbound and outbound on the fly. The genetic algorithm uses the engine while training against live censors, but the engine does not need the genetic algorithm. If you simply wish to apply known evasion strategies, this is the code to use. The engine uses our domain-specific language to specify packet manipulation strategies; you can copy-paste the strategies directly from our [papers](/papers) (the code also includes many examples).
 
 # What should I do with new evasion strategies?
 
@@ -40,7 +40,7 @@ Any time a new technique for censorship evasion is developed, researchers must a
 
 We believe the net effect of releasing Geneva helps evaders.
 
-The first consideration is resources: our [research papers](http://geneva.cs.umd.edu/papers) and talks detail how we built, tested, and deployed Geneva. Nation-state adversaries have the resources to re-implement Geneva themselves regardless of whether we release the code or not. To this end, releasing the code democratizes its use: regardless of the resources available to you, Geneva presents an automated solution to identifying bugs in censors.
+The first consideration is resources: our [research papers](/papers) and talks detail how we built, tested, and deployed Geneva. Nation-state adversaries have the resources to re-implement Geneva themselves regardless of whether we release the code or not. To this end, releasing the code democratizes its use: regardless of the resources available to you, Geneva presents an automated solution to identifying bugs in censors.
 
 The second consideration is the nature of the bugs Geneva finds themselves, and how it finds them. Geneva gives us the ability to *fast forward* the censorship arms race. Techniques that previously could take weeks or months to find can now be identified in hours or days. With this in mind, we ask: *what is the logical conclusion of the censorship arms race?* 
 
