@@ -192,7 +192,7 @@ GitHub repository](https://github.com/kkevsterrr/geneva).
 
 To learn more about how Geneva (or the Geneva strategy engine) works under the
 hood, see
-our [papers](https://geneva.cs.umd.edu/papers) or [about](https://geneva.cs.umd.edu/about) page.
+our [papers](/papers) or [about](/about) page.
 
 
 <!-- callout section close -->
