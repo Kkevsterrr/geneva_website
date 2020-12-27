@@ -24,7 +24,7 @@ Want to be added to this list? Then swing by, get involved, and [drop Dave a lin
 {{< flex >}}
 {{< flex-column >}}
 
-{{< person name="Kevin Bock" icon="kevin.png" >}} 
+{{< person name="Kevin Bock" icon="kevin.png" link="https://cs.umd.edu/~kbock" >}} 
 {{< /flex-column >}}
 
 {{< /flex >}}
