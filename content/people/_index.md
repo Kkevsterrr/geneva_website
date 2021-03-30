@@ -37,17 +37,11 @@ Want to be added to this list? Then swing by, get involved, and [drop Dave a lin
 {{< person name="Louis Henri-Merino" icon="avatar.png" >}}
 {{< /flex-column >}}
 
-{{< flex-column >}}
-{{< person name="Jasraj Singh" icon="avatar.png" >}}
-{{< /flex-column >}}
 
-{{< flex-column >}}
-{{< person name="Yair Fax" icon="avatar.png" >}}
-{{< /flex-column >}}
 
-{{< flex-column >}}
-{{< person name="Daniel Liscinsky" icon="avatar.png" >}}
-{{< /flex-column >}}
+
+
+
 
 {{< flex-column >}}
 {{< person name="Kyle Reese" icon="avatar.png" >}}
@@ -67,8 +61,19 @@ Want to be added to this list? Then swing by, get involved, and [drop Dave a lin
 {{< /flex-column >}}
 
 {{< flex-column >}}
-
 {{< person name="Regina Pogosian" icon="avatar.png" >}}
+{{< /flex-column >}}
+
+{{< flex-column >}}
+{{< person name="Jasraj Singh" icon="avatar.png" >}}
+{{< /flex-column >}}
+
+{{< flex-column >}}
+{{< person name="Daniel Liscinsky" icon="avatar.png" >}}
+{{< /flex-column >}}
+
+{{< flex-column >}}
+{{< person name="Yair Fax" icon="avatar.png" >}}
 {{< /flex-column >}}
 
 {{< /flex >}}
