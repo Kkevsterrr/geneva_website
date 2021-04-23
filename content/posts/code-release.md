@@ -10,7 +10,7 @@ featured_image: "concert.jpeg"
 
 # Genetic Algorithm Release
 
-We're happy to announce that the full code base of Geneva is now [public](https://github.com/kkevsterrr/geneva). Please read through our [documentation](https://gevena.readthedocs.io) thoroughly and understand the risks before trying it out. 
+We're happy to announce that the full code base of Geneva is now [public](https://github.com/kkevsterrr/geneva). Please read through our [documentation](https://geneva.readthedocs.io) thoroughly and understand the risks before trying it out. 
 
 {{% callout color="red" emoji="" %}}
 
