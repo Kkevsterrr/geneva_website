@@ -13,6 +13,14 @@
     flex: 1;
     padding: 0 30px;
 }
+
+.flex-container > .flex-column-border {
+    flex: 1;
+    padding: 0 30px;
+    border: 2px solid #73AD21;
+    border-radius: 25px;
+}
+
 .flex-container > .nopad-flex-column {
     flex: 1;
     padding: 0px;
@@ -47,6 +55,9 @@ li code {
 }
 .callout-red {
     background-color: rgba(219, 45, 83, 0.3);
+}
+.callout-yellow {
+    background-color: rgba(238, 210, 2, 0.3);
 }
 .callout-gray {
     background-color: rgb(47, 52, 55); 

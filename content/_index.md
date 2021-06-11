@@ -4,6 +4,20 @@ featured_color: "red"
 description: "Join us and learn about our fight to defeat censorship around the world."
 ---
 
+
+
+{{< center-me >}}
+
+{{% callout color=yellow %}}
+
+### *NEW*: Censors pose a threat to the entire Internet. See how attackers can [weaponize censorship infrastructure](/weaponizing).
+
+{{% /callout %}}
+
+{{< /center-me >}}
+
+
+
 {{< padded >}}
 {{< flex >}}
 {{% flex-column %}}
