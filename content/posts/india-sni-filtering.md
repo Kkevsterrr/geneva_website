@@ -4,13 +4,13 @@ lang = "en"
 date = 2021-07-27
 tag = []
 featured_image = "indian-flag.jpeg"
-summary = "In July of 2020, the Open Observatory of Network Interference (OONI) team [discovered](https://ooni.org/post/2020-tls-blocking-india/) that Indian ISPs (Airtel and Reliance Jio) had started filtering HTTPS websites using the Server Name Indication (SNI) field in TLS. A year later, we revisit Airtel's HTTPS censorship system, show how we trained Geneva against the new censorship system to discover evasion strategies, learn more about how the censorship systems operate."
+summary = "In July of 2020, the Open Observatory of Network Interference (OONI) team [discovered](https://ooni.org/post/2020-tls-blocking-india/) that Indian ISPs (Airtel and Reliance Jio) had started filtering HTTPS websites using the Server Name Indication (SNI) field in TLS. A year later, we revisit Airtel's HTTPS censorship system, show how we trained Geneva against the new censorship system to discover evasion strategies, and learn more about how the censorship systems operate."
 author = "Kevin Bock, Yair Fax, and Dave Levin"
 +++
 
 # Introduction
 
-**Summary: In July of 2020, the Open Observatory of Network Interference (OONI) team [discovered](https://ooni.org/post/2020-tls-blocking-india/) that Indian ISPs (Airtel and Reliance Jio) had started filtering HTTPS websites using the Server Name Indication (SNI) field in TLS. A year later, we revisit Airtel's HTTPS censorship system, show how we trained Geneva against the new censorship system to discover evasion strategies, learn more about how the censorship systems operate.**  
+**Summary: In July of 2020, the Open Observatory of Network Interference (OONI) team [discovered](https://ooni.org/post/2020-tls-blocking-india/) that Indian ISPs (Airtel and Reliance Jio) had started filtering HTTPS websites using the Server Name Indication (SNI) field in TLS. A year later, we revisit Airtel's HTTPS censorship system, show how we trained Geneva against the new censorship system to discover evasion strategies, and learn more about how the censorship systems operate.**  
 
 In July of 2020, the Open Observatory of Network Interference (OONI) team [discovered](https://ooni.org/post/2020-tls-blocking-india/) that Indian ISPs (Airtel and Reliance Jio) had started filtering HTTPS websites using the Server Name Indication (SNI) field in TLS. The SNI field is included in the TLS ClientHello message—in plaintext—specifying the hostname a client wants to connect to. The SNI is useful if there are multiple domains hosted on one IP address and the client wants to indicate which of those domains' certificates it wants to connect to. However, because the SNI is transmitted in plaintext, it presents an opportunity for censors to identify encrypted connections with forbidden websites.
 
@@ -18,7 +18,7 @@ In this article, we will:
 
 - Detail how Airtel's censor blocks TLS connections,
 - Describe a plugin to train [Geneva](http://censorship.ai) against the new censorship system, and
-- Present five vulnerabilities we find in the censor and how to take advantage of them for censorship evasion
+- Present five vulnerabilities we found in the censor and how to take advantage of them for censorship evasion
 
 All experiments described in this article were run from vantage points that we control in Bangalore, India to VPSes we control in Iowa and Tokyo and to `example.org`, `google.com`, and `amazon.com`. Our vantage points were all within the Airtel ISP.
 
