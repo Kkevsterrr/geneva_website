@@ -73,7 +73,7 @@ As a result, for Airtel's censorship to work properly, it must arrive at the ser
 
 In our experiments and while training Geneva, we find that the censor's `RST+ACK` *almost always loses* to our `PSH+ACK` to the server. When this occurs, we can simply drop the `RST+ACK` at the client and the connection can continue. Geneva discovered this strategy (and many variants): `\/ [TCP:flags:RA]-drop-|`
 
-The censor could combat this by sending two `RST+ACK`s, one accounting for the `PSH+ACK` and one not, but we find that Airtel doesn't do this.
+The censor could solve this problem by sending two `RST+ACK`s (one with it's sequence number as it is now and a second one advanced for the `PSH+ACK`), but Airtel does not.
 
 ### Strategy 4: Request "Cool Down"
 
@@ -87,7 +87,7 @@ Geneva discovered a second variant of this strategy: injecting a TLS ClientHello
 
 ### Strategy 5: Protocol Confusion
 
-Because Airtel's censorship system now monitors for both HTTP and HTTPS connections, Geneva discovers that it can trick it into not censoring an HTTPS connection by sending an innocuous HTTP GET request (with a corrupt checksum) first. In Geneva's syntax: `[TCP:flags:PA]-duplicate(tamper{TCP:load:replace:__HTTP_REQUEST__}(tamper{TCP:chksum:corrupt},),)-|`
+Because Airtel's censorship system now monitors for both HTTP and HTTPS connections, Geneva discovered that it can trick it into not censoring an HTTPS connection by sending an innocuous HTTP GET request (with a corrupt checksum) first. In Geneva's syntax: `[TCP:flags:PA]-duplicate(tamper{TCP:load:replace:__HTTP_REQUEST__}(tamper{TCP:chksum:corrupt},),)-|`
 
 The censor sees that the first data-carrying packet looks like an HTTP request and, as a consequence, seems to ignore our TLS ClientHello immediately after it. We find that both innocuous `GET` or `POST` requests have this effect. This strategy seems to be a different variant of the previous strategy `Request Cool Down`: we examine this more in the next section.
 
@@ -103,7 +103,7 @@ If we inject a forbidden HTTP `GET` request, a forbidden TLS Client Hello, or an
 
 ### How often does the client win the `RST+ACK` race?
 
-To test how often the client wins the `RST+ACK` race, i.e., if the TLS ClientHello reaches the server before the censor's `RST+ACK`, we ran the following experiment. We instrumented our client to drop all inbound `RST+ACK`s and issued forbidden TLS Client Hellos to a server we controlled. If the connection is not affected by the censor, we know one of two things happened: either the censor failed to attempt censorship at all or our `PSH+ACK` beat the `RST+ACK` to the server. To account for the first possibility, we run a packet capture to check if the server received a `RST+ACK`. If we receive a `RST+ACK` but the client can still communicate after dropping it, we know that our `PSH+ACK` beat the censor's `RST+ACK` to the server.
+To test how often the client wins the `RST+ACK` race, i.e., the TLS ClientHello reaches the server before the censor's `RST+ACK`, we ran the following experiment. We instrumented our client to drop all inbound `RST+ACK`s and issued forbidden TLS Client Hellos to a server we controlled. If the connection is not affected by the censor, we know one of two things happened: either the censor failed to attempt censorship at all or our `PSH+ACK` beat the `RST+ACK` to the server. To account for the first possibility, we run a packet capture to check if the server received a `RST+ACK`. If we receive a `RST+ACK` but the client can still communicate after dropping it, we know that our `PSH+ACK` beat the censor's `RST+ACK` to the server.
 
 We ran this experiment once every ten seconds over the course of 2 weeks and found that our `PSH+ACK` won 85.0% of the time. 
 
