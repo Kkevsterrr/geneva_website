@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ $.Site.LanguageCode | default "en" }}">
+<html lang="{{ $.Site.LanguageCode | default "en" }}" color-mode='light'>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -56,7 +56,7 @@
         {{ end }}
     </head>
 
-    <body class="ma0 {{ $.Param "body_classes"  | default "avenir bg-near-black"}}{{ with getenv "HUGO_ENV" }} {{ . }}{{ end }}">
+    <body class="ma0 {{ $.Param "body_classes"  | default "avenir bg-color"}}{{ with getenv "HUGO_ENV" }} {{ . }}{{ end }}">
 
         {{ block "header" . }}{{ partial "site-header.html" .}}{{ end }}
         <main class="pb7" role="main">

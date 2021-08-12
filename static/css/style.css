@@ -39,6 +39,7 @@ li code {
     border-radius:3px;
     font-size:85%;
 }
+
 .callout {
     background: #F9F9F9;
     padding: 1.5em 1.25em;
@@ -106,11 +107,11 @@ figure {
 }
 
 .nested-links a {
-    color: white;
+    color: var(--links, black);
 }
 
 .lighter-gray {
-    background-color: rgb(24, 26, 27);
+    background-color: var(--surface2);
 }
 
 .section {
@@ -121,7 +122,7 @@ figure {
     text-align: left;
 }
 a {
-    color: white;
+    color: var(--links, white);
 }
 .single-para li {
     text-align: left;
@@ -147,3 +148,88 @@ a {
     .flex-container > .flex-column {
         padding: 0;
     }
+}
+
+
+:root[color-mode="light"] {
+  --surface1: ##f4f4f4;
+  --surface2: #f2f2f2;
+  --surface3: #ffffff;
+  --transparent-surface: rgb(255, 255, 255, 0.8);
+  --element1: #111111;
+  --element2: hsla(0,0%,100%,.9);
+  --element3: #333333;
+  --elementInverse: #eee;
+  --primary: #01408e;
+  --secondary: #3c5d5c;
+  --tertiary: #fff7d6;
+  --links: black;
+}
+
+/* Dark Mode */
+:root[color-mode="dark"] {
+  --surface1: #111;
+  --surface2: rgb(24, 26, 27);
+  --surface3: rgba(0,0,0,.6);
+  --transparent-surface: rgb(0, 0, 0, 0.8);
+  --element1: #eeeeee;
+  --element2: #dddddd;
+  --element3: #cccccc;
+  --elementInverse: #111;
+  --primary: #8fceff;
+  --secondary: #72faca;
+  --tertiary: #eee8a9;
+  --links: white;
+}
+.light-gray {
+    color: var(--element1, "#eeeeee");
+}
+.text-color {
+    color: var(--element1, "#eeeeee");
+}
+.bg-color {
+    background-color: var(--surface1, "#111")
+}
+
+.surface3 {
+    background-color: var(--surface3, "#ffffff")
+}
+
+
+/* Any element with the class "light--hidden" will be hidden when the site is set to Light Mode */
+:root[color-mode="light"] .light--hidden {
+    display: none;
+}
+
+/* Any element with the class "dark--hidden" will be hidden when the site is set to Dark Mode */
+:root[color-mode="dark"] .dark--hidden {
+    display: none;
+}
+
+.color-mode__btn {
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: var(--box-shadow);
+}
+
+.color-mode__btn svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: #222222;
+  stroke: var(--element2, #222222);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5px;
+}
+
+.color-mode__btn:hover svg,
+.color-mode__btn:focus svg, .color-mode__btn:focus {
+  outline: none;
+  fill: #fff7d6;
+  fill: var(--tertiary, #fff7d6);
+}
+

@@ -12,7 +12,7 @@
         });
     });
 </script>
-  <article class="cf pv3 pv4-l f4 tc-l center  lh-copy light-gray">
+  <article class="cf pv3 pv4-l f4 tc-l center  lh-copy text-color">
     {{ .Content }}
   </article>
   {{/* Define a section to pull recent posts from. For Hugo 0.20 this will default to the section with the most number of pages. */}}
@@ -25,7 +25,7 @@
     {{/* Derive the section name  */}}
     {{ $section_name := index (.Site.Params.mainSections) 0 }}
 
-    <div class="cf ph3 ph5-l pv3 pv4-l f4 lh-copy light-gray">
+    <div class="cf ph3 ph5-l pv3 pv4-l f4 lh-copy text-color">
       {{/* Use $section_name to get the section title. Use "with" to only show it if it exists */}}
        {{ with .Site.GetPage "section" $section_name }}
           <h1 class="cf ph3 ph5-l pv3 pv4-l tc-l">
