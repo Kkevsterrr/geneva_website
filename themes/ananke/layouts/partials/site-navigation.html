@@ -29,6 +29,74 @@
             {{ partialCached "social-follow.html" . }}
             </div>
 
+            <!--- Light mode button --->
+            <button class="color-mode__btn light--hidden" aria-label="Toggle light mode">
+                <svg aria-hidden="true">
+                    <use href="#sun">
+                        <svg id="sun" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                    </use>
+                </svg>
+            </button>
+
+            <!--- Dark mode button --->
+            <button class="color-mode__btn dark--hidden" aria-label="Toggle dark mode">
+                <svg aria-hidden="true">
+                    <use href="#moon">
+                        <svg viewBox="0 0 24 24" id="moon">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </use>
+                </svg>
+            </button>
+            <script type='text/javascript'> 
+                const toggleColorMode = function(e) {
+                    // Switch to Light Mode
+                    if (e.currentTarget.classList.contains("light--hidden")) {
+                        // Sets the custom HTML attribute
+                        document.documentElement.setAttribute("color-mode", "light");
+
+                        // Sets the user's preference in local storage
+                        localStorage.setItem("color-mode", "light");
+                        return;
+                    }
+                
+                    /* Switch to Dark Mode
+                    Sets the custom HTML attribute */
+                    document.documentElement.setAttribute("color-mode", "dark");
+
+                    // Sets the user's preference in local storage
+                    localStorage.setItem("color-mode", "dark");
+                };
+
+            // Get the buttons in the DOM
+            const toggleColorButtons = document.querySelectorAll(".color-mode__btn");
+
+            // Set up event listeners
+            toggleColorButtons.forEach(btn => {
+                btn.addEventListener("click", toggleColorMode);
+            });
+
+            // This code assumes a Light Mode default
+            if (
+                /* This condition checks whether the user has set a site preference for dark mode OR a OS-level preference for Dark Mode AND no site preference */
+                localStorage.getItem('color-mode') === 'dark' ||
+                (window.matchMedia('(prefers-color-scheme: dark)').matches &&
+                 !localStorage.getItem('color-mode'))
+            ) {
+                // if true, set the site to Dark Mode
+                document.documentElement.setAttribute('color-mode', 'dark')
+            }
+        </script>
         </div>
     </div>
 </nav>
