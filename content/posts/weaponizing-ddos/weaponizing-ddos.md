@@ -1,6 +1,6 @@
 ---
 title: "Weaponizing Middleboxes for TCP Reflected Amplification"
-shorttitle: "Weaponizing DDoS"
+shorttitle: "Weaponizing Censors for DDoS"
 featured_image: "/amplify.jpg"
 show_particles: false
 date: 2021-08-12T03:53:38-05:00

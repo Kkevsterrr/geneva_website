@@ -162,7 +162,7 @@ a {
   --elementInverse: #eee;
   --primary: #01408e;
   --secondary: #3c5d5c;
-  --tertiary: #fff7d6;
+  --tertiary: rgb(255, 247, 214, 0.7);
   --links: black;
 }
 
@@ -178,7 +178,7 @@ a {
   --elementInverse: #111;
   --primary: #8fceff;
   --secondary: #72faca;
-  --tertiary: #eee8a9;
+  --tertiary: rgb(238, 232, 169, 0.7);
   --links: white;
 }
 .light-gray {
