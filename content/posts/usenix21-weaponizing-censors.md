@@ -35,7 +35,7 @@ This is not the only way we've discovered that censors could be weaponized: see 
 
 ## What's reflected amplification?
 
-Reflected amplification attacks are a powerful tool in the arsenal of a DoS attacker. An attacker spoofs a request from a victim to an open server (e.g. open DNS resolver), and the server responds to the victim. If the response is larger than the spoofed request, the server effectively *amplifies* the attacker's bandwidth in the DoS attack:
+Reflected amplification attacks are a powerful tool in the arsenal of a DoS attacker. An attacker spoofs a request from a victim to an open server (e.g., open DNS resolver), and the server responds to the victim. If the response is larger than the spoofed request, the server effectively *amplifies* the attacker's bandwidth in the DoS attack:
 
 {{< figure src="/weaponizing/udp.gif" >}}
 
@@ -47,7 +47,7 @@ Most DoS amplifications today are UDP-based. The reason for this is that TCP req
 
 The 3-way handshake is effective at preventing amplification for TCP-compliant hosts. But in this work, we discover a large number of **network middleboxes** do not conform to the TCP standard, and can be abused to perform attacks. In particular, we find many censorship middleboxes will respond to spoofed censored requests with large block pages, even if there is no valid TCP connection or handshake. These middleboxes can be weaponized to conduct DoS amplification attacks.
 
-Middleboxes are often not TCP-compliant by design: many middleboxes attempt handle asymmetric routing, where the middlebox can only see one direction of packets in a connection (e.g. client to server). But this feature opens them to attack: if middleboxes inject content based only on one side of the connection, an attacker can spoof one side of a TCP 3-way handshake, and convince the middlebox there is a valid connection.
+Middleboxes are often not TCP-compliant by design: many middleboxes attempt handle asymmetric routing, where the middlebox can only see one direction of packets in a connection (e.g., client to server). But this feature opens them to attack: if middleboxes inject content based only on one side of the connection, an attacker can spoof one side of a TCP 3-way handshake, and convince the middlebox there is a valid connection.
 
 {{< figure src="/weaponizing/weaponizing_middleboxes.gif" >}}
 
