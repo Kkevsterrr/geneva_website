@@ -11,9 +11,11 @@ aliases:
     - /weaponizing
     - /weaponizing/
 
+author: "Kevin Bock, Abdulrahman Alaraj, Yair Fax, Kyle Hurley, Eric Wustrow, and Dave Levin"
+
 ---
 
-This work is presented at [USENIX Security 2021](https://www.usenix.org/conference/usenixsecurity21/presentation/bock) and received a Distinguished Paper Award.
+This work was presented at [USENIX Security 2021](https://www.usenix.org/conference/usenixsecurity21/presentation/bock) and received a Distinguished Paper Award.
 
 **Summary:**
 
@@ -21,7 +23,7 @@ This work is presented at [USENIX Security 2021](https://www.usenix.org/conferen
 - This is the first reflected amplification attack over TCP that goes beyond sending `SYN` packets and the first HTTP-based reflected amplification attack.
 - We found multiple types of middlebox misconfiguration in the wild that can lead to technically *infinite* *amplification* for the attacker: by sending a single packet, the attacker can initiate an *endless stream of packets* to the victim.
 
-**Collectively, our results show that censorship infrastructure poses a greater threat to the broader Internet than previously understood.** 
+**Collectively, our results show that censorship infrastructure poses a greater threat to the broader Internet than previously understood.** Even _benign_ deployments of firewalls and intrusion prevention systems in non-censoring nation-states can be weaponized using the techniques we discovered. 
 
 See our full paper [here](https://geneva.cs.umd.edu/papers/usenix-weaponizing-ddos.pdf), our open source code [here](https://github.com/breakerspace/weaponizing-censors), or you can jump to the [FAQ section](#faq) below. 
 
@@ -97,7 +99,7 @@ Our version of zmap is open-source and available [here](https://github.com/break
 
 # Results
 
-{{< figure src="/weaponizing/amplification-patterns.svg" caption="Types of attacks we find. Thick arrows denote amplification; red ones denote packets that trigger amplification. (a) Normal TCP Reflection, in which the attacker sends a single SYN packet to elicit SYN+ACKs. (b) Middlebox reflection, in which the attacker sends a packet sequence to trigger a block page or censorship response. (c) Combined destination and middlebox reflection, in which the attacker can elicit a response from both the middlebox and end destination. (d) Routing loop reflection, in which trigger packets are trapped in a routing loop. (e) Victim-sustained reflection, in which the victim's default response triggers additional packets from the middlebox or destination. We find that infinite amplification is caused by (d) routing loops that fail to decrement TTLs and (e) victim-sustained reflection.">}}
+{{< figure src="/weaponizing/amplification-patterns.svg" caption="**Types of attacks we find**. Thick arrows denote amplification; red ones denote packets that trigger amplification. (a) Normal TCP Reflection, in which the attacker sends a single SYN packet to elicit SYN+ACKs. (b) Middlebox reflection, in which the attacker sends a packet sequence to trigger a block page or censorship response. (c) Combined destination and middlebox reflection, in which the attacker can elicit a response from both the middlebox and end destination. (d) Routing loop reflection, in which trigger packets are trapped in a routing loop. (e) Victim-sustained reflection, in which the victim's default response triggers additional packets from the middlebox or destination. We find that infinite amplification is caused by (d) routing loops that fail to decrement TTLs and (e) victim-sustained reflection.">}}
 
 Recall that we are searching for weaknesses in the TCP implementation in middleboxes, not in the TCP protocol itself. In addition, each middlebox has its own injection policies and block pages: this means that there is no one single amplification factor for this attack, since each middlebox we trigger will be different!
 

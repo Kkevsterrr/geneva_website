@@ -7,6 +7,7 @@ date: 2021-08-11T03:53:38-05:00
 description: "Attackers can force censors to block arbitrary IP address pairs."
 summary: "We discover it is possible for an attacker to weaponize a censor to prevent _any pair_ of hosts from communicating across its borders by abusing a little known feature of many censorship systems: _residual censorship_."
 draft: false
+author: "Kevin Bock, Pranav Bharadwaj, Jasraj Singh, and Dave Levin"
 ---
 
 This work appeared in WOOT 21 "[Your Censor is My Censor: Weaponizing Censorship Infrastructure for Availability Attacks](/papers/woot21-weaponizing-availability.pdf)". You can also view the [conference talk](https://www.youtube.com/watch?v=QkB3IeHpGgY). 
