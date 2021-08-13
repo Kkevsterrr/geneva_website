@@ -27,7 +27,7 @@ See our full paper [here](https://geneva.cs.umd.edu/papers/usenix-weaponizing-dd
 
 {{% callout emoji="" color="blue" %}}
 
-This is not the only way we've discovered that censors could be weaponized: see the post about our work in WOOT 2021 "[Your Censor is My Censor: Weaponizing Censorship Infrastructure for Availability Attacks](/posts/weaponizing-availability/weaponizing-availability)".
+This is not the only way we've discovered that censors could be weaponized: see the post about our work in WOOT 2021 "[Your Censor is My Censor: Weaponizing Censorship Infrastructure for Availability Attacks](/posts/weaponizing-availability/weaponizing-availability/)".
 
 {{% /callout %}}
 
