@@ -9,6 +9,7 @@ summary: "Censors pose an even greater threat to the Internet than previously un
 draft: false
 aliases:
     - /weaponizing
+    - /weaponizing/
 
 ---
 
@@ -23,6 +24,14 @@ This work is presented at [USENIX Security 2021](https://www.usenix.org/conferen
 **Collectively, our results show that censorship infrastructure poses a greater threat to the broader Internet than previously understood.** 
 
 See our full paper [here](https://geneva.cs.umd.edu/papers/usenix-weaponizing-ddos.pdf), our open source code [here](https://github.com/breakerspace/weaponizing-censors), or you can jump to the [FAQ section](#faq) below. 
+
+{{% callout emoji="" color="blue" %}}
+
+This is not the only way we've discovered that censors could be weaponized: see the post about our work in WOOT 2021 "[Your Censor is My Censor: Weaponizing Censorship Infrastructure for Availability Attacks](/posts/weaponizing-availability/weaponizing-availability)".
+
+{{% /callout %}}
+
+
 
 ## What's reflected amplification?
 
