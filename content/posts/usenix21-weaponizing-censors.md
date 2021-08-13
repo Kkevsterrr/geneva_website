@@ -197,7 +197,7 @@ Yes, but we're limited. In September of 2020, we reached out and shared an advan
   &nbsp;  
   Unfortunately, completely fixing this problem will require countries to invest money in changes that could weaken their censorship infrastructure, which we do not think is likely to occur. 
 10. **Why don't you have a logo or fancy name for your attack?**  
-Don't tempt us. 
+Drop us a line if you have any suggestions!
 
 # Paper
 
