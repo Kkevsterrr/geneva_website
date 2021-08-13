@@ -9,6 +9,8 @@ summary: "We discover it is possible for an attacker to weaponize a censor to pr
 draft: false
 ---
 
+This work appeared in WOOT 21 "[Your Censor is My Censor: Weaponizing Censorship Infrastructure for Availability Attacks](/papers/woot21-weaponizing-availability.pdf)". You can also view the [conference talk](https://www.youtube.com/watch?v=QkB3IeHpGgY). 
+
 **Summary:**
 
 - We discover a new way that attackers could weaponize censorship infrastructure to cause  *a* denial of service attacks between any pair of IP addresses that cross the censor.
@@ -17,11 +19,11 @@ draft: false
 
 **Collectively, our results show that censorship infrastructure poses a greater threat to the broader Internet than previously understood.** 
 
-See our full paper [here](https://geneva.cs.umd.edu/papers/woot21-weaponizing-availability.pdf), our open-source and artifact evaluated code [here](https://github.com/breakerspace/weaponizing-residual-censorship/), or you can jump to the [FAQ section](#faq) below. 
+See our full paper [here](https://geneva.cs.umd.edu/papers/woot21-weaponizing-availability.pdf), our open-source and artifact evaluated code [here](https://github.com/breakerspace/weaponizing-residual-censorship/), our [talk](https://www.youtube.com/watch?v=QkB3IeHpGgY), or you can jump to the [FAQ section](#faq) below. 
 
 {{% callout emoji="" color="blue" %}}
 
-This is not the only way we've discovered that censors could be weaponized: see the post about our work in USENIX Security 2021 "[Weaponizing Middleboxes for TCP Reflected Amplification](/weaponizing)".
+This is not the only way we've discovered that censors could be weaponized: see the post about our work in USENIX Security 2021 "[Weaponizing Middleboxes for TCP Reflected Amplification](/weaponizing/)".
 
 {{% /callout %}}
 
