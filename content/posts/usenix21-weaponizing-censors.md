@@ -15,7 +15,7 @@ author: "Kevin Bock, Abdulrahman Alaraj, Yair Fax, Kyle Hurley, Eric Wustrow, an
 
 ---
 
-This work was presented at [USENIX Security 2021](https://www.usenix.org/conference/usenixsecurity21/presentation/bock) and received a Distinguished Paper Award.
+This work was presented at [USENIX Security 2021](https://www.usenix.org/conference/usenixsecurity21/presentation/bock) and received a Distinguished Paper Award. Our conference talk is also available [here](https://www.youtube.com/watch?v=OSfgTbjb3og).
 
 **Summary:**
 
@@ -25,7 +25,7 @@ This work was presented at [USENIX Security 2021](https://www.usenix.org/confere
 
 **Collectively, our results show that censorship infrastructure poses a greater threat to the broader Internet than previously understood.** Even _benign_ deployments of firewalls and intrusion prevention systems in non-censoring nation-states can be weaponized using the techniques we discovered. 
 
-See our full paper [here](https://geneva.cs.umd.edu/papers/usenix-weaponizing-ddos.pdf), our open source code [here](https://github.com/breakerspace/weaponizing-censors), or you can jump to the [FAQ section](#faq) below. 
+See our [full paper](https://geneva.cs.umd.edu/papers/usenix-weaponizing-ddos.pdf), our [conference talk](https://www.youtube.com/watch?v=OSfgTbjb3og), our open source [code](https://github.com/breakerspace/weaponizing-censors), or you can jump to the [FAQ section](#faq) below. 
 
 {{% callout emoji="" color="blue" %}}
 
