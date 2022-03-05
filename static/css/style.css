@@ -233,3 +233,6 @@ a {
   fill: var(--tertiary, #fff7d6);
 }
 
+summary {
+    cursor:pointer;
+}

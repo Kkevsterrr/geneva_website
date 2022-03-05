@@ -1,1 +1,1 @@
-hugo
+HUGO_ENV="production" hugo
