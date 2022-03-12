@@ -6,6 +6,7 @@ tag = []
 featured_image = "fiber3.jpeg"
 summary = "The Great Firewall (GFW) of China has recently begun blocking fully encrypted traffic in an effort to crack down on circumvention protocols. We demonstrate how this censorship works, what triggers it, how different protocols are affected, and how long residual censorship lasts."
 author = "Anonymous, Kevin Bock, David Fifield, Eric Wustrow, Amir Houmansadr, Dave Levin"
+draft = true
 +++
 
 Since at least as early as November 6, 2021, [numerous users reported](https://github.com/net4people/bbs/issues/69#issuecomment-962666385) the blocking of their servers running Shadowsocks and VMess+TCP. Outline lead developer Vinicius also [reported](https://github.com/shadowsocks/shadowsocks-libev/issues/2860#issuecomment-974250511) "a drop in the opt-in Outline usage metrics in China starting on November 8". The start of this blocking coincides with the [Sixth Plenary Session of the 19th CPC Central Committee (中国共产党第十九届中央委员会第六次全体会议)](https://zh.wikipedia.org/zh-cn/%E4%B8%AD%E5%9B%BD%E5%85%B1%E4%BA%A7%E5%85%9A%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%B1%8A%E4%B8%AD%E5%A4%AE%E5%A7%94%E5%91%98%E4%BC%9A%E7%AC%AC%E5%85%AD%E6%AC%A1%E5%85%A8%E4%BD%93%E4%BC%9A%E8%AE%AE), which was held from November 8, 2021 to November 11, 2021.
