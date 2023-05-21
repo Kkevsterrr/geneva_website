@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en-US" color-mode='light'>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Geneva is a genetic algorithm that automatically learns how to evade nation state censors.">
+        
+        <title>censorship.ai  | Weaponizing Censorship Infrastructure for Availability Attacks</title>
+        <meta name="viewport" content="width=device-width,minimum-scale=1, initial-scale='1.0'">
+        <meta name="generator" content="Hugo 0.82.1" />
+        
+        
+        <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+        
+
+        
+        
+        <link href="/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
+        
+
+        
+        <link rel="stylesheet" href="/css/style.css">
+        
+        <link rel="stylesheet" href="/css/syntax.css">
+        
+        <link rel="stylesheet" href="/css/labels.css">
+        
+
+        
+        
+        
+
+        
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" type='text/javascript'></script>
+        <script type='text/javascript'>
+            $(document).ready(function() {
+                let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+                if (isMobile) {
+                    var viewportHeight = $('.section').outerHeight();
+                    $('.section').css({ height: viewportHeight });
+                }
+            })
+        </script>
+
+        <meta property="og:title" content="Weaponizing Censorship Infrastructure for Availability Attacks" />
+<meta property="og:description" content="Attackers can force censors to block arbitrary IP address pairs." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://geneva.cs.umd.edu/posts/woot21-weaponizing-availability/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-08-11T03:53:38-05:00" />
+<meta property="article:modified_time" content="2021-08-11T03:53:38-05:00" /><meta property="og:site_name" content="censorship.ai" />
+
+<meta itemprop="name" content="Weaponizing Censorship Infrastructure for Availability Attacks">
+<meta itemprop="description" content="Attackers can force censors to block arbitrary IP address pairs."><meta itemprop="datePublished" content="2021-08-11T03:53:38-05:00" />
+<meta itemprop="dateModified" content="2021-08-11T03:53:38-05:00" />
+<meta itemprop="wordCount" content="1768">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Weaponizing Censorship Infrastructure for Availability Attacks"/>
+<meta name="twitter:description" content="Attackers can force censors to block arbitrary IP address pairs."/>
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WM3D2KZ64S"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-WM3D2KZ64S');
+        </script>
+    </head>
+
+    <body class="ma0 avenir bg-color">
+
+        
+   
+  
+
+
+
+  
+  
+  <header class="cover bg-top" style="background-image: url('https://geneva.cs.umd.edu/fiber.jpg');">
+
+    <script src="/particles.js"></script>
+    <div class="pb3-m pb6-l bg-black-60" id='particle-container'>
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+    <div class="flex-l justify-between items-center center">
+        <a href="https://geneva.cs.umd.edu" class="subtext f3 fw2 hover-white no-underline white-90 dib">
+            censorship.ai
+        </a>
+        <div class="flex-l items-center">
+            
+            <ul class="pl0 mr3">
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/about/" title="About Geneva page">About</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/people/" title="People page">People</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/posts/" title="Posts page">Posts</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/code/" title="Code &amp; Data page">Code</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/papers/" title="Papers page">Papers</a>
+                </li>
+                
+            </ul>
+            
+
+
+
+                
+
+
+
+
+            <div class="hideonmobile">
+            
+
+
+
+
+
+
+
+
+<a href="https://github.com/kkevsterrr/geneva" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+
+            </div>
+
+            
+            <button class="color-mode__btn light--hidden" aria-label="Toggle light mode">
+                <svg aria-hidden="true">
+                    <use href="#sun">
+                        <svg id="sun" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                    </use>
+                </svg>
+            </button>
+
+            
+            <button class="color-mode__btn dark--hidden" aria-label="Toggle dark mode">
+                <svg aria-hidden="true">
+                    <use href="#moon">
+                        <svg viewBox="0 0 24 24" id="moon">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </use>
+                </svg>
+            </button>
+            <script type='text/javascript'> 
+                const toggleColorMode = function(e) {
+                    
+                    if (e.currentTarget.classList.contains("light--hidden")) {
+                        
+                        document.documentElement.setAttribute("color-mode", "light");
+
+                        
+                        localStorage.setItem("color-mode", "light");
+                        return;
+                    }
+                
+                    
+
+                    document.documentElement.setAttribute("color-mode", "dark");
+
+                    
+                    localStorage.setItem("color-mode", "dark");
+                };
+
+            
+            const toggleColorButtons = document.querySelectorAll(".color-mode__btn");
+
+            
+            toggleColorButtons.forEach(btn => {
+                btn.addEventListener("click", toggleColorMode);
+            });
+
+            
+            if (
+                 
+                localStorage.getItem('color-mode') === 'dark' ||
+                (window.matchMedia('(prefers-color-scheme: dark)').matches &&
+                 !localStorage.getItem('color-mode'))
+            ) {
+                
+                document.documentElement.setAttribute('color-mode', 'dark')
+            }
+        </script>
+        </div>
+    </div>
+</nav>
+
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title" style="font-weight:normal">Weaponizing Censorship Infrastructure for Availability Attacks</h1>
+          
+            <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
+              Attackers can force censors to block arbitrary IP address pairs.
+            </h2>
+          
+        
+      </div>
+    </div>
+    
+
+  </header>
+
+
+
+        <main class="pb7" role="main">
+            
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked light-gray">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=https://geneva.cs.umd.edu/posts/woot21-weaponizing-availability/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=https://geneva.cs.umd.edu/posts/woot21-weaponizing-availability/&amp;text=Weaponizing%20Censorship%20Infrastructure%20for%20Availability%20Attacks" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://geneva.cs.umd.edu/posts/woot21-weaponizing-availability/&amp;title=Weaponizing%20Censorship%20Infrastructure%20for%20Availability%20Attacks" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+
+      
+      
+      <p class="light-gray tracked">
+          By <strong>
+          
+              Kevin Bock, Pranav Bharadwaj, Jasraj Singh, and Dave Levin
+          
+          </strong>
+      </p>
+      
+      
+      <time class="f6 mv4 dib tracked light-gray" datetime="2021-08-11T03:53:38-05:00">August 11, 2021</time>
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy avenir f4 nested-links nested-img light-gray pr4-l"><p>This work appeared in WOOT 21 &ldquo;<a href="/papers/woot21-weaponizing-availability.pdf">Your Censor is My Censor: Weaponizing Censorship Infrastructure for Availability Attacks</a>&rdquo;. You can also view the <a href="https://www.youtube.com/watch?v=QkB3IeHpGgY">conference talk</a>.</p>
+<p><strong>Summary:</strong></p>
+<ul>
+<li>We discover a new way that attackers could weaponize censorship infrastructure to cause  <em>a</em> denial of service attacks between any pair of IP addresses that cross the censor.</li>
+<li>The attack is completely off-path and exploits a little known feature of many censorship systems called <em>residual censorship.</em></li>
+<li>This attack allows effectively anyone to weaponize censorship infrastructure to perform their own targeted blocking.</li>
+</ul>
+<p><strong>Collectively, our results show that censorship infrastructure poses a greater threat to the broader Internet than previously understood.</strong></p>
+<p>See our <a href="https://geneva.cs.umd.edu/papers/woot21-weaponizing-availability.pdf">full paper</a>, our open-source and artifact evaluated <a href="https://github.com/breakerspace/weaponizing-residual-censorship/">code</a>, our <a href="https://www.youtube.com/watch?v=QkB3IeHpGgY">talk</a>, or you can jump to the <a href="#faq">FAQ section</a> below.</p>
+<div class="callout callout-blue" style="">
+  <div></div>
+	<div class="callout-inner">
+<p>This is not the only way we&rsquo;ve discovered that censors could be weaponized: see the post about our work in USENIX Security 2021 &ldquo;<a href="/weaponizing/">Weaponizing Middleboxes for TCP Reflected Amplification</a>&rdquo;.</p>
+  </div>
+</div>
+<h1 id="what-is-residual-censorship">What is residual censorship?</h1>
+<p>Residual censorship is a feature observed in some censorship systems in which the censor
+continues to block innocuous requests for a short period of time (usually two minutes or less)  <em>after</em> censoring a forbidden request.</p>
+<p>An important facet of residual censorship is what information the censor remembers about the client&rsquo;s connection after censorship is initially triggered. There are three basic options available to an adversary: <em>2-tuple</em> (in which the censor remembers the client&rsquo;s IP address and. the server IP address), <em>3-tuple</em> (client IP address, server IP address and port), or <em>4-tuple</em> (client IP address+port, server IP address+port). The less specific information the censor remembers, the broader and harsher its residual censorship is.</p>
+<figure>
+    <img src="/weaponizing/types_of_residual.001.png"/> 
+</figure>
+
+<p>At this time, we aren&rsquo;t aware of any censorship systems that employ 2-tuple residual censorship, so our work focuses on 3-tuple and 4-tuple residual censorship.</p>
+<h1 id="weaponizing-residual-censorship">Weaponizing residual censorship</h1>
+<p>To weaponize residual censorship, our idea is straightforward. The attacker will spoof the source IP address of the victim client and generate a forbidden request to the victim server. This will activate residual censorship and block the client and server from communicating for a short period of time.</p>
+<figure>
+    <img src="/weaponizing/weaponizing_residual.gif"/> 
+</figure>
+
+<p>We found that the <em>direction</em> of residual censorship matters: this attack will prevent the client from communicating with the server, but will not always prevent the server from communicating with the client.</p>
+<p>How can an attacker generate a forbidden request for TCP based protocols while spoofing their source IP address? In prior work, we used Geneva to identify packet sequences that could be used to trigger censors without requiring a proper 3-way handshake, even for stateful censors that try to monitor the 3-way handshake.</p>
+<h1 id="ethically-demonstrating-the-attack">Ethically demonstrating the attack</h1>
+<p>Since all of our vantage points employed egress filtering, we cannot launch the attack directly from our censored vantage points within China, Iran, or Kazakhstan.</p>
+<p>Instead, we leverage a public deployment of <a href="https://github.com/willscott/sp3">SP3</a> (A Simple Practical &amp; Safe Packet Spoofing Protocol) deployed at the University of Washington, to ethically send source-spoofed packets and thus act as our attacker. SP3 is a web server that offers the ability to send spoofed packets, but mandates that a client <em>consent</em> to receiving source-spoofed packets. A client gives this consent by creating and holding open a websocket connection to SP3. When the client connects, SP3 returns a UUID16 challenge string. As long as the websocket connection is held open, other servers can connect to SP3 with a websocket, supply the challenge code, and can give SP3
+packets through binary frames to send to that client.</p>
+<p>We launched the attack on ourselves as follows. We used SP3 to send a sequence of packets to  trigger residual censorship to a server that crosses the censor, with the source addresses spoofed to be a test victim under our control. Recall that traffic direction matters to residual censorship: the attacker must be on the same side of the censor as the victim. Since SP3
+is located in the United States, this means we are launching the attack from outside-in for each censoring country. Our vantage points within each country acted as the server; we launched the attack against all of our geographically disparate vantage points around the world as
+victims.</p>
+<p>Then, we used our “victim” to make requests to the server, and recorded if the connection succeeded or if it was impacted by residual censorship. We varied our test request based on the protocol and type of residual censorship. For 3-tuple residual censorship, the client makes an innocuous request with a different source port to the same server IP address and port. For 4-tuple residual censorship, we ensure the client uses the same source port as the attacker. Of course, in a real attack scenario, the attacker cannot know the source port a victim will use a priori. Therefore, to weaponize 4-tuple residual censorship systems, the attacker would re-trigger censorship for all 65,535 possible source ports. As we&rsquo;ll see later, this does not impose a significant limitation on attackers.</p>
+<figure>
+    <img src="/weaponizing/exp.gif"/> 
+</figure>
+
+<h3 id="results">Results</h3>
+<p>We launched this attack against our uncensored vantage points located around the world in Australia (Sydney), India (Mumbai), Ireland (Dublin), Japan (Tokyo), United Arab Emirates (Dubai), and the United States (Iowa, Colorado, and Virginia) for every bidirectional, residually censored protocol to each of our vantage points in China, with HTTP and ESNI, in Kazakhstan, with HTTP and SNI, and in Iran, with HTTP and SNI.</p>
+<p>In every country we tested, <strong>we could successfully weaponize the censorship infrastructure against every victim vantage point at least once around the world.</strong> We find that the attack is sensitive to the chosen protocol (for example, HTTPS offers better results in Kazakhstan than HTTP).</p>
+<p>Collectively, our results suggest that there are many shared paths through the censorship infrastructure of each country, and an attacker that can access just one source spoofed capable
+machine is capable of launching highly effective availability attacks. A more well resourced attacker could likely get even better results by choosing vantage points with even more similar paths as their victims.</p>
+<p>See our paper for the full breakdown of success rates by attack location.</p>
+<h1 id="sustaining-the-attack">Sustaining the attack</h1>
+<p>Since residual censorship usually only lasts for a short period of time, how can an attacker sustain the attack? It depends on the type of residual censorship.</p>
+<p>For 4-tuple residual censorship, it is a little harder, since the attacker can&rsquo;t guess the client&rsquo;s source port. Therefore, the attacker has to send the trigger packet sequence 65,535 times (once for each source port) within the duration of residual censorship. In Kazakhstan, this requires sending 145 bytes 65,535 times within 120 seconds, requiring 634 kbps to sustain the attack indefinitely.</p>
+<p>For 3-tuple residual censorship, the attacker must be able to send the trigger sequence at least once per duration of residual censorship. In China, this requires the attacker to send 145 bytes every 90 seconds: requiring only 13bps. A weak attacker can sustain this attack easily.</p>
+<p>In some cases though, we discovered that the victim themselves help the attacker sustain the attack. In Kazakhstan and Iran, any additional packets sent by the victim reset the censor&rsquo;s residual censorship timer. This means the victim&rsquo;s <em>default behavior</em> (resending unacknowledged packets) prolongs the attack all on its own.</p>
+<h1 id="code">Code</h1>
+<p>All of our code is open source and available on Github <a href="https://github.com/breakerspace/weaponizing-residual-censorship/">here</a>. Our code completed Artifact Evaluation with the conference and was awarded the Results Reproduced (ROR-R) and Open Research Artifacts (ORO) badges.</p>
+<p>By releasing this code, are we helping attackers? We don&rsquo;t think so. The code we are releasing is useful for evaluating this attack, but not useful for deploying the attack in the wild. This is because our code goes through SP^3: an attacker can only use our code to launch an attack if they are attacking themselves.</p>
+<h1 id="paper">Paper</h1>
+<p>In our paper, we perform an in-depth look at the current state of residual censorship in Iran, Kazakhstan, and China: the types of residual censorship in operation, their censorship mechanisms, and their limitations. There are also more details in our paper about our experiment configuration. See our full paper <a href="https://geneva.cs.umd.edu/papers/woot21-weaponizing-availability.pdf">here</a> for more details.</p>
+<h1 id="faq">FAQ</h1>
+<ol>
+<li><strong>Who is vulnerable? Do I need to live within a censored country to be a victim?</strong><br>
+This attack blocks any pair of IP addresses from communicating across a censor. This means that you could be affected, but it&rsquo;s less likely. If you live outside a censored regime, an attacker could prevent you from accessing a resource inside that censored regime.</li>
+<li><strong>Who is vulnerable to being weaponized?</strong><br>
+We studied Iran, Kazakhstan, and China in our paper and demonstrated this attack live against all three countries.</li>
+<li><strong>What can a client or server do to defend themselves?</strong><br>
+Unfortunately, there isn&rsquo;t much a client or server can do if this attack is used. This attack effectively coopts the strengths of the national censorship infrastructure, and we were unable to find any way for a client or server to disable the attack or defend themselves.</li>
+<li><strong>What can we do to detect this attack?</strong><br>
+Servers could try to monitor for packet sequences used by attackers to trigger residual censorship, but this approach is not foolproof. Since attackers only need the censor to process their packet sequence, an attacker can abuse the <code>ttl</code> (time to live) field to hide the attack. The <code>ttl</code> field determines how long packets can survive in a network: it decrements once per hop, and if the <code>ttl</code> field hits 0, the packet is dropped. An attacker can set the <code>ttl</code> of their packets high enough to cross the censor, but not high enough to reach the server. In these cases, the attack would be all but invisible.</li>
+<li><strong>Has this attack been detected in the wild?</strong><br>
+Not yet, to our knowledge, but we believe detecting it would be extremely difficult.</li>
+<li><strong>Is your code open source?</strong><br>
+Yes: our code is open source and available on Github <a href="https://github.com/breakerspace/weaponizing-residual-censorship/">here</a>. Our code completed Artifact Evaluation with the conference and was awarded the Results Reproduced (ROR-R) and Open Research Artifacts (ORO) badges.</li>
+<li><strong>By releasing this code, aren&rsquo;t you helping attackers?</strong><br>
+There&rsquo;s always a small risk of this, but in this case, we don&rsquo;t think so. The code we are releasing is useful for <em>evaluating</em> this attack, but not useful for <em>deploying</em> the attack in the wild. This is because our code relies entirely on SP^3, which means an attacker can only use our code to launch an attack if they are attacking themselves.</li>
+<li><strong>Was this attack responsibly disclosed?</strong><br>
+Yes. We reached out to several country-level CERTs about this issue to report it, but never heard back. Unfortunately, completely fixing this problem will require countries to invest money in potentially costly changes that could weaken their censorship infrastructure, which we do not think is likely to occur.</li>
+</ol>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+        </main>
+        <footer class="surface3 bottom-0 w-100 pa3" role="contentinfo">
+    <div class="flex justify-between">
+        <span class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3">
+            <a class='no-underline' href="https://geneva.cs.umd.edu" >
+                &copy;  censorship.ai 2023, proud member of <a href='https://breakerspace.io'>Breakerspace</a>
+        </span>
+        
+
+
+
+
+
+
+
+
+<a href="https://github.com/kkevsterrr/geneva" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+        
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en-US" color-mode='light'>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Geneva is a genetic algorithm that automatically learns how to evade nation state censors.">
+        
+        <title>censorship.ai  | Evading SNI Filtering in India with Geneva</title>
+        <meta name="viewport" content="width=device-width,minimum-scale=1, initial-scale='1.0'">
+        <meta name="generator" content="Hugo 0.82.1" />
+        
+        
+        <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+        
+
+        
+        
+        <link href="/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
+        
+
+        
+        <link rel="stylesheet" href="/css/style.css">
+        
+        <link rel="stylesheet" href="/css/syntax.css">
+        
+        <link rel="stylesheet" href="/css/labels.css">
+        
+
+        
+        
+        
+
+        
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" type='text/javascript'></script>
+        <script type='text/javascript'>
+            $(document).ready(function() {
+                let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+                if (isMobile) {
+                    var viewportHeight = $('.section').outerHeight();
+                    $('.section').css({ height: viewportHeight });
+                }
+            })
+        </script>
+
+        <meta property="og:title" content="Evading SNI Filtering in India with Geneva" />
+<meta property="og:description" content="In July of 2020, the Open Observatory of Network Interference (OONI) team discovered that Indian ISPs (Airtel and Reliance Jio) had started filtering HTTPS websites using the Server Name Indication (SNI) field in TLS. A year later, we revisit Airtel&rsquo;s HTTPS censorship system, show how we trained Geneva against the new censorship system to discover evasion strategies, and learn more about how the censorship systems operate." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://geneva.cs.umd.edu/posts/india-sni-filtering/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-07-27T00:00:00-04:00" />
+<meta property="article:modified_time" content="2021-07-27T00:00:00-04:00" /><meta property="og:site_name" content="censorship.ai" />
+
+<meta itemprop="name" content="Evading SNI Filtering in India with Geneva">
+<meta itemprop="description" content="In July of 2020, the Open Observatory of Network Interference (OONI) team discovered that Indian ISPs (Airtel and Reliance Jio) had started filtering HTTPS websites using the Server Name Indication (SNI) field in TLS. A year later, we revisit Airtel&rsquo;s HTTPS censorship system, show how we trained Geneva against the new censorship system to discover evasion strategies, and learn more about how the censorship systems operate."><meta itemprop="datePublished" content="2021-07-27T00:00:00-04:00" />
+<meta itemprop="dateModified" content="2021-07-27T00:00:00-04:00" />
+<meta itemprop="wordCount" content="2236">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Evading SNI Filtering in India with Geneva"/>
+<meta name="twitter:description" content="In July of 2020, the Open Observatory of Network Interference (OONI) team discovered that Indian ISPs (Airtel and Reliance Jio) had started filtering HTTPS websites using the Server Name Indication (SNI) field in TLS. A year later, we revisit Airtel&rsquo;s HTTPS censorship system, show how we trained Geneva against the new censorship system to discover evasion strategies, and learn more about how the censorship systems operate."/>
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WM3D2KZ64S"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-WM3D2KZ64S');
+        </script>
+    </head>
+
+    <body class="ma0 avenir bg-color">
+
+        
+   
+  
+
+
+
+  
+  
+  <header class="cover bg-top" style="background-image: url('https://geneva.cs.umd.edu/indian-flag.jpeg');">
+
+    <script src="/particles.js"></script>
+    <div class="pb3-m pb6-l bg-black-60" id='particle-container'>
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+    <div class="flex-l justify-between items-center center">
+        <a href="https://geneva.cs.umd.edu" class="subtext f3 fw2 hover-white no-underline white-90 dib">
+            censorship.ai
+        </a>
+        <div class="flex-l items-center">
+            
+            <ul class="pl0 mr3">
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/about/" title="About Geneva page">About</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/people/" title="People page">People</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/posts/" title="Posts page">Posts</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/code/" title="Code &amp; Data page">Code</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/papers/" title="Papers page">Papers</a>
+                </li>
+                
+            </ul>
+            
+
+
+
+                
+
+
+
+
+            <div class="hideonmobile">
+            
+
+
+
+
+
+
+
+
+<a href="https://github.com/kkevsterrr/geneva" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+
+            </div>
+
+            
+            <button class="color-mode__btn light--hidden" aria-label="Toggle light mode">
+                <svg aria-hidden="true">
+                    <use href="#sun">
+                        <svg id="sun" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                    </use>
+                </svg>
+            </button>
+
+            
+            <button class="color-mode__btn dark--hidden" aria-label="Toggle dark mode">
+                <svg aria-hidden="true">
+                    <use href="#moon">
+                        <svg viewBox="0 0 24 24" id="moon">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </use>
+                </svg>
+            </button>
+            <script type='text/javascript'> 
+                const toggleColorMode = function(e) {
+                    
+                    if (e.currentTarget.classList.contains("light--hidden")) {
+                        
+                        document.documentElement.setAttribute("color-mode", "light");
+
+                        
+                        localStorage.setItem("color-mode", "light");
+                        return;
+                    }
+                
+                    
+
+                    document.documentElement.setAttribute("color-mode", "dark");
+
+                    
+                    localStorage.setItem("color-mode", "dark");
+                };
+
+            
+            const toggleColorButtons = document.querySelectorAll(".color-mode__btn");
+
+            
+            toggleColorButtons.forEach(btn => {
+                btn.addEventListener("click", toggleColorMode);
+            });
+
+            
+            if (
+                 
+                localStorage.getItem('color-mode') === 'dark' ||
+                (window.matchMedia('(prefers-color-scheme: dark)').matches &&
+                 !localStorage.getItem('color-mode'))
+            ) {
+                
+                document.documentElement.setAttribute('color-mode', 'dark')
+            }
+        </script>
+        </div>
+    </div>
+</nav>
+
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title" style="font-weight:normal">Evading SNI Filtering in India with Geneva</h1>
+          
+        
+      </div>
+    </div>
+    
+
+  </header>
+
+
+
+        <main class="pb7" role="main">
+            
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked light-gray">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=https://geneva.cs.umd.edu/posts/india-sni-filtering/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=https://geneva.cs.umd.edu/posts/india-sni-filtering/&amp;text=Evading%20SNI%20Filtering%20in%20India%20with%20Geneva" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://geneva.cs.umd.edu/posts/india-sni-filtering/&amp;title=Evading%20SNI%20Filtering%20in%20India%20with%20Geneva" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+
+      
+      
+      <p class="light-gray tracked">
+          By <strong>
+          
+              Kevin Bock, Yair Fax, and Dave Levin
+          
+          </strong>
+      </p>
+      
+      
+      <time class="f6 mv4 dib tracked light-gray" datetime="2021-07-27T00:00:00-04:00">July 27, 2021</time>
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy avenir f4 nested-links nested-img light-gray pr4-l"><h1 id="introduction">Introduction</h1>
+<p><strong>Summary: In July of 2020, the Open Observatory of Network Interference (OONI) team <a href="https://ooni.org/post/2020-tls-blocking-india/">discovered</a> that Indian ISPs (Airtel and Reliance Jio) had started filtering HTTPS websites using the Server Name Indication (SNI) field in TLS. A year later, we revisit Airtel&rsquo;s HTTPS censorship system, show how we trained Geneva against the new censorship system to discover evasion strategies, and learn more about how the censorship systems operate.</strong></p>
+<p>In July of 2020, the Open Observatory of Network Interference (OONI) team <a href="https://ooni.org/post/2020-tls-blocking-india/">discovered</a> that Indian ISPs (Airtel and Reliance Jio) had started filtering HTTPS websites using the Server Name Indication (SNI) field in TLS. The SNI field is included in the TLS ClientHello message—in plaintext—specifying the hostname a client wants to connect to. The SNI is useful if there are multiple domains hosted on one IP address and the client wants to indicate which of those domains' certificates it wants to connect to. However, because the SNI is transmitted in plaintext, it presents an opportunity for censors to identify encrypted connections with forbidden websites.</p>
+<p>In this article, we will:</p>
+<ul>
+<li>Detail how Airtel&rsquo;s censor blocks TLS connections,</li>
+<li>Describe a plugin to train <a href="http://censorship.ai">Geneva</a> against the new censorship system, and</li>
+<li>Present five vulnerabilities we found in the censor and how to take advantage of them for censorship evasion</li>
+</ul>
+<p>All experiments described in this article were run from vantage points that we control in Bangalore, India to VPSes we control in Iowa and Tokyo and to <code>example.org</code>, <code>google.com</code>, and <code>amazon.com</code>. Our vantage points were all within the Airtel ISP.</p>
+<h1 id="how-does-airtel-censor">How does Airtel Censor?</h1>
+<p>We find that Airtel censors forbidden connections by sending one <code>RST+ACK</code> packet in each direction—to the client and to the server. The <code>RST+ACK</code> packet has sequence and acknowledgement fields that match the <code>PSH+ACK</code> packet it&rsquo;s trying to censor. <a href="https://geneva.cs.umd.edu/papers/geneva_ccs19.pdfhttps://geneva.cs.umd.edu/papers/geneva_ccs19.pdf">I</a><a href="https://geneva.cs.umd.edu/papers/geneva_ccs19.pdf">n some of our prior work</a>, we explored Airtel&rsquo;s HTTP censorship system, and found that it was only active on port 80 at the time. Today, we find that the censor now runs on ports 80 (typically HTTP) and 443 (typically TLS/HTTPS): any other port is uncensored (so a website hosted on any other port could be used to evade censorship). Notably, Airtel&rsquo;s HTTP and HTTPS censorship systems are not bound to their respective ports: it still checks the TLS SNI field if used on port 80 and for forbidden HTTP connections on port 443.</p>
+<p>We also find that not all IP addresses are affected by the censor. For example, we find that <a href="http://example.org"><code>example.org</code></a> and <a href="http://google.com"><code>google.com</code></a> (as well as the VPSes we control in Google Cloud) are affected, but <a href="http://amazon.com"><code>amazon.com</code></a> and our vantage points in Amazon EC2 are not affected. The rationale behind why certain IP address ranges are filtered and not others is not clear.</p>
+<p><a href="https://geneva.cs.umd.edu/papers/geneva_ccs19.pdf">Unlike the Great Firewall of China</a>, we find that Airtel&rsquo;s censor does not track the state of TCP connections. Simply sending a single <code>PSH+ACK</code> packet containing a TLS ClientHello with a forbidden SNI is sufficient to trigger censorship.</p>
+<h1 id="training-geneva">Training Geneva</h1>
+<div class="callout callout-blue" style="">
+  <div></div>
+	<div class="callout-inner">
+<p><strong>Geneva (<em>Gen</em>etic <em>Eva</em>sion)</strong> is a genetic algorithm we developed that <em>evolves</em> censorship evasion strategies against a censor. Unlike most anti-censorship systems, it does not require deployment at both ends of the connection: it runs exclusively at one side (client or server) and defeats censorship by manipulating the packet stream to confuse the censor without impacting the underlying connection. A <em>censorship evasion strategy</em> describes how that traffic should be modified. Since Geneva will be evolving these strategies, they are expressed in a domain-specific language that comprises the DNA of each strategy. (For a full rundown of Geneva&rsquo;s strategy DNA syntax, see <a href="https://github.com/kkevsterrr/geneva">our Github page</a>).</p>
+<p>Geneva is comprised of two main components. First, the genetic algorithm, which can evolve new ways to defeat a censorship system given an application that experiences censorship and a fitness function. Second, the strategy engine, which applies a given strategy on the fly to modify active network traffic. All of the strategies provided here can be copy &amp; pasted and used with Geneva&rsquo;s engine to evade censorship.</p>
+  </div>
+</div>
+<p>To train Geneva against Airtel&rsquo;s new censorship system, all we need is the ability to trigger censorship and we can write a new Geneva plugin. Geneva&rsquo;s plugins consists of (1) the client that triggers the censor, (2) the fitness function that evaluates how well a given strategy did at evading censorship. <a href="https://geneva.readthedocs.io/en/latest/extending/plugins.html">Our documentation</a> has more information on how plugins are written.</p>
+<p>To trigger Airtel&rsquo;s new censorship, we use OpenSSL to initiate a handshake with <a href="http://example.org"><code>example.org</code></a> (or an IP address we control) with an SNI of <code>collegehumor.com</code>. If the connection gets censored, OpenSSL indicates <code>no peer certificate available</code> and <code>SSL handshake has read 0 bytes</code>. If the connection doesn&rsquo;t get censored, OpenSSL exits with code 0.</p>
+<p>This plugin is also open source and available on <a href="https://github.com/Kkevsterrr/geneva">our Github page</a>.</p>
+<p>We trained Geneva over several hours in multiple experiments. In the next section, we will explore the bugs we find in Airtel&rsquo;s censorship system and how they can be used to evade censorship.</p>
+<h1 id="censorship-evasion-strategies">Censorship Evasion Strategies</h1>
+<p>Using Geneva, we discovered five classes of packet-manipulation strategies that successfully evade Airtel&rsquo;s censorship. In our 2019 <a href="https://geneva.cs.umd.edu/papers/geneva_ccs19.pdf">paper</a> that introduced Geneva, we trained Geneva against Airtel&rsquo;s HTTP censor. Two of the strategies below are identical to strategies we found in the past, which may suggest that Airtel&rsquo;s HTTPS system uses a similar (or the same) middlebox to perform censorship.</p>
+<h3 id="strategy-1-tcp-reassembly">Strategy 1: TCP Reassembly</h3>
+<p>In 2019, we found that Airtel&rsquo;s HTTP censor couldn&rsquo;t reassemble segmented TCP packets. That still holds true for Airtel&rsquo;s TLS censor. If we segment the initial TLS ClientHello, the censor doesn&rsquo;t reassemble the packet, and the rest of the connection goes uncensored. This is the simplest strategy that Geneva found, and in Geneva&rsquo;s syntax: <code>[TCP:flags:PA]-fragment{tcp:-1:True}-|</code></p>
+<p>We can also induce this strategy on the server-side. In a recent <a href="https://geneva.cs.umd.edu/papers/come-as-you-are.pdf">paper</a>, we explored using strategies from the server-side to evade censorship without requiring <em>any</em> deployment from the client. We can express this as a server-side strategy by having the server induce TCP segmentation in the client by setting the window of its <code>SYN+ACK</code> to a value less than 318 (the size of the TLS ClientHello). This can be done with <code>[TCP:flags:SA]-tamper{TCP:window:replace:227}-|</code></p>
+<p>Also, we find that it doesn&rsquo;t matter where we segment the TLS ClientHello; even if the entire SNI is intact, the censor still doesn&rsquo;t trigger on a segmented packet.</p>
+<h3 id="strategy-2-unexpected-tcp-options">Strategy 2: Unexpected TCP Options</h3>
+<p>The second strategy Geneva found works by including corrupt TCP options that the censor does not recognize, causing the censor to completely ignore the packet. In Geneva&rsquo;s syntax, we can do this with: <code>[TCP:flags:PA]-tamper{TCP:options-sackok:corrupt}-|</code></p>
+<p>Note that <code>sackok</code> is just one of many possible TCP options that confuse Airtel&rsquo;s censor. Interestingly, Geneva found this strategy in the past against Airtel&rsquo;s HTTP censorship system, lending additional evidence that the SNI censorship is performed by the same middlebox (or the same middlebox manufacturer) and still has not patched the issues we originally found.</p>
+<h3 id="strategy-3-winning-the-rstack-race">Strategy 3: Winning the <code>RST+ACK</code> Race</h3>
+<p>When Airtel censors our connection, it sends a single <code>RST+ACK</code> to both client and server. Recall that a <code>RST+ACK</code> packet&rsquo;s sequence numbers must be within the server&rsquo;s/client&rsquo;s window for them to accept it (and thereby terminate the connection). Otherwise, the recipient of the <code>RST+ACK</code> will simply ignore it.</p>
+<p>As a result, for Airtel&rsquo;s censorship to work properly, it must arrive at the server <em>before</em> the client&rsquo;s TLS ClientHello (a <code>PSH+ACK</code> packet), or else the ClientHello will advance the server&rsquo;s TCP window and thus the <code>RST+ACK</code> will be ignored. In other words, because Airtel sends only 1 <code>RST+ACK</code> packet, there is a race: if the client&rsquo;s offending ClientHello can reach the server before the censor&rsquo;s teardown packet, then the server will evade censorship.</p>
+<p>In our experiments and while training Geneva, we find that the censor&rsquo;s <code>RST+ACK</code> <em>almost always loses</em> to our <code>PSH+ACK</code> to the server. When this occurs, we can simply drop the <code>RST+ACK</code> at the client and the connection can continue. Geneva discovered this strategy (and many variants): <code>\/ [TCP:flags:RA]-drop-|</code></p>
+<p>The censor could solve this problem by sending two <code>RST+ACK</code>s (one with it&rsquo;s sequence number as it is now and a second one advanced for the <code>PSH+ACK</code>), but Airtel does not.</p>
+<h3 id="strategy-4-request-cool-down">Strategy 4: Request &ldquo;Cool Down&rdquo;</h3>
+<p>The next strategy Geneva discovered works by triggering censorship intentionally, but in such a way that the connection is not torn down. It appears that Airtel will not censor a second forbidden request immediately after processing a first one.</p>
+<p>In Geneva&rsquo;s syntax: <code>[TCP:flags:PA]-duplicate(tamper{TCP:seq:corrupt}(tamper{TCP:ack:corrupt}(tamper{TCP:chksum:corrupt},),),)-|</code></p>
+<p>This strategy duplicates the TLS ClientHello packet and corrupts the sequence and acknowledgement numbers and checksum of the first packet it sends. The censor, which doesn&rsquo;t check checksums, sends a <code>RST+ACK</code> with bad sequence and acknowledgement numbers in both directions (to client and server). Thus, both the client and the server ignore the <code>RST+ACK</code> and the connection continues. Since Airtel does not censor the second offending packet so soon after sending the <code>RST+ACK</code>, the real forbidden message can go through unimpeded.</p>
+<p>Geneva discovered a second variant of this strategy: injecting a TLS ClientHello with an innocuous SNI and a corrupt checksum at the start of the connection. After processing the innocuous packet, the censorship system seems to ignore our flow for a small period of time, which allows our forbidden TLS ClientHello to go through unharmed.</p>
+<h3 id="strategy-5-protocol-confusion">Strategy 5: Protocol Confusion</h3>
+<p>Because Airtel&rsquo;s censorship system now monitors for both HTTP and HTTPS connections, Geneva discovered that it can trick it into not censoring an HTTPS connection by sending an innocuous HTTP GET request (with a corrupt checksum) first. In Geneva&rsquo;s syntax: <code>[TCP:flags:PA]-duplicate(tamper{TCP:load:replace:__HTTP_REQUEST__}(tamper{TCP:chksum:corrupt},),)-|</code></p>
+<p>The censor sees that the first data-carrying packet looks like an HTTP request and, as a consequence, seems to ignore our TLS ClientHello immediately after it. We find that both innocuous <code>GET</code> or <code>POST</code> requests have this effect. This strategy seems to be a different variant of the previous strategy <code>Request Cool Down</code>: we examine this more in the next section.</p>
+<h1 id="followup-experiments">Followup Experiments</h1>
+<p>In this section, we perform further experiments to answer questions about the strategies Geneva discovered.</p>
+<h3 id="can-we-use-the-https-cool-down-to-evade-http-censorship">Can we use the HTTPS cool-down to evade HTTP censorship?</h3>
+<p>Injecting an innocuous HTTP <code>GET</code> request or HTTPS SNI field (or a forbidden HTTP <code>GET</code> request or HTTPS SNI field with an incorrect sequence or acknowledgement number) is sufficient to provide a &lsquo;cool-down window&rsquo; within the censor and evade SNI filtering. Unfortunately, we find that we cannot directly apply the same techniques to evade Airtel&rsquo;s HTTP filtering.</p>
+<p>If we inject a forbidden HTTP <code>GET</code> request, a forbidden TLS Client Hello, or an innocuous TLS Client Hello, we can evades HTTP filtering. But we find that inserting an innocuous HTTP <code>GET</code> request does not prevent Airtel from immediately censoring a follow-up forbidden HTTP <code>GET</code> request. We&rsquo;re not sure why this is; we hypothesize there is some separate code path that processes innocuous HTTP <code>GET</code> requests.</p>
+<h3 id="how-often-does-the-client-win-the-rstack-race">How often does the client win the <code>RST+ACK</code> race?</h3>
+<p>To test how often the client wins the <code>RST+ACK</code> race, i.e., the TLS ClientHello reaches the server before the censor&rsquo;s <code>RST+ACK</code>, we ran the following experiment. We instrumented our client to drop all inbound <code>RST+ACK</code>s and issued forbidden TLS Client Hellos to a server we controlled. If the connection is not affected by the censor, we know one of two things happened: either the censor failed to attempt censorship at all or our <code>PSH+ACK</code> beat the <code>RST+ACK</code> to the server. To account for the first possibility, we run a packet capture to check if the server received a <code>RST+ACK</code>. If we receive a <code>RST+ACK</code> but the client can still communicate after dropping it, we know that our <code>PSH+ACK</code> beat the censor&rsquo;s <code>RST+ACK</code> to the server.</p>
+<p>We ran this experiment once every ten seconds over the course of 2 weeks and found that our <code>PSH+ACK</code> won 85.0% of the time.</p>
+<h3 id="how-often-does-airtel-attempt-censorship">How often does Airtel attempt censorship?</h3>
+<p>Using the same experiment as above, we can see how often Airtel attempts censorship by simply checking if the client received a <code>RST+ACK</code>. We find that Airtel attempts censorship 96.3% of the time. We also found that Airtel&rsquo;s censorship failures occur almost exclusively between approximately 8:30 AM and 11:30 PM in India (03:00 and 18:00 UTC). We hypothesize that this  depends on the censor&rsquo;s load, and intend to explore this in the future.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>In this article, we investigated Airtel&rsquo;s new HTTPS censorship system. We used Geneva to discover five different classes of strategies for evading Airtel&rsquo;s censorship, and used these strategies to better understand how Airtel&rsquo;s censorship operates. We found that it suffers from some of the same underlying issues as their HTTP censorship infrastructure, and that it has performance issues that make it slow to react to all packets. Collectively, these results reinforce the notion that censoring connections at the scale of a nation-state introduces challenges, and that Geneva is effective at finding ways to take advantage of the challenges that censors face.</p>
+<p>New advances in TLS promise to make SNI obsolete, including Encrypted SNI (ESNI) and Encrypted Client Hello (ECH). Despite these advances, censors have continued to invest in their SNI filtering infrastructure, and as some countries have moved to <a href="https://geneva.cs.umd.edu/posts/china-censors-esni/esni/">block ESNI completely</a>, studying SNI-based censorship remains as important as ever.</p>
+<div class="callout callout-red" style="">
+  <div></div>
+	<div class="callout-inner">
+<p>Disclaimer: Geneva’s strategies intentionally take overt action on the network to interfere with the normal operation of censors. The genetic algorithm in Geneva trains against a live adversary, so when running the genetic algorithm to evolve new censorship strategies, it will intentionally trigger censorship many times during training. Understand the risks of using Geneva in your country before trying it.</p>
+  </div>
+</div>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+        </main>
+        <footer class="surface3 bottom-0 w-100 pa3" role="contentinfo">
+    <div class="flex justify-between">
+        <span class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3">
+            <a class='no-underline' href="https://geneva.cs.umd.edu" >
+                &copy;  censorship.ai 2023, proud member of <a href='https://breakerspace.io'>Breakerspace</a>
+        </span>
+        
+
+
+
+
+
+
+
+
+<a href="https://github.com/kkevsterrr/geneva" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+        
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+    </body>
+</html>

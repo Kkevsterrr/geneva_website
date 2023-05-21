@@ -1,0 +1,49 @@
+.label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
+.label-primary {
+    background-color: rgb(37, 89, 133);
+}
+
+.label-success {
+    background-color: #5cb85c;
+}
+
+.label-black {
+    background-color: rgb(24, 26, 27);
+}
+
+.label-info {
+    background-color: rgb(25, 102, 124);
+}
+
+.label-warning {
+    background-color: rgb(145, 90, 12);
+}
+
+.label-danger {
+    background-color: rgb(129, 31, 28);
+}
+
+.label-default {
+    background-color: rgb(61, 64, 67);
+}
+
+td {
+    border-top-color: rgb(58, 58, 58);
+    border-top: 1px solid #ddd;
+}
+
+table {
+    border-collapse: collapse;
+}

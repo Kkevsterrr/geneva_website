@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en-US" color-mode='light'>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Geneva is a genetic algorithm that automatically learns how to evade nation state censors.">
+        
+        <title>censorship.ai  | Geneva Code Release</title>
+        <meta name="viewport" content="width=device-width,minimum-scale=1, initial-scale='1.0'">
+        <meta name="generator" content="Hugo 0.82.1" />
+        
+        
+        <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+        
+
+        
+        
+        <link href="/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
+        
+
+        
+        <link rel="stylesheet" href="/css/style.css">
+        
+        <link rel="stylesheet" href="/css/syntax.css">
+        
+        <link rel="stylesheet" href="/css/labels.css">
+        
+
+        
+        
+        
+
+        
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" type='text/javascript'></script>
+        <script type='text/javascript'>
+            $(document).ready(function() {
+                let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+                if (isMobile) {
+                    var viewportHeight = $('.section').outerHeight();
+                    $('.section').css({ height: viewportHeight });
+                }
+            })
+        </script>
+
+        <meta property="og:title" content="Geneva Code Release" />
+<meta property="og:description" content="We&rsquo;re excited to announce the full code base of Geneva is now public! Click to read more about the code, how to use it, and why we are releasing it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://geneva.cs.umd.edu/posts/code-release/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-07-12T09:53:38-05:00" />
+<meta property="article:modified_time" content="2020-07-12T09:53:38-05:00" /><meta property="og:site_name" content="censorship.ai" />
+
+<meta itemprop="name" content="Geneva Code Release">
+<meta itemprop="description" content="We&rsquo;re excited to announce the full code base of Geneva is now public! Click to read more about the code, how to use it, and why we are releasing it."><meta itemprop="datePublished" content="2020-07-12T09:53:38-05:00" />
+<meta itemprop="dateModified" content="2020-07-12T09:53:38-05:00" />
+<meta itemprop="wordCount" content="679">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Geneva Code Release"/>
+<meta name="twitter:description" content="We&rsquo;re excited to announce the full code base of Geneva is now public! Click to read more about the code, how to use it, and why we are releasing it."/>
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WM3D2KZ64S"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-WM3D2KZ64S');
+        </script>
+    </head>
+
+    <body class="ma0 avenir bg-color">
+
+        
+   
+  
+
+
+
+  
+  
+  <header class="cover bg-top" style="background-image: url('https://geneva.cs.umd.edu/concert.jpeg');">
+
+    <script src="/particles.js"></script>
+    <div class="pb3-m pb6-l bg-black-60" id='particle-container'>
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+    <div class="flex-l justify-between items-center center">
+        <a href="https://geneva.cs.umd.edu" class="subtext f3 fw2 hover-white no-underline white-90 dib">
+            censorship.ai
+        </a>
+        <div class="flex-l items-center">
+            
+            <ul class="pl0 mr3">
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/about/" title="About Geneva page">About</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/people/" title="People page">People</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/posts/" title="Posts page">Posts</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/code/" title="Code &amp; Data page">Code</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/papers/" title="Papers page">Papers</a>
+                </li>
+                
+            </ul>
+            
+
+
+
+                
+
+
+
+
+            <div class="hideonmobile">
+            
+
+
+
+
+
+
+
+
+<a href="https://github.com/kkevsterrr/geneva" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+
+            </div>
+
+            
+            <button class="color-mode__btn light--hidden" aria-label="Toggle light mode">
+                <svg aria-hidden="true">
+                    <use href="#sun">
+                        <svg id="sun" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                    </use>
+                </svg>
+            </button>
+
+            
+            <button class="color-mode__btn dark--hidden" aria-label="Toggle dark mode">
+                <svg aria-hidden="true">
+                    <use href="#moon">
+                        <svg viewBox="0 0 24 24" id="moon">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </use>
+                </svg>
+            </button>
+            <script type='text/javascript'> 
+                const toggleColorMode = function(e) {
+                    
+                    if (e.currentTarget.classList.contains("light--hidden")) {
+                        
+                        document.documentElement.setAttribute("color-mode", "light");
+
+                        
+                        localStorage.setItem("color-mode", "light");
+                        return;
+                    }
+                
+                    
+
+                    document.documentElement.setAttribute("color-mode", "dark");
+
+                    
+                    localStorage.setItem("color-mode", "dark");
+                };
+
+            
+            const toggleColorButtons = document.querySelectorAll(".color-mode__btn");
+
+            
+            toggleColorButtons.forEach(btn => {
+                btn.addEventListener("click", toggleColorMode);
+            });
+
+            
+            if (
+                 
+                localStorage.getItem('color-mode') === 'dark' ||
+                (window.matchMedia('(prefers-color-scheme: dark)').matches &&
+                 !localStorage.getItem('color-mode'))
+            ) {
+                
+                document.documentElement.setAttribute('color-mode', 'dark')
+            }
+        </script>
+        </div>
+    </div>
+</nav>
+
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title" style="font-weight:normal">Geneva Code Release</h1>
+          
+        
+      </div>
+    </div>
+    
+
+  </header>
+
+
+
+        <main class="pb7" role="main">
+            
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked light-gray">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=https://geneva.cs.umd.edu/posts/code-release/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=https://geneva.cs.umd.edu/posts/code-release/&amp;text=Geneva%20Code%20Release" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://geneva.cs.umd.edu/posts/code-release/&amp;title=Geneva%20Code%20Release" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+
+      
+      
+      
+      <time class="f6 mv4 dib tracked light-gray" datetime="2020-07-12T09:53:38-05:00">July 12, 2020</time>
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy avenir f4 nested-links nested-img light-gray pr4-l"><h1 id="genetic-algorithm-release">Genetic Algorithm Release</h1>
+<p>We&rsquo;re happy to announce that the full code base of Geneva is now <a href="https://github.com/kkevsterrr/geneva">public</a>. Please read through our <a href="https://geneva.readthedocs.io">documentation</a> thoroughly and understand the risks before trying it out.</p>
+<div class="callout callout-red" style="">
+  <div></div>
+	<div class="callout-inner">
+<p><strong>Disclaimer</strong>: Running Geneva or Geneva’s strategies may place you at risk if you use it within a censoring regime. Geneva takes overt actions that interfere with the normal operations of a censor and its strategies may be detectable on the network. During the training process, Geneva will trip censorship many times. Geneva is not an anonymity tool, nor does it encrypt any traffic. Understand the risks of running Geneva in your country before trying it. If you have any questions or concerns, please feel free to <a href="https://geneva.cs.umd.edu/people/#contact-us">contact us</a>.</p>
+  </div>
+</div>
+<h1 id="what-does-this-code-do">What does this code do?</h1>
+<p>Our code base is comprised of two key components:</p>
+<ul>
+<li><strong>Genetic Algorithm:</strong> The logic underlying Geneva is its genetic algorithm, which comprises multiple &ldquo;packet manipulation&rdquo; primitives (duplicate, tamper, fragment, and drop) to form sophisticated censorship evasion strategies. The genetic algorithm trains against <em>live</em> censors to discover new evasion strategies. If you wish to discover new evasion strategies, this is the code to use.</li>
+<li><strong>Engine:</strong> The Geneva &ldquo;engine&rdquo; executes packet manipulation strategies by capturing and modifying inbound and outbound on the fly. The genetic algorithm uses the engine while training against live censors, but the engine does not need the genetic algorithm. If you simply wish to apply known evasion strategies, this is the code to use. The engine uses our domain-specific language to specify packet manipulation strategies; you can copy-paste the strategies directly from our <a href="/papers/">papers</a> (the code also includes many examples).</li>
+</ul>
+<h1 id="what-should-i-do-with-new-evasion-strategies">What should I do with new evasion strategies?</h1>
+<p>If you run our genetic algorithm and discover new evasion strategies, we welcome you to share them with us! We are very interested in learning about new strategies—where they work, against what censors, for what protocols, etc. Sharing your findings with us can help lead to new discoveries about censorship around the world—and we will be happy to work with you to ensure your safety in sharing these results with us.</p>
+<p>To share new results with us, the easiest way to reach us is by email.</p>
+<ul>
+<li>Kevin: kbock (at) umd.edu (PGP key <a href="https://geneva.cs.umd.edu/keys/kevin_pgp.asc">here</a>)</li>
+<li>Dave: dml (at) cs.umd.edu (PGP key <a href="https://geneva.cs.umd.edu/keys/dave_pgp.asc">here</a>)</li>
+</ul>
+<h1 id="why-release-the-code">Why Release the Code?</h1>
+<p>Any time a new technique for censorship evasion is developed, researchers must ask themselves if it is ethical to release the code. Censoring nation-states watch what new tools, papers, and techniques are released: if we made Geneva open-source, couldn&rsquo;t nation-states use Geneva themselves to identify bugs and patch them before evaders can use them?</p>
+<p>We believe the net effect of releasing Geneva helps evaders.</p>
+<p>The first consideration is resources: our <a href="/papers/">research papers</a> and talks detail how we built, tested, and deployed Geneva. Nation-state adversaries have the resources to re-implement Geneva themselves regardless of whether we release the code or not. To this end, releasing the code democratizes its use: regardless of the resources available to you, Geneva presents an automated solution to identifying bugs in censors.</p>
+<p>The second consideration is the nature of the bugs Geneva finds themselves, and how it finds them. Geneva gives us the ability to <em>fast forward</em> the censorship arms race. Techniques that previously could take weeks or months to find can now be identified in hours or days. With this in mind, we ask: <em>what is the logical conclusion of the censorship arms race?</em></p>
+<p>Geneva generally finds two classes of strategies: bugs in implementation and systemic logic issues. We believe that minor implementation bugs may be easier for censors to simply patch. However, issues that are more systemic to the design and limitations of the middleboxes, such as those that attack state tracking, are likely more expensive for censors to fix. Long-term, we expect the minor implementation bugs to be patched but systemic issues to remain.</p>
+<p>Only time will tell how nation-state censors will engage in the arms race with a tool like Geneva. In the meantime, we will continue to advance the state of the art in automating censorship evasion to help evaders open communication everywhere.</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+        </main>
+        <footer class="surface3 bottom-0 w-100 pa3" role="contentinfo">
+    <div class="flex justify-between">
+        <span class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3">
+            <a class='no-underline' href="https://geneva.cs.umd.edu" >
+                &copy;  censorship.ai 2023, proud member of <a href='https://breakerspace.io'>Breakerspace</a>
+        </span>
+        
+
+
+
+
+
+
+
+
+<a href="https://github.com/kkevsterrr/geneva" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+        
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+    </body>
+</html>

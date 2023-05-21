@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en-US" color-mode='light'>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Geneva is a genetic algorithm that automatically learns how to evade nation state censors.">
+        
+        <title>censorship.ai  | Exposing the Great Firewall&#39;s Dynamic Blocking of Fully Encrypted Traffic</title>
+        <meta name="viewport" content="width=device-width,minimum-scale=1, initial-scale='1.0'">
+        <meta name="generator" content="Hugo 0.82.1" />
+        
+        
+        <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+        
+
+        
+        
+        <link href="/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
+        
+
+        
+        <link rel="stylesheet" href="/css/style.css">
+        
+        <link rel="stylesheet" href="/css/syntax.css">
+        
+        <link rel="stylesheet" href="/css/labels.css">
+        
+
+        
+        
+        
+
+        
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" type='text/javascript'></script>
+        <script type='text/javascript'>
+            $(document).ready(function() {
+                let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+                if (isMobile) {
+                    var viewportHeight = $('.section').outerHeight();
+                    $('.section').css({ height: viewportHeight });
+                }
+            })
+        </script>
+
+        <meta property="og:title" content="Exposing the Great Firewall&#39;s Dynamic Blocking of Fully Encrypted Traffic" />
+<meta property="og:description" content="The Great Firewall (GFW) of China has recently begun blocking fully encrypted traffic in an effort to crack down on circumvention protocols. We demonstrate how this censorship works, what triggers it, how different protocols are affected, and how long residual censorship lasts." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://geneva.cs.umd.edu/posts/fully-encrypted-traffic/en/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-11-18T00:00:00-05:00" />
+<meta property="article:modified_time" content="2021-11-18T00:00:00-05:00" /><meta property="og:site_name" content="censorship.ai" />
+
+<meta itemprop="name" content="Exposing the Great Firewall&#39;s Dynamic Blocking of Fully Encrypted Traffic">
+<meta itemprop="description" content="The Great Firewall (GFW) of China has recently begun blocking fully encrypted traffic in an effort to crack down on circumvention protocols. We demonstrate how this censorship works, what triggers it, how different protocols are affected, and how long residual censorship lasts."><meta itemprop="datePublished" content="2021-11-18T00:00:00-05:00" />
+<meta itemprop="dateModified" content="2021-11-18T00:00:00-05:00" />
+<meta itemprop="wordCount" content="4877">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Exposing the Great Firewall&#39;s Dynamic Blocking of Fully Encrypted Traffic"/>
+<meta name="twitter:description" content="The Great Firewall (GFW) of China has recently begun blocking fully encrypted traffic in an effort to crack down on circumvention protocols. We demonstrate how this censorship works, what triggers it, how different protocols are affected, and how long residual censorship lasts."/>
+
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WM3D2KZ64S"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-WM3D2KZ64S');
+        </script>
+    </head>
+
+    <body class="ma0 avenir bg-color production">
+
+        
+   
+  
+
+
+
+  
+  
+  <header class="cover bg-top" style="background-image: url('https://geneva.cs.umd.edu/fiber3.jpeg');">
+
+    <script src="/particles.js"></script>
+    <div class="pb3-m pb6-l bg-black-60" id='particle-container'>
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+    <div class="flex-l justify-between items-center center">
+        <a href="https://geneva.cs.umd.edu" class="subtext f3 fw2 hover-white no-underline white-90 dib">
+            censorship.ai
+        </a>
+        <div class="flex-l items-center">
+            
+            <ul class="pl0 mr3">
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/about/" title="About Geneva page">About</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/people/" title="People page">People</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/posts/" title="Posts page">Posts</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/code/" title="Code &amp; Data page">Code</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/papers/" title="Papers page">Papers</a>
+                </li>
+                
+            </ul>
+            
+
+
+
+                
+
+
+
+
+            <div class="hideonmobile">
+            
+
+
+
+
+
+
+
+
+<a href="https://github.com/kkevsterrr/geneva" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+
+            </div>
+
+            
+            <button class="color-mode__btn light--hidden" aria-label="Toggle light mode">
+                <svg aria-hidden="true">
+                    <use href="#sun">
+                        <svg id="sun" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                    </use>
+                </svg>
+            </button>
+
+            
+            <button class="color-mode__btn dark--hidden" aria-label="Toggle dark mode">
+                <svg aria-hidden="true">
+                    <use href="#moon">
+                        <svg viewBox="0 0 24 24" id="moon">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </use>
+                </svg>
+            </button>
+            <script type='text/javascript'> 
+                const toggleColorMode = function(e) {
+                    
+                    if (e.currentTarget.classList.contains("light--hidden")) {
+                        
+                        document.documentElement.setAttribute("color-mode", "light");
+
+                        
+                        localStorage.setItem("color-mode", "light");
+                        return;
+                    }
+                
+                    
+
+                    document.documentElement.setAttribute("color-mode", "dark");
+
+                    
+                    localStorage.setItem("color-mode", "dark");
+                };
+
+            
+            const toggleColorButtons = document.querySelectorAll(".color-mode__btn");
+
+            
+            toggleColorButtons.forEach(btn => {
+                btn.addEventListener("click", toggleColorMode);
+            });
+
+            
+            if (
+                 
+                localStorage.getItem('color-mode') === 'dark' ||
+                (window.matchMedia('(prefers-color-scheme: dark)').matches &&
+                 !localStorage.getItem('color-mode'))
+            ) {
+                
+                document.documentElement.setAttribute('color-mode', 'dark')
+            }
+        </script>
+        </div>
+    </div>
+</nav>
+
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title" style="font-weight:normal">Exposing the Great Firewall&#39;s Dynamic Blocking of Fully Encrypted Traffic</h1>
+          
+        
+      </div>
+    </div>
+    
+
+  </header>
+
+
+
+        <main class="pb7" role="main">
+            
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked light-gray">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=https://geneva.cs.umd.edu/posts/fully-encrypted-traffic/en/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=https://geneva.cs.umd.edu/posts/fully-encrypted-traffic/en/&amp;text=Exposing%20the%20Great%20Firewall%27s%20Dynamic%20Blocking%20of%20Fully%20Encrypted%20Traffic" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://geneva.cs.umd.edu/posts/fully-encrypted-traffic/en/&amp;title=Exposing%20the%20Great%20Firewall%27s%20Dynamic%20Blocking%20of%20Fully%20Encrypted%20Traffic" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+
+      
+      
+      <p class="light-gray tracked">
+          By <strong>
+          
+              Anonymous, Kevin Bock, David Fifield, Eric Wustrow, Amir Houmansadr, Dave Levin
+          
+          </strong>
+      </p>
+      
+      
+      <time class="f6 mv4 dib tracked light-gray" datetime="2021-11-18T00:00:00-05:00">November 18, 2021</time>
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy avenir f4 nested-links nested-img light-gray pr4-l"><p>Since at least as early as November 6, 2021, <a href="https://github.com/net4people/bbs/issues/69#issuecomment-962666385">numerous users reported</a> the blocking of their servers running Shadowsocks and VMess+TCP. Outline lead developer Vinicius also <a href="https://github.com/shadowsocks/shadowsocks-libev/issues/2860#issuecomment-974250511">reported</a> &ldquo;a drop in the opt-in Outline usage metrics in China starting on November 8&rdquo;. The start of this blocking coincides with the <a href="https://zh.wikipedia.org/zh-cn/%E4%B8%AD%E5%9B%BD%E5%85%B1%E4%BA%A7%E5%85%9A%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%B1%8A%E4%B8%AD%E5%A4%AE%E5%A7%94%E5%91%98%E4%BC%9A%E7%AC%AC%E5%85%AD%E6%AC%A1%E5%85%A8%E4%BD%93%E4%BC%9A%E8%AE%AE">Sixth Plenary Session of the 19th CPC Central Committee (中国共产党第十九届中央委员会第六次全体会议)</a>, which was held from November 8, 2021 to November 11, 2021.</p>
+<p>On November 14, 2021, we confirmed that the Great Firewall (GFW) of China has now been able to inspect and dynamically block any seemingly random traffic in real time. This capability potentially affects many censorship circumvention protocols that use encryption to appear random, including (but not limited to) VMess+TCP, Obfs4, and the many variants of Shadowsocks. The censor strategically applies this censorship only against connections from China to certain popular VPS providers, possibly to mitigate over-blocking caused by false positives in traffic classification.</p>
+<p>In this report, we demonstrate how the GFW identifies and blocks seemingly random traffic and share code that led to our conclusions. We also offer an effective way to temporarily circumvent the censorship. We then discuss the implication of this blocking incident.</p>
+<div class="callout callout-red" style="">
+  <div></div>
+	<div class="callout-inner">
+<p>To maintain reproducibility and promote transparency, we release all the code we used to come to these findings <a href="https://github.com/breakerspace/madwall-fully-encrypted-traffic-censorship">on Github</a>. We also include code in-line throughout this article to help other researchers to reproduce our findings. Note that this code is explicitly designed to trigger (or subvert) this new censorship system, so understand the risks before trying any of the below examples yourself.</p>
+  </div>
+</div>
+<h2 id="our-main-findings">Our Main Findings</h2>
+<ul>
+<li>The GFW can now dynamically block any seemingly random data in real-time, merely based on passive traffic analysis, without relying on its well-known active probing infrastructure.</li>
+<li>The blocking only targets connections from China to a few popular VPS providers outside of China, including Vultr, AlibabaCloud (Hong Kong and Singapore), and Digital Ocean (San Francisco, New York City). Amazon Lightsail, EC2, and Oracle Cloud are reportedly not affected.</li>
+<li>In many cases, after the TCP handshake, a single data packet containing only 1 byte of payload from client to server is sufficient to trigger blocking.</li>
+<li>Only TCP traffic can trigger and is affected by the blocking. UDP traffic cannot trigger and is not affected by the blocking.</li>
+<li>Once triggered, the GFW drops all C2S (client-to-server) <strong>TCP</strong> packets having the same (client IP, server IP, server port) for 120 to 180 seconds. S2C (server-to-client) packets are not dropped.</li>
+<li>The blocking can happen on any port from 1 to 65535.</li>
+<li>While the traffic classification appears to be deterministic, the blocking is probabilistic.</li>
+<li>GFW seems to censor connections whose payload contains less than <code>70%</code> printable characters.</li>
+<li>The censor uses protocol fingerprinting to exempt connections from blocking if the first several bytes of the payload match common protocols (including TLS, HTTP, and SSH).</li>
+<li>The censor also allows a connection if its first six bytes are non-whitespace printable characters.</li>
+</ul>
+<h2 id="background">Background</h2>
+<p>Tschantz et al. divide approaches to censorship circumvention traffic into two types: <em>steganograpic</em> and <em>polymorphic</em> (see <a href="https://censorbib.nymity.ch/pdf/Tschantz2016a.pdf#page=8">Section V and Table 3</a>). The goal of <em>steganography</em> is to make circumvention traffic look like allowed traffic; the goal of <em>polymorphism</em> is to make circumvention traffic not look like forbidden traffic.</p>
+<p>A common way to achieve polymorphism is to fully encrypt the traffic: since fully encrypted traffic presents no plaintext or fixed structures at all, the censor cannot simply identify such traffic with regular expression rules. This is the approach used by Shadowsocks, VMess, Obfs4 and many other censorship circumvention tools. In comparison, most of the protocols that offer encryption, such as TLS, still leave various framing fields unencrypted and therefore can be easily identified; circumvention tools encrypt or otherwise obfuscate these fields.</p>
+<p>Fully encrypted traffic is often referred to as &ldquo;looks like nothing&rdquo;, or misunderstood as &ldquo;having no characteristics&rdquo;; however, a more accurate description would be <em>&ldquo;looks like random&rdquo;</em>. In fact, such traffic does have many characteristics:</p>
+<ul>
+<li>Fully encrypted traffic is <a href="https://en.wikipedia.org/wiki/Distinguishing_attack">indistinguishable from random</a>. One may therefore refer to it as (seemingly) random traffic.</li>
+<li>The data stream possesses <em>high entropy, homogeneously throughout the entire connection</em>, starting from the bytes of the first data packets.</li>
+<li>When no packet length obfuscation is implemented, the length of each circumvention packet is equal to <code>a fixed header length</code> + <code>the length of the payload of the proxied traffic</code>.</li>
+</ul>
+<h2 id="how-do-we-know-blocking-is-happening">How do we know blocking is happening?</h2>
+<p>We sent traffic between hosts inside and outside of China. We captured and compared traffic on both endpoints to identify any dropped packets. All experiments were conducted between November 14 and December 8, 2021.</p>
+<p>At first, we set up our own Shadowsocks client and server based on <a href="https://gfw.report/blog/ss_tutorial/en/">this tutorial</a>. We then used an automatic script to generate traffic and proxy it through Shadowsocks. The traffic was generated by using curl to visit <code>http://example.com</code> and <code>https://example.com</code> every 5 seconds. We found that the connections got blocked and unblocked periodically soon after the script started.</p>
+<p>Aided by these two observations by Alice et al., we quickly narrowed down sufficient conditions to trigger blocking:</p>
+<ul>
+<li>&ldquo;[T]he byte streams sent between Shadowsocks clients and servers are, by design, indistinguishable from random&rdquo; (see <a href="https://censorbib.nymity.ch/pdf/Alice2020a.pdf#page=6">Section 4.1</a>);</li>
+<li>and &ldquo;[a]fter a TCP handshake, a single data packet from client to server suffices to trigger active probes&rdquo; (see <a href="https://censorbib.nymity.ch/pdf/Alice2020a.pdf#page=6">Section 4.2</a>).</li>
+</ul>
+<p>To test this, we set up <em>sink servers</em> that complete TCP handshakes, but never send data back to the client. We then repeatedly opened connections, sent <em>random data</em> to the server, and closed the connection. Within a few connections, we observed blocking.</p>
+<h2 id="how-does-the-blocking-work">How does the blocking work?</h2>
+<h3 id="how-can-we-trigger-the-blocking">How can we trigger the blocking?</h3>
+<p>We observe that a single data packet from client to newly deployed server is sometimes sufficient to trigger the GFW. Often though, we do not observe blocking unless we repeatedly make connections and send random-looking data.</p>
+<p><strong>Reproduce it:</strong></p>
+<p>One can try reproducing the blocking by sending traffic from China to open ports to a server within an affected data center:</p>
+<ol>
+<li>Start TCP-pinging the port with <a href="https://nmap.org/nping/">Nping</a>:</li>
+</ol>
+<pre><code>nping -4 -c 0 --tcp-connect $SERVER_IP -p $PORT
+</code></pre><ol start="2">
+<li>Send 180 bytes of random data to the port (it may not trigger blocking on the first try; you may need to repeat this step a few times to get the port blocked):</li>
+</ol>
+<pre><code>head -c180 /dev/urandom | nc -vn $SERVER_IP $PORT
+</code></pre><ol start="3">
+<li>The Nping log shows that the port was blocked right after sending the random data at 147s:</li>
+</ol>
+<pre><code>...
+SENT (144.3590s) Starting TCP Handshake &gt; REDACTED
+RCVD (144.5365s) Handshake with REDACTED completed
+SENT (145.3615s) Starting TCP Handshake &gt; REDACTED
+RCVD (145.5318s) Handshake with REDACTED completed
+SENT (146.3639s) Starting TCP Handshake &gt; REDACTED
+RCVD (146.5410s) Handshake with REDACTED completed
+SENT (147.3660s) Starting TCP Handshake &gt; REDACTED
+SENT (148.3671s) Starting TCP Handshake &gt; REDACTED
+SENT (149.3693s) Starting TCP Handshake &gt; REDACTED
+SENT (150.3715s) Starting TCP Handshake &gt; REDACTED
+SENT (151.3736s) Starting TCP Handshake &gt; REDACTED
+</code></pre><h3 id="the-same-payload-does-not-always-trigger-the-blocking-on-the-first-try">The same payload does not always trigger the blocking on the first try</h3>
+<p>We find that while the traffic classification appears to be deterministic, the blocking is probabilistic. That is, sending a payload that <em>once</em> triggered the blocking does not always trigger the blocking every time; however, repetitively sending it for a few times will eventually trigger the blocking. On the contrary, sending a payload that <em>never</em> trigger the blocking for hundreds of times will not trigger the blocking.</p>
+<p><strong>Reproduce it:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># This command triggered blocking. Record the payload in payload file:</span>
+head -c180 /dev/urandom | tee payload | netcat -vn $SERVER_IP $SERVER_PORT_1
+
+<span style="color:#75715e"># Send the same payload again, but it does not always trigger blocking after being replayed:</span>
+cat payload | netcat -vn $SERVER_IP $SERVER_PORT_2
+</code></pre></div><h3 id="blocking-is-done-by-dropping-packets-from-client-to-server">Blocking is done by dropping packets from client to server</h3>
+<p>We captured and compared the packets sent and received on both endpoints. We found that blocking is implemented by dropping C2S (client-to-server) packets. S2C Packets sent by servers are not blocked and are still received at clients.</p>
+<h3 id="no-active-probing-is-required-before-blocking">No active probing is required before blocking</h3>
+<p>The GFW makes its blocking decision based purely on passive traffic analysis, without relying on <a href="https://gfw.report/talks/imc20/en/">its well-known active probing infrastructure</a>. We know this because, in most cases, the GFW had not sent any active probes to the server yet before the connection was already blocked.</p>
+<p>We want to emphasize that this finding does not mean that <a href="https://gfw.report/blog/ss_advise/en">defenses against active probing</a> are not necessary or not important anymore. On the contrary, it is because that Shadowsocks-libev, Outline and many other censorship circumvention implementations improved defenses against active probing that forces the censor to strategically take this approach.</p>
+<p>Despite this new censorship system, we confirm that the GFW still sends active probes to servers. This evidence warns us that the censor still attempts to accurately identify circumvention servers using active probing.</p>
+<h3 id="only-connections-from-china-to-a-few-well-known-hosting-services-outside-of-china-are-affected">Only connections from China to a few well-known hosting services outside of China are affected</h3>
+<p>We have only been able to trigger the blocking when the servers are hosted by one of a few well-known hosting services outside of China. This finding aligns with <a href="https://github.com/shadowsocks/shadowsocks-libev/issues/2860#issuecomment-965999586">many</a> <a href="https://github.com/shadowsocks/shadowsocks-libev/issues/2860#issuecomment-966340389">user</a> <a href="https://github.com/shadowsocks/shadowsocks-libev/issues/2860#issuecomment-966813234">reports</a>, where users could use Shadowsocks servers deployed on Amazon Lightsail, EC2, Oracle Cloud and some &ldquo;off-brand&rdquo; VPS providers, but not on AlibabaCloud (Hong Kong and Singapore), and Digital Ocean (San Francisco, New York City).</p>
+<p>In particular, we conducted the following testing:</p>
+<ol>
+<li>Sending random data from a host inside of China to a well-known host provider outside of China: blocking triggered.</li>
+<li>Using exactly the same pair of hosts in 1, but sending random data from outside-in this time: blocking not triggered.</li>
+<li>Sending random data from a host inside of China to the open ports of some foreign websites: blocking not triggered.</li>
+<li>Sending random data from a well-known host provider outside of China to the open ports of some Chinese websites: blocking not triggered.</li>
+</ol>
+<p>We also conducted tests from different vantage points within China to different foreign datacenters to confirm our findings.</p>
+<h3 id="a-complete-tcp-handshake-is-necessary-to-trigger-the-blocking">A complete TCP handshake is necessary to trigger the blocking</h3>
+<p>Sending a SYN packet followed by a PSH+ACK packet containing random data (without the server completing its end of the handshake) is not sufficient to trigger blocking. The blocking is thus harder to exploit for <a href="https://geneva.cs.umd.edu/papers/woot21-weaponizing-availability.pdf">residual censorship attacks</a>.</p>
+<p><strong>Reproduce it:</strong></p>
+<p>We tested this with the <code>test_handshake.py</code> script, located in the <code>handshake_tests</code> folder:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#75715e">#!/usr/bin/env python3</span>
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">A helper script to test if the censorship system can be triggered
+</span><span style="color:#e6db74">with or without a 3-way hanshake.
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+
+<span style="color:#f92672">import</span> sys
+<span style="color:#f92672">import</span> os
+<span style="color:#f92672">import</span> time
+
+<span style="color:#f92672">from</span> scapy.all <span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span>
+
+dst_ip <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>]
+dport <span style="color:#f92672">=</span> int(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">2</span>])
+need_syn_ack <span style="color:#f92672">=</span> int(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">3</span>])
+
+seqno <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">100000</span>)
+sport <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">10000</span>, <span style="color:#ae81ff">20000</span>)
+syn <span style="color:#f92672">=</span> IP(dst<span style="color:#f92672">=</span>dst_ip)<span style="color:#f92672">/</span>TCP(dport<span style="color:#f92672">=</span>dport, flags<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;S&#34;</span>, seq<span style="color:#f92672">=</span>seqno, sport<span style="color:#f92672">=</span>sport)
+
+ackno <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">100000</span>)
+<span style="color:#66d9ef">if</span> need_syn_ack:
+    synack <span style="color:#f92672">=</span> sr1(syn)
+    ackno <span style="color:#f92672">=</span> synack[TCP]<span style="color:#f92672">.</span>seq
+<span style="color:#66d9ef">else</span>:
+    send(syn)
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.5</span>)
+
+pshack <span style="color:#f92672">=</span> IP(dst<span style="color:#f92672">=</span>dst_ip)<span style="color:#f92672">/</span>TCP(dport<span style="color:#f92672">=</span>dport, flags<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;PA&#34;</span>, seq<span style="color:#f92672">=</span>seqno <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, ack<span style="color:#f92672">=</span>ackno<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, sport<span style="color:#f92672">=</span>sport)<span style="color:#f92672">/</span>Raw(os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">200</span>))
+send(pshack)
+</code></pre></div><p>Specifically, we use the following command to 1) send a SYN to an <em>open</em> port of the server; 2) wait until we receive a SYN/ACK from the server; 3) and then send a PSH/ACK data packet with 200 bytes random payload. We confirm that it could successfully trigger the blocking:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo ./test_handshake.py $DST_IP $DST_PORT <span style="color:#ae81ff">1</span>
+</code></pre></div><p>We then use the following command to 1) send a SYN to <em>filtered</em> port of the server; 2) since the filtered port will not send any SYN/ACK or RST packet, we simply wait for 0.5 seconds; 3) and then send a PSH/ACK data packet with 200 bytes random payload. We confirm that it could <strong>not</strong> trigger the blocking:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo ./test_handshake.py $DST_IP $DST_PORT <span style="color:#ae81ff">0</span>
+</code></pre></div><h3 id="the-blocking-happens-on-all-ports">The blocking happens on all ports</h3>
+<p>Blocking can happen on all server ports from 1 to 65535. Therefore, running circumvention servers on an unusual port cannot mitigate the blocking.</p>
+<p>We tested it by having a sink server listen on all ports from 1 to 65535; then having a small Go program continuously send random traffic to each port until the port became blocked.</p>
+<p><strong>Reproduce it:</strong></p>
+<p>Having a server listen on all ports is not always feasible, since some ports may already be taken. We find the following small trick especially simple and helpful:</p>
+<ol>
+<li>Let the sink server listen on only one port, for example <code>12345</code>.</li>
+<li>Use iptables to redirect all traffic from <code>$CLIENT_IP</code> to the port <code>12345</code>: <code>iptables -t nat -A PREROUTING -i eth0 -p tcp -s &quot;$CLIENT_IP&quot; --dport 1:65535 -j REDIRECT --to-port 12345</code>.</li>
+<li>Increase the server process&rsquo;s maximum number of file descriptors: <code>ulimit -n 655350</code>.</li>
+</ol>
+<h3 id="udp-traffic-does-not-trigger-the-blocking">UDP traffic does not trigger the blocking</h3>
+<p>At this time, it appears that this new censorship system is limited to TCP. Because of the absence of UDP blocking, users may experience something interesting when using Shadowsocks: they can still access websites or use apps that use UDP (for example, QUIC), but cannot access websites that use TCP. This is because:</p>
+<ol>
+<li>Shadowsocks proxies TCP traffic with TCP, and proxies UDP traffic with UDP;</li>
+<li>and even when the server&rsquo;s port is blocked, UDP packets to or from the same port is not affected.</li>
+</ol>
+<p><strong>Reproduce it:</strong></p>
+<p>To test this, start <code>nping</code> in the background:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">nping -4 -c <span style="color:#ae81ff">0</span> --tcp-connect $SERVER_IP -p $SERVER_PORT
+nping -4 -c <span style="color:#ae81ff">0</span> --udp $SERVER_IP -p $SERVER_PORT
+</code></pre></div><p>Then, run the following simple Python script:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
+<span style="color:#f92672">import</span> socket
+<span style="color:#f92672">import</span> sys
+<span style="color:#f92672">import</span> time
+s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_DGRAM)
+s<span style="color:#f92672">.</span>settimeout(<span style="color:#ae81ff">1.0</span>)
+<span style="color:#66d9ef">while</span> True:
+    s<span style="color:#f92672">.</span>sendto(os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">200</span>), (sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>], int(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">2</span>])))
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">0.001</span>)
+</code></pre></div><p>Alternatively, one can run:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">while</span> true; <span style="color:#66d9ef">do</span> head -c200 /dev/urandom | nc -vn -u $SERVER_IP $SERVER_PORT &amp; <span style="color:#66d9ef">done</span>
+</code></pre></div><p>We observed no disruption of <code>nping</code> and saw that the UDP packets made it to the server.</p>
+<h3 id="residual-censorship-is-present">Residual censorship is present</h3>
+<p>Once the GFW blocks a connection, it continues to drop all <strong>TCP</strong> packets having the same <code>(client IP, server IP, server Port)</code> for 120 or 180 seconds. We tested it as follows:</p>
+<ol>
+<li>Let both Chinese hosts <code>C1</code> and <code>C2</code> TCP-ping and UDP-ping port <code>1000</code> of a foreign host <code>F1</code>;</li>
+<li>Let Chinese host <code>C1</code> also TCP-ping and UDP-ping port <code>1001</code> of <code>F1</code>;</li>
+<li>Send random data from <code>C1</code> to port <code>1000</code> of <code>F1</code>.</li>
+</ol>
+<p>We observed that only TCP connections, not UDP connections, from <code>C1</code> to port <code>1000</code> of <code>F1</code> got blocked. All other pings could still reach the server or get the proper response.</p>
+<p>Similar to a past finding on <a href="https://github.com/net4people/bbs/issues/43#issue-675228023">the GFW&rsquo;s censorship on ESNI traffic</a>, we observed duration of residual censorship to be either 120 or 180 seconds. We do not understand why we observed different durations from different vantage points. Unlike <a href="https://geneva.cs.umd.edu/papers/woot21-weaponizing-availability.pdf">other residual censorship systems</a>, the residual censorship timer does not reset when additional packets are sent.</p>
+<h2 id="how-does-the-gfw-identify-random-traffic">How does the GFW identify random traffic?</h2>
+<p>In this section, we describe our understanding of how the GFW identifies fully encrypted traffic. Although we do not fully understand how the traffic analysis algorithm decides whether to block a connection, our experiments led to interesting observations.</p>
+<h3 id="blocking-is-not-based-on-entropy">Blocking is not based on entropy</h3>
+<p>We know that the GFW&rsquo;s existing active probing system likely used entropy (see <a href="https://censorbib.nymity.ch/pdf/Alice2020a.pdf#page=7">Figure 9</a>) to identify Shadowsocks traffic. We tested if this new system also uses entropy to make a blocking decision.</p>
+<p>Initially, our results suggested that entropy might have been used. Messages with very high entropy (such as sending bytes from <code>/dev/urandom</code>) trigger blocking quickly, and messages with low entropy (such as a repeated string of <code>AAAA...</code>) do not trigger blocking.</p>
+<p>However, we find that entropy does not tell the whole story. Some payloads with very high entropy never trigger blocking, whereas other payloads with very low entropy can trigger blocking immediately.</p>
+<h3 id="blocking-is-based-on-the-percentage-of-unprintable-bytes">Blocking is based on the percentage of unprintable bytes</h3>
+<p>We theorized that the GFW may be blocking random-looking connections based on the character set in the message, not entropy.</p>
+<p>We tested this by writing a script that could generate random messages of a fixed length with a specified percentage of printable characters vs. unprintable characters. Using this, we can test if the censor cares about high frequencies of unprintable messages by slowing increasing the percentage of printable messages within the message, while keeping entropy fixed.</p>
+<p>We find that the GFW seems to censor connections if they have less than 70% printable characters.</p>
+<p><strong>Reproduce it:</strong></p>
+<p>In the open-source repository, see <code>ascii_tests/generate_ascii_message.py</code>.</p>
+<p>Another easy way to see this in action is by simply <code>base64</code>-encoding random bytes and then sending them through the censor. In doing this experiment, we observe no censorship:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">head /dev/urandom | base64 | nc -vn $SERVER_IP $SERVER_PORT
+</code></pre></div><p>Yet, if we send a message with much lower entropy with unprintable characters, blocking occurs almost immediately.</p>
+<h3 id="the-gfw-is-using-protocol-fingerprinting-to-avoid-over-blocking">The GFW is using protocol fingerprinting to avoid over-blocking</h3>
+<p>If the GFW is triggering based on unprintable character frequency, it raises the question of why aren&rsquo;t other normal protocols affected? (For example, a TLS handshake consists of only <code>~27%</code> printable characters.)</p>
+<p>We find that the system is applying protocol fingerprinting to <em>exempt</em> connections from its scrutiny. We reverse engineered the protocol fingerprints used by this system; below, we share the fingerprints. These fingerprints can be used to evade the censor; by simply injecting them into the start of the connection, the connection will be ignored. We note that these protocol fingerprints do not match the fingerprints used by the <a href="https://geneva.cs.umd.edu/posts/iran-whitelister/">Iranian protocol filter</a>.</p>
+<h4 id="tls">TLS</h4>
+<p>We find that if a message starts with the same three bytes as the TLS header, they will be exempted from blocking. Specifically, we find that the protocol fingerprint for TLS is that anything that starts with <code>\x16\x03</code> [<code>\x01</code> - <code>\x09</code>] (so <code>\x16\x03\x0a</code> does not fit the fingerprint.)</p>
+<p><strong>Reproduce it:</strong></p>
+<p>For example, while this can trigger the blocking easily:</p>
+<pre><code>head -c240 /dev/urandom | nc -vn $IP $PORT
+</code></pre><p>By simply prepending <code>\x16\x03\x01</code> to the front of the message, no censorship will occur:</p>
+<pre><code>for i in {1..20}; do (printf '\x16\x03\x01'; head -c240 /dev/urandom) | nc -vn $IP $PORT &amp; done
+</code></pre><h4 id="http-methods">HTTP Methods</h4>
+<p>We find that the protocol fingerprint for HTTP GET works by starting messages with an HTTP verb, followed by a space, such as <code>GET </code>. We further find that <code>GET</code> is case-insensitive: it can be <code>GeT </code>, <code>get </code>, or other variations. Typos in the verb do not match the fingerprint, however.</p>
+<p>Similarly, we find that the protocol fingerprint for HTTP POST works by starting messages with <code>POST </code>. The space after <code>POST</code> is necessary to evade the blocking. <code>POST</code> is also case-insensitive, for example it can be <code>pOsT </code>, or other variations. Typos in the verb do not match the fingerprint, however.</p>
+<p>We confirm the GFW has fingerprints for <code>&quot;GET &quot;</code>, <code>&quot;PUT &quot;</code>, <code>&quot;POST &quot;</code>, <code>&quot;HEAD &quot;</code>. We suspect it also has fingerprints for the other HTTP methods, but we cannot test the others directly. As we will see below, the censor seems to have special handling for messages whose first 6 bytes are all printable characters, and these are the only four HTTP methods that are shorter than 5 bytes.</p>
+<p><strong>Reproduce it:</strong></p>
+<p>We observe blocking immediately:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">for</span> i in <span style="color:#f92672">{</span>1..30<span style="color:#f92672">}</span>; <span style="color:#66d9ef">do</span> <span style="color:#f92672">(</span>printf <span style="color:#e6db74">&#39;GET&#39;</span>; head -c240 /dev/urandom<span style="color:#f92672">)</span> | nc -vn $IP $PORT &amp; <span style="color:#66d9ef">done</span>
+</code></pre></div><p>We observe no blocking at all:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">for</span> i in <span style="color:#f92672">{</span>1..30<span style="color:#f92672">}</span>; <span style="color:#66d9ef">do</span> <span style="color:#f92672">(</span>printf <span style="color:#e6db74">&#39;GET &#39;</span>; head -c240 /dev/urandom<span style="color:#f92672">)</span> | nc -vn $IP $PORT &amp; <span style="color:#66d9ef">done</span>
+</code></pre></div><p>We observe blocking immediately:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">for</span> i in <span style="color:#f92672">{</span>1..30<span style="color:#f92672">}</span>; <span style="color:#66d9ef">do</span> <span style="color:#f92672">(</span>printf <span style="color:#e6db74">&#39;POST&#39;</span>; head -c240 /dev/urandom<span style="color:#f92672">)</span> | nc -vn $IP $PORT &amp; <span style="color:#66d9ef">done</span>
+</code></pre></div><p>We observe no blocking at all (note the space after the verb):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">for</span> i in <span style="color:#f92672">{</span>1..30<span style="color:#f92672">}</span>; <span style="color:#66d9ef">do</span> <span style="color:#f92672">(</span>printf <span style="color:#e6db74">&#39;pOsT &#39;</span>; head -c240 /dev/urandom<span style="color:#f92672">)</span> | nc -vn $IP $PORT &amp; <span style="color:#66d9ef">done</span>
+</code></pre></div><h4 id="ssh">SSH</h4>
+<p>The protocol fingerprint for SSH uses the magic bytes <code>SSH-[0-9,A-Z,a-z].</code>
+Note that the trailing <code>.</code> is required: omitting it fails to match the protocol fingerprint.</p>
+<p><strong>Reproduce it:</strong></p>
+<p>We observe blocking immediately:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">for</span> i in <span style="color:#f92672">{</span>1..30<span style="color:#f92672">}</span>; <span style="color:#66d9ef">do</span> <span style="color:#f92672">(</span>printf <span style="color:#e6db74">&#39;SSH-2&#39;</span>; head -c240 /dev/urandom<span style="color:#f92672">)</span> | nc -vn $IP $PORT &amp; <span style="color:#66d9ef">done</span>
+</code></pre></div><p>We observe no blocking at all:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">for</span> i in <span style="color:#f92672">{</span>1..30<span style="color:#f92672">}</span>; <span style="color:#66d9ef">do</span> <span style="color:#f92672">(</span>printf <span style="color:#e6db74">&#39;SSH-2.&#39;</span>; head -c240 /dev/urandom<span style="color:#f92672">)</span> | nc -vn $IP $PORT &amp; <span style="color:#66d9ef">done</span>
+</code></pre></div><p>The censor may have other protocol fingerprints as well to avoid over-blocking.</p>
+<h3 id="the-gfw-exempts-blocking-if-the-first-6-bytes-of-a-connection-are-printable">The GFW exempts blocking if the first 6 bytes of a connection are printable</h3>
+<p>We observe that the GFW seems to exempt blocking if the first 6 bytes of a connection are printable or spaces (but not other whitespace).</p>
+<p>We tested this with a script that could generate messages where the first <em>N</em> bytes were sourced from different character sets (such as <code>string.ascii_letters</code>) and the rest of the message would be random unprintable characters. If the first 6 bytes of the connection are lowercase or uppercase letters (<code>string.ascii_letters</code>), digits (<code>string.digits</code>), spaces (<code>&quot; &quot;</code>), or punctuation (<code>string.punctuation</code>), there is no blocking. If there are whitespace characters other than spaces or any other characters in the first 6 bytes, we observe blocking.</p>
+<p>This feature of the censor may be an attempt to limit over-blocking. Even though it may cause the censor to occasionally miss some real random connections, because it uses residual censorship, the censor does not actually need to catch every connection. Since the Shadowsocks makes a new TCP connection for each proxied connection, Shadowsocks client usually sends many TCP connections to the server. As long as one connection triggers the blocking, future connections will be impacted.</p>
+<p><strong>Reproduce it:</strong></p>
+<p>Prepending 5 bytes of printable characters to a random payload will <em>not</em> exempt it from blocking:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#f92672">(</span>printf <span style="color:#e6db74">&#39;abcde&#39;</span>; head -c240 /dev/urandom<span style="color:#f92672">)</span> | netcat -vn $SERVER_IP $SERVER_PORT
+</code></pre></div><p>Prepending 6 bytes of printable character to a random payload will exempt it from blocking. For example, all the following connections were not blocked even after sending them multiple times:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#f92672">(</span>printf <span style="color:#e6db74">&#39;abcdef&#39;</span>; head -c240 /dev/urandom<span style="color:#f92672">)</span> | netcat -vn $SERVER_IP $SERVER_PORT
+<span style="color:#f92672">(</span>printf <span style="color:#e6db74">&#39;abcde &#39;</span>; head -c240 /dev/urandom<span style="color:#f92672">)</span> | netcat -vn $SERVER_IP $SERVER_PORT
+<span style="color:#f92672">(</span>printf <span style="color:#e6db74">&#39;abcd  &#39;</span>; head -c240 /dev/urandom<span style="color:#f92672">)</span> | netcat -vn $SERVER_IP $SERVER_PORT
+<span style="color:#f92672">(</span>printf <span style="color:#e6db74">&#39;abc   &#39;</span>; head -c240 /dev/urandom<span style="color:#f92672">)</span> | netcat -vn $SERVER_IP $SERVER_PORT
+<span style="color:#75715e"># extreme case where there are only 6 bytes of space characters.</span>
+<span style="color:#f92672">(</span>printf <span style="color:#e6db74">&#39;      &#39;</span>; head -c240 /dev/urandom<span style="color:#f92672">)</span> | netcat -vn $SERVER_IP $SERVER_PORT
+</code></pre></div><h3 id="some-1--and-2-byte-payloads-can-trigger-blocking-but-not-all">Some 1- and 2-byte payloads can trigger blocking, but not all</h3>
+<p>We next tested if extremely short payloads could trigger the GFW. We did two experiments:</p>
+<p><strong>Single Byte Experiment</strong>: We enumerated all 1-byte payloads from <code>0x00</code> to <code>0xff</code>. For each port, every 10 seconds, we 1) made a connection to the port; 2) sent the same 1-byte payload to the port; 3) and then closed the connection. For example, we sent <code>0x00</code> to port <code>50000</code> and <code>0x01</code> to port <code>50001</code>. After repeating the experiment many times, we found that 40 payloads out of 256 result in blocking.
+We repeated this experiment multiple times.</p>
+<p>The bytes that can trigger the GFW are: <code>'\x0f', '\x17', '\x1b', '\x1d', '\x1e', '\x87', '\x8b', '\x8d', '\x8e', '\x93', '\x95', '\x96', '\x99', '\x9a', '\x9c', '£', '¥', '¦', '©', 'ª', '¬', '±', '²', '´', '¸', 'Ã', 'Å', 'Æ', 'É', 'Ê', 'Ì', 'Ñ', 'Ò', 'Ô', 'Ø', 'á', 'â', 'ä', 'è',</code> and <code>'ð'</code>.</p>
+<p>We know the censorship is tied to the payload, not the server port because we used different port ranges in different experiments. We find that the same 40 values always cause blocking. (There was one exception in which we observed timeouts on an additional 13 ports in an experiment, but we could not later reproduce this result.)</p>
+<p>Note that the presence of these bytes within a larger message is not enough to trigger blocking all on its own. We tested this by sending different simple messages that start with these bytes (such as <code>\x1b2345678</code>). We also found censorship when we tested generating random, fixed-length messages that contained other random bytes besides these 40 bytes. This suggests that these 40 bytes are not fully representative of what the GFW is searching for.</p>
+<p><strong>Double Byte Experiment</strong>: We enumerated all 2-byte payloads whose first byte ranges from <code>0x00</code> to <code>0xff</code> and whose second byte is <code>0x0a</code>. For each port, every 10 seconds, we 1) made a connection to the port; 2) sent the same 2-byte payload to the port; 3) and then closed the connection. For example, we sent <code>0x000a</code> to port <code>50000</code> and <code>0x010a</code> to <code>50001</code>. After repeating the experiment many times, we found that 92 payloads out of 256 result in blocking. At this time, we do not understand why more bytes trigger blocking when a newline is appended.</p>
+<h3 id="longer-payload-may-more-likely-to-trigger-the-blocking">Longer payload may more likely to trigger the blocking</h3>
+<p>We find that longer payloads are more likely to trigger the GFW more quickly. For example, when sending payloads of 2 random bytes, it can take up to 20 connections to trigger blocking.
+We also find that it may also depend on the interval when sending: the longer the interval between connections, the more connections are required to trigger blocking.</p>
+<p><strong>Reproduce it:</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">head -c2 /dev/urandom | netcat -vn $SERVER_IP $SERVER_PORT
+</code></pre></div><p>When sending 180 bytes in each connection, usually only 1 to 3 connections are required to trigger blocking:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">head -c180 /dev/urandom | netcat -vn $SERVER_IP $SERVER_PORT
+</code></pre></div><h2 id="discussions">Discussions</h2>
+<p>This blocking incident reveals many interesting details of the nature of the censor. Understanding this nature will help us 1) better understand the censor&rsquo;s capabilities and limitations, and 2) predict its possible future moves.</p>
+<h3 id="the-censor-still-attempts-to-avoid-over-blocking">The censor still attempts to avoid over-blocking</h3>
+<p>A key insight shared by Tschantz et al., after summarizing a large number of real-world censorship incidents, is that &ldquo;[c]ensors use exploits for which packet loss results in under-blocking instead of over-blocking&rdquo; (see <a href="https://censorbib.nymity.ch/pdf/Tschantz2016a.pdf#page=12">Table V</a> and <a href="https://censorbib.nymity.ch/pdf/Tschantz2016a.pdf#page=14">Recommendation 5</a>).</p>
+<p>This conclusion still holds for the current blocking incident, where the censor 1) limits its blocking only to a few popular VPS providers; and 2) uses relatively loose conditions to whitelist protocols.</p>
+<h3 id="the-censors-active-probing-may-have-been-rendered-ineffective">The censor&rsquo;s active probing may have been rendered ineffective</h3>
+<p>The rollout of this new censorship system may be indication that the GFW&rsquo;s active probing infrastructure has become less effective due to recent community efforts. The censor <a href="https://gfw.report/talks/imc20/en/">has been using a combination</a> of passive traffic analysis, active probing, and potentially human decisions to block Shadowsocks. Such an approach cannot now effectively identify Shadowsocks, thanks to <a href="https://github.com/net4people/bbs/issues/26">suggestions by Frolov et al.</a> and the patches by developers in the community.</p>
+<h3 id="the-censor-may-still-be-testing-this-new-system">The censor may still be testing this new system</h3>
+<p>Our experiments above show that while the censor explicitly tries to avoid targeting innocuous protocols (such as TLS), we suspect, with no evidence, that its traffic classification may have a non-trivial false positive rate. Since the system is effectively a protocol allowlist for unprintable-character-based protocols, any errors in these fingerprints (like <a href="https://geneva.cs.umd.edu/posts/iran-whitelister/#dns-fingerprint">in Iran</a>) or ommitted protocols will cause collateral damage.</p>
+<p>Some of our results also suggest that the censor is not yet fully confident in the new system:</p>
+<ol>
+<li>The censor limits its blocking to connections from China to a few popular VPS providers. If the censor were confident that its traffic analysis has very few false positives, they could have applied it to <em>all</em> connections to the outside of China.</li>
+<li>The censor does only short-term dynamic port blocking, rather than long term IP blocking. When using this approach, the censor only blocks the port for 120 seconds or 180 seconds. If the censor were confident in having few false positives, it could have blocked the entire IP address of servers for weeks, like what it had done when using its <a href="https://gfw.report/talks/imc20/en/">active probing approach</a>.</li>
+<li>The censor&rsquo;s blocking rule includes the client IP. If the censor were confident that the server was really a circumvention server, it could have blocked the port or IP of the server for all client IP addresses.</li>
+</ol>
+<h3 id="censor-may-tolerate-more-false-positives-during-politically-sensitive-times">Censor may tolerate more false positives during politically sensitive times</h3>
+<p>The start of this less accurate blocking coincides with the <a href="https://zh.wikipedia.org/zh-cn/%E4%B8%AD%E5%9B%BD%E5%85%B1%E4%BA%A7%E5%85%9A%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%B1%8A%E4%B8%AD%E5%A4%AE%E5%A7%94%E5%91%98%E4%BC%9A%E7%AC%AC%E5%85%AD%E6%AC%A1%E5%85%A8%E4%BD%93%E4%BC%9A%E8%AE%AE">Sixth Plenary Session of the 19th CPC Central Committee (中国共产党第十九届中央委员会第六次全体会议)</a>, which may show that censor is willing to tolerate more false positives during politically sensitive times.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="i-am-a-user-running-a-shadowsocks-server-what-should-i-do">I am a user running a Shadowsocks server. What should I do?</h3>
+<p>At this time, our recommendation in the short term is to use other datacenters to host the server. Long term, users may need to rely on other circumvention protocols.</p>
+<h3 id="as-a-circumvention-tool-developers-what-should-i-do">As a circumvention tool developers, what should I do?</h3>
+<p>Developer a version with fixed 6 byte of salt/IV; like what suggested by dcf and vinicius.</p>
+<h3 id="is-tor-affected">Is Tor affected?</h3>
+<p>This censorship system seems targeted towards Shadowsocks, not Tor. That being said, it shows that the GFW continues to be willing to invest into rendering these circumvention systems ineffective.</p>
+<h3 id="is-obfs4-affected">Is obfs4 affected?</h3>
+<p><a href="https://metrics.torproject.org/userstats-bridge-combined.html?start=2021-01-01&amp;end=2021-12-16&amp;country=cn">https://metrics.torproject.org/userstats-bridge-combined.html?start=2021-01-01&amp;end=2021-12-16&amp;country=cn</a></p>
+<p>At this time based on metrics, <code>obfs4</code> doesn&rsquo;t seem to be affected. It depends on how the metrics measured this, because the blocking is dynamic, the first SYN can reach server. Maybe the bridge IPs are mostly not in those IP addresses belong to webhost well-known to Chinese users?</p>
+<p>We need to set up our own to check.</p>
+<h3 id="is-brook-affected">Is Brook affected?</h3>
+<p>We have not tested Brook directly, but there are anecdotal reports that it is blocked: <a href="https://github.com/shadowsocks/shadowsocks-libev/issues/2860#issuecomment-966813234">https://github.com/shadowsocks/shadowsocks-libev/issues/2860#issuecomment-966813234</a></p>
+<h3 id="if-my-shadowsocks-server-is-updated-to-protect-from-active-probing-am-i-at-still-risk">If my Shadowsocks server is updated to protect from active probing, am I at still risk?</h3>
+<p>Although the GFW still sends active probes to suspected servers, it can now conduct dynamic and real-time blocking merely based on passive traffic analysis, without using any information from active probing. In other words, even if the server can defend against active probing attacks, it is still vulnerable to blocking. We want to emphasize that does not mean that <a href="https://gfw.report/blog/ss_advise/en">defenses against active probing</a> are not necessary anymore.</p>
+<p>If your shadowsocks server is updated and accepting connections successfully, you may be running with an IP address the GFW is not yet targeting.</p>
+<h2 id="how-can-i-help">How can I help?</h2>
+<p>The current blocking only targets some famous VPS providers, including Vultr, AlibabaCloud, and Digital Ocean. But it possibly does not influence Amazon Lightsail, Oracle Cloud, and others.</p>
+<p>Please feel free to let us know of any other cloud vendor that does or does not work.</p>
+<h2 id="ack">Ack</h2>
+<p>Vinicius Fortuna
+Xiangkang Wang
+Three anonymous Shadowsocks users who promoptly</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+        </main>
+        <footer class="surface3 bottom-0 w-100 pa3" role="contentinfo">
+    <div class="flex justify-between">
+        <span class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3">
+            <a class='no-underline' href="https://geneva.cs.umd.edu" >
+                &copy;  censorship.ai 2022, proud member of <a href='https://breakerspace.io'>Breakerspace</a>
+        </span>
+        
+
+
+
+
+
+
+
+
+<a href="https://github.com/kkevsterrr/geneva" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+        
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en-US" color-mode='light'>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Geneva is a genetic algorithm that automatically learns how to evade nation state censors.">
+        
+        <title>censorship.ai  | Papers</title>
+        <meta name="viewport" content="width=device-width,minimum-scale=1, initial-scale='1.0'">
+        <meta name="generator" content="Hugo 0.82.1" />
+        
+        
+        <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+        
+
+        
+        
+        <link href="/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
+        
+
+        
+        <link rel="stylesheet" href="/css/style.css">
+        
+        <link rel="stylesheet" href="/css/syntax.css">
+        
+        <link rel="stylesheet" href="/css/labels.css">
+        
+
+        
+        
+        
+
+        
+        
+        <link href="/papers/index.xml" rel="alternate" type="application/rss+xml" title="censorship.ai" />
+        <link href="/papers/index.xml" rel="feed" type="application/rss+xml" title="censorship.ai" />
+        
+        
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" type='text/javascript'></script>
+        <script type='text/javascript'>
+            $(document).ready(function() {
+                let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+                if (isMobile) {
+                    var viewportHeight = $('.section').outerHeight();
+                    $('.section').css({ height: viewportHeight });
+                }
+            })
+        </script>
+
+        <meta property="og:title" content="Papers" />
+<meta property="og:description" content="Our papers and talks" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://geneva.cs.umd.edu/papers/" /><meta property="og:site_name" content="censorship.ai" />
+
+<meta itemprop="name" content="Papers">
+<meta itemprop="description" content="Our papers and talks"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Papers"/>
+<meta name="twitter:description" content="Our papers and talks"/>
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WM3D2KZ64S"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-WM3D2KZ64S');
+        </script>
+    </head>
+
+    <body class="ma0 avenir bg-color">
+
+        
+
+
+
+  
+  <script src="/particles.js"></script>
+  
+  <header id='particle-container' class="bg-top" style="background-image: linear-gradient(to bottom right, black, purple)">
+      <div><div id="particles" style="width: 100%;position:  absolute;display: flex; overflow:hidden;z-index:0;pointer-events:none;"></div></div>
+    <script type="text/javascript">
+        particlesJS.load('particles', '/particles.json', function() {
+            console.log('callback - particles.js config loaded');
+        });
+    </script>
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+    <div class="flex-l justify-between items-center center">
+        <a href="https://geneva.cs.umd.edu" class="subtext f3 fw2 hover-white no-underline white-90 dib">
+            censorship.ai
+        </a>
+        <div class="flex-l items-center">
+            
+            <ul class="pl0 mr3">
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/about/" title="About Geneva page">About</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/people/" title="People page">People</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/posts/" title="Posts page">Posts</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/code/" title="Code &amp; Data page">Code</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/papers/" title="Papers page">Papers</a>
+                </li>
+                
+            </ul>
+            
+
+
+
+                
+
+
+
+
+            <div class="hideonmobile">
+            
+
+
+
+
+
+
+
+
+<a href="https://github.com/kkevsterrr/geneva" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+
+            </div>
+
+            
+            <button class="color-mode__btn light--hidden" aria-label="Toggle light mode">
+                <svg aria-hidden="true">
+                    <use href="#sun">
+                        <svg id="sun" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                    </use>
+                </svg>
+            </button>
+
+            
+            <button class="color-mode__btn dark--hidden" aria-label="Toggle dark mode">
+                <svg aria-hidden="true">
+                    <use href="#moon">
+                        <svg viewBox="0 0 24 24" id="moon">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </use>
+                </svg>
+            </button>
+            <script type='text/javascript'> 
+                const toggleColorMode = function(e) {
+                    
+                    if (e.currentTarget.classList.contains("light--hidden")) {
+                        
+                        document.documentElement.setAttribute("color-mode", "light");
+
+                        
+                        localStorage.setItem("color-mode", "light");
+                        return;
+                    }
+                
+                    
+
+                    document.documentElement.setAttribute("color-mode", "dark");
+
+                    
+                    localStorage.setItem("color-mode", "dark");
+                };
+
+            
+            const toggleColorButtons = document.querySelectorAll(".color-mode__btn");
+
+            
+            toggleColorButtons.forEach(btn => {
+                btn.addEventListener("click", toggleColorMode);
+            });
+
+            
+            if (
+                 
+                localStorage.getItem('color-mode') === 'dark' ||
+                (window.matchMedia('(prefers-color-scheme: dark)').matches &&
+                 !localStorage.getItem('color-mode'))
+            ) {
+                
+                document.documentElement.setAttribute('color-mode', 'dark')
+            }
+        </script>
+        </div>
+    </div>
+</nav>
+
+      <div class="tc-l pv4 pv6-l ph3 ph4-ns">
+        <h1 class="f2 f-subheadline-l fw2 white-90 mb0 lh-title" style="font-weight: normal">
+          Papers
+        </h1>
+        
+          <h2 class="fw1 f5 f3-l white-80 measure-wide-l center mt3 subtext">
+            Our papers and talks
+          </h2>
+        
+      </div>
+    </div>
+  </header>
+
+
+        <main class="pb7" role="main">
+            
+  <article class="pa3 pa4-ns nested-copy-line-height nested-img">
+    <section class="cf ph3-ns ph5-l pv3 pv4-l f4 tc-l center lh-copy light-gray"><div class="ph6-l container">
+    
+    <div class="row">
+        <div class="col-lg-12" style="text-align: left;">
+            <h4 class='mv1'><font color="#E90013">2023</font></h4>
+            <table class="table table-striped" border="0" width="100%" cellspacing="10">
+                <tbody>
+                    <tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+                            <a href="/papers/2023-usenix-fully-encrypted-traffic.pdf" class='no-underline'><span class="label label-primary">&nbsp;&nbsp;pdf&nbsp;&nbsp;</span></a>
+                        </td>
+                        <td class='pv3 ph1'>
+                            <b>How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic</b><br>
+                            Mingshi Wu, GFW Report, Jackson Sippe, Danesh Sivakumar, Jack Burg, Peter Anderson, Xiaokang Wang, Kevin Bock, Amir Houmansadr, Dave Levin, Eric Wustrow<br>
+                            <a href="https://www.usenix.org/conference/usenixsecurity23/presentation/wu-mingshi">USENIX Security 2023</a> 
+                        </td>
+                    </tr>  
+                    <tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+                            <a href="/papers/2023-web-turkmenistan.pdf" class='no-underline'><span class="label label-primary">&nbsp;&nbsp;pdf&nbsp;&nbsp;</span></a>
+                        </td>
+                        <td class='pv3 ph1'>
+                            <b>Measuring and Evading Turkmenistan's Internet Censorship</b><br>
+                            Sadia Nourin, Van Tran, Xi Jiang, Kevin Bock, Nick Feamster, Nguyen Phong Hoang, Dave Levin<br>
+                            <a href="https://www.sigweb.org/toc/www23.html">The Web Conference 2023</a> 
+                        </td>
+                    </tr>                    
+                </tbody></table>
+        </div>
+    
+    <div class="row">
+        <div class="col-lg-12" style="text-align: left;">
+            <h4 class='mv1'><font color="#E90013">2022</font></h4>
+            <table class="table table-striped" border="0" width="100%" cellspacing="10">
+
+                <tbody>
+                    <tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+                            <a href="/papers/2022-usenix-application-evasion.pdf" class='no-underline'><span class="label label-primary">&nbsp;&nbsp;pdf&nbsp;&nbsp;</span></a>
+                            <a href="https://www.youtube.com/watch?v=b9F696-oax0" class='no-underline'><span class="label label-success">&nbsp;&nbsp;talk&nbsp;&nbsp;</span></a>
+                        </td>
+                        <td class='pv3 ph1'>
+                            <b>GET /out: Automated Discovery of Application-Layer Censorship Evasion Strategies</b><br>
+                            Michael Harrity, Kevin Bock, Frederick Sell, and Dave Levin<br>
+                            <a href="https://www.usenix.org/conference/usenixsecurity22/presentation/harrity">USENIX Security 2022</a> 
+                        </td>
+                    </tr>                    
+                </tbody></table>
+        </div>
+
+
+    
+    <div class="row">
+        <div class="col-lg-12" style="text-align: left;">
+
+            <h4 class='mv1'><font color="#E90013">2021</font></h4>
+            <table class="table table-striped" border="0" width="100%" cellspacing="10">
+
+                <tbody>
+                    <tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+                            <a href="/slides/2021-ptim-geneva-tunnelbear.pdf" class='no-underline'><span class="label label-info">&nbsp;slides&nbsp;</span></a>
+                        </td>
+                        <td class='pv3 ph1'>
+                            <b>Geneva + Tunnelbear: Packet Manipulation Evasion at Scale</b><br>
+                            Kevin Bock, Jules Mazur<br>
+                            <a href="https://www.pluggabletransports.info/ptim2021/">PTIM 2021 (Pluggable Transports Implementers Meeting)</a> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+                            <a href="/papers/2021-foci-censors-have-backup.pdf" class='no-underline'><span class="label label-primary">&nbsp;&nbsp;pdf&nbsp;&nbsp;</span></a>
+                            <a href="https://www.youtube.com/watch?v=ASskHbwnrV4" class='no-underline'><span class="label label-success">&nbsp;&nbsp;talk&nbsp;&nbsp;</span></a>
+                        </td>
+                        <td class='pv3 ph1'>
+                            <b>Even Censors Have a Backup: Examining China's Double HTTPS Censorship System</b><br>
+                            Kevin Bock, Gabriel Naval, Kyle Reese, Dave Levin<br>
+                            <a href="https://conferences.sigcomm.org/sigcomm/2021/workshop-foci.html">SIGCOMM FOCI 2021</a> 
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+                            <a href="/papers/2021-usenix-weaponizing-ddos.pdf" class='no-underline'><span class="label label-primary">&nbsp;&nbsp;pdf&nbsp;&nbsp;</span></a>
+                            <a href="/slides/2021-usenix-weaponizing-ddos-slides.pdf" class='no-underline'><span class="label label-info">&nbsp;slides&nbsp;</span></a>
+                            <a href="https://www.youtube.com/watch?v=OSfgTbjb3og" class='no-underline'><span class="label label-success">&nbsp;&nbsp;talk&nbsp;&nbsp;</span></a>
+                            <a href="https://github.com/breakerspace/weaponizing-censors/" class='no-underline'><span class="label label-default">&nbsp;code&nbsp;</span></a>
+                            <a href="/weaponizing/" class='no-underline'><span class="label label-warning">www</span></a>
+                        </td>
+                        <td class='pv3 ph1'>
+                            <b>Weaponizing Middleboxes for TCP Reflected Amplification</b><br>
+                            Kevin Bock, Abdulrahman Alaraj, Yair Fax, Kyle Hurley, Eric Wustrow, Dave Levin<br>
+                            <a href="https://www.usenix.org/conference/usenixsecurity21/presentation/bock">USENIX Security 2021</a> (<i>Distinguished Paper Award</i>)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+                            <a href="https://www.youtube.com/watch?v=c6gR4UDXmOY" class='no-underline'><span class="label label-success">&nbsp;&nbsp;talk&nbsp;&nbsp;</span></a>
+                        </td>
+                        <td class='pv3 ph1'>
+                            <b>Weaponizing Censorship Infrastructure</b><br>
+                            Kevin Bock and Dave Levin<br>
+                            <a href="https://rightscon.summit.tc/t/2021/events/weaponizing-censorship-infrastructure-k2DwJeJ3b8VrBHgLMLV4Ze">RightsCon 2021</a> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+                            <a href="/papers/2021-woot-weaponizing-availability.pdf" class='no-underline'><span class="label label-primary">&nbsp;&nbsp;pdf&nbsp;&nbsp;</span></a>
+                            <a href="/slides/2021-woot-weaponizing-availability-slides.pdf" class='no-underline'><span class="label label-primary">&nbsp;slides&nbsp;</span></a>
+                            <a href="https://www.youtube.com/watch?v=QkB3IeHpGgY" class='no-underline'><span class="label label-success">&nbsp;&nbsp;talk&nbsp;&nbsp;</span></a>
+                            <a href="https://github.com/breakerspace/weaponizing-residual-censorship/" class='no-underline'><span class="label label-default">&nbsp;code&nbsp;</span></a>
+                            <a href="/posts/woot21-weaponizing-availability/" class='no-underline'><span class="label label-warning">www</span></a>
+                        </td>
+                        <td class='pv3 ph1'>
+                            <b>Your Censor is My Censor: Weaponizing Censorship Infrastructure for Availability Attacks</b><br>
+                            Kevin Bock, Pranav Bharadwaj, Jasraj Singh, Dave Levin<br>
+                            <a href="https://www.ieee-security.org/TC/SP2021/SPW2021/WOOT21/">IEEE WOOT 2021</a> 
+                        </td>
+                    </tr>
+                     <tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+                            <a href="https://irtf.org/anrp/" class='no-underline'><span class="label label-warning">www</span></a>
+                            <a href="/papers/2020-sigcomm-come-as-you-are.pdf" class='no-underline'><span class="label label-primary">&nbsp;&nbsp;pdf&nbsp;&nbsp;</span></a>
+                        </td>
+                        <td class='pv3 ph1'>
+                            <b>Applied Network Research Prize</b><br>
+                            Kevin Bock, George Hughey, Louis-Henri Merino, Tania Arya, Daniel Liscinsky, Regina Pogosian, Dave Levin<br>
+                            <a href="https://irtf.org/anrp/">IRTF ANRP 2020</a> (<a href="https://datatracker.ietf.org/meeting/112/proceedings">IETF-112</a>)
+                        </td>
+                    </tr>
+                    
+                </tbody></table>
+        </div>
+
+
+    
+    <div class="row">
+        <div class="col-lg-12" style="text-align: left;">
+
+            <h4 class='mv1'><font color="#E90013">2020</font></h4>
+            <table class="table table-striped" border="0" width="100%" cellspacing="10">
+
+                <tbody>
+                 <tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+
+                            
+
+                            <a href="/papers/2020-foci-protocol-filter.pdf" class='no-underline'><span class="label label-primary">&nbsp;&nbsp;pdf&nbsp;&nbsp;</span></a>
+                            <a href="https://www.youtube.com/watch?v=NM-h3WoAYEc" class='no-underline'><span class="label label-success">&nbsp;&nbsp;talk&nbsp;&nbsp;</span></a>
+                            <a href="https://github.com/kkevsterrr/geneva/" class='no-underline'><span class="label label-default">&nbsp;code&nbsp;</span></a>
+                        </td>
+                        <td class='pv3 ph1'>
+                            <b>Detecting and Evading Censorship-in-Depth: A Case Study of Iran's Protocol Filter</b><br>
+                            Kevin Bock, Yair Fax, Kyle Reese, Jasraj Singh, Dave Levin<br>
+                            <a href="https://www.usenix.org/conference/foci20">USENIX FOCI 2020</a> 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+                            <a href="https://www.youtube.com/watch?v=ksojSRFLbBM" class='no-underline'><span class="label label-success">&nbsp;&nbsp;talk&nbsp;&nbsp;</span></a>
+                            <a href="/slides/2020-imv-ooni.pdf" class='no-underline'><span class="label label-info">slides</span></a>
+                        </td>
+                        <td class='pv3 ph1'>
+                            <b>Geneva: Evolving Censorship Evasion</b><br>
+                            Kevin Bock<br>
+                            <a href="https://ooni.org/post/2020-internet-measurement-village/">OONI Internet Measurement Village 2020</a> 
+                        </td>
+                    </tr>
+
+                     <tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+                            <a href="/papers/2020-sigcomm-come-as-you-are.pdf" class='no-underline'><span class="label label-primary">&nbsp;&nbsp;pdf&nbsp;&nbsp;</span></a>
+                            <a href="https://github.com/kkevsterrr/geneva/" class='no-underline'><span class="label label-default">&nbsp;code&nbsp;</span></a>
+                        </td>
+                        <td class='pv3 ph1'>
+                            <b>Come as You Are: Helping Unmodified Clients Bypass Censorship with Server-side Evasion</b><br>
+                            Kevin Bock, George Hughey, Louis-Henri Merino, Tania Arya, Daniel Liscinsky, Regina Pogosian, Dave Levin<br>
+                            <a href="https://conferences.sigcomm.org/sigcomm/2020/">ACM SIGCOMM 2020</a> 
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+                            <a href="https://www.youtube.com/watch?v=R9TWLO5N7mc" class='no-underline'><span class="label label-success">&nbsp;&nbsp;talk&nbsp;&nbsp;</span></a>
+                            <a href="/slides/2020-bluehat-ai-approach.pdf" class='no-underline'><span class="label label-info">slides</span></a>
+                        </td>
+                        <td class='pv3 ph1'>
+                            <b>Geneva: An AI Approach to Evading Nation-State Censorship</b><br>
+                            Kevin Bock & George Hughey<br>
+                            <a href="https://www.bluehatil.com/">Bluehat IL 2020</a> 
+                           (Conference on Groundbreaking Offensive Security Research) 
+                        </td>
+                    </tr>
+
+                    
+                </tbody></table>
+        </div>
+
+    
+    <div class="row">
+        <div class="col-lg-12" style="text-align: left;">
+            <h4 class='mv1'><font color="#E90013">2019</font></h4>
+            <table class="table table-striped" border="0" width="100%" cellspacing="10">
+
+                <tbody><tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+                            <a href="/papers/2019-ccs-geneva.pdf" class='no-underline'><span class="label label-primary">&nbsp;&nbsp;pdf&nbsp;&nbsp;</span></a>
+                            <a href="https://github.com/kkevsterrr/geneva/" class='no-underline'><span class="label label-default">&nbsp;code&nbsp;</span></a>
+                        </td>
+                        <td class='pv3'>
+                            <b>Geneva: Evolving Censorship Evasion Strategies</b><br>
+                            Kevin Bock, George Hughey, Xiao Qiang, Dave Levin <br>
+                            <a href="https://www.sigsac.org/ccs/CCS2019/">ACM CCS 2019</a>
+                            (Conference on Computer and Communications Security)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+                            <a href="https://www.usenix.org/conference/scainet19/presentation/levin" class='no-underline'><span class="label label-warning">www</span></a>
+                        </td>
+                        <td class='pv3'>
+                            <b>Automatically Learning How to Evade Censorship</b><br>
+                            Dave Levin <br>
+                            <a href="https://www.caida.org/workshops/aims/1904/">USENIX ScAINet 2019</a>
+                            (Security and AI Networking Conference)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" valign="top" width="8%" class='pv3 ph1'>
+                            <a href="/slides/2019-aims-automatically-learning.pdf" class='no-underline'><span class="label label-info">slides</span></a>
+                        </td>
+                        <td class='pv3 ph1'>
+                            <b>Learning Nation-State Censorship with Genetic Algorithms</b><br>
+                            Kevin Bock, George Hughey<br>
+                            <a href="https://www.caida.org/workshops/aims/1904/">AIMS 2019</a>
+                            (Workshop on Active Internet Measurements)
+                        </td>
+                    </tr>
+
+                </tbody></table>
+        </div>
+    </div>
+
+</div>
+
+</section>
+    <section class="flex-ns flex-wrap justify-around mt5">
+      
+    </section>
+
+</article>
+
+        </main>
+        <footer class="surface3 bottom-0 w-100 pa3" role="contentinfo">
+    <div class="flex justify-between">
+        <span class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3">
+            <a class='no-underline' href="https://geneva.cs.umd.edu" >
+                &copy;  censorship.ai 2023, proud member of <a href='https://breakerspace.io'>Breakerspace</a>
+        </span>
+        
+
+
+
+
+
+
+
+
+<a href="https://github.com/kkevsterrr/geneva" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+        
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+    </body>
+</html>

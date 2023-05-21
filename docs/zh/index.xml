@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>censorship.ai</title>
+    <link>https://geneva.cs.umd.edu/zh/</link>
+    <description>Recent content on censorship.ai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Fri, 07 Aug 2020 00:00:00 -0400</lastBuildDate><atom:link href="https://geneva.cs.umd.edu/zh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>揭示和规避中国对加密SNI（ESNI）的封锁</title>
+      <link>https://geneva.cs.umd.edu/zh/posts/china-censors-esni/esni/</link>
+      <pubDate>Fri, 07 Aug 2020 00:00:00 -0400</pubDate>
+      
+      <guid>https://geneva.cs.umd.edu/zh/posts/china-censors-esni/esni/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.iyouport.org&#34;&gt;iyouport&lt;/a&gt;于2020年7月30日&lt;a href=&#34;https://mailarchive.ietf.org/arch/msg/tls/YzT5LjLJ_6WWhdnU2wVsKNKR6_I/&#34;&gt;报告&lt;/a&gt; (&lt;a href=&#34;https://web.archive.org/web/20200801221253/https://mailarchive.ietf.org/arch/msg/tls/YzT5LjLJ_6WWhdnU2wVsKNKR6_I/&#34;&gt;存档&lt;/a&gt;)中国封锁了带有ESNI扩展的TLS连接。
+iyouport称初次封锁见于2020年7月29日。&lt;/p&gt;
+&lt;p&gt;我们确认中国的防火长城（GFW）已经开始封锁ESNI这一TLS1.3和HTTPS的基础特性。我们在本文中实证性地展示如何触发审查，并研究&amp;quot;残余审查&amp;quot;的延续时长。
+我们还将展示7种用&lt;a href=&#34;https://geneva.cs.umd.edu&#34;&gt;Geneva&lt;/a&gt;发现的基于客户端或服务端的绕过审查策略。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

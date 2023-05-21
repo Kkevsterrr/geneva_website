@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en-US" color-mode='light'>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Geneva is a genetic algorithm that automatically learns how to evade nation state censors.">
+        
+        <title>censorship.ai  | Evading Censorship from the Server-side</title>
+        <meta name="viewport" content="width=device-width,minimum-scale=1, initial-scale='1.0'">
+        <meta name="generator" content="Hugo 0.82.1" />
+        
+        
+        <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+        
+
+        
+        
+        <link href="/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
+        
+
+        
+        <link rel="stylesheet" href="/css/style.css">
+        
+        <link rel="stylesheet" href="/css/syntax.css">
+        
+        <link rel="stylesheet" href="/css/labels.css">
+        
+
+        
+        
+        
+
+        
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" type='text/javascript'></script>
+        <script type='text/javascript'>
+            $(document).ready(function() {
+                let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+                if (isMobile) {
+                    var viewportHeight = $('.section').outerHeight();
+                    $('.section').css({ height: viewportHeight });
+                }
+            })
+        </script>
+
+        <meta property="og:title" content="Evading Censorship from the Server-side" />
+<meta property="og:description" content="Using our tool Geneva, we have discovered how to circumvent censorship from the server-side: with no client participation whatsoever. This opens up new avenues for helping people evade censorship, even if they didn&rsquo;t realize they were being censored in the first place." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://geneva.cs.umd.edu/posts/server-side/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-09-08T00:00:00-04:00" />
+<meta property="article:modified_time" content="2020-09-08T00:00:00-04:00" /><meta property="og:site_name" content="censorship.ai" />
+
+<meta itemprop="name" content="Evading Censorship from the Server-side">
+<meta itemprop="description" content="Using our tool Geneva, we have discovered how to circumvent censorship from the server-side: with no client participation whatsoever. This opens up new avenues for helping people evade censorship, even if they didn&rsquo;t realize they were being censored in the first place."><meta itemprop="datePublished" content="2020-09-08T00:00:00-04:00" />
+<meta itemprop="dateModified" content="2020-09-08T00:00:00-04:00" />
+<meta itemprop="wordCount" content="1323">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Evading Censorship from the Server-side"/>
+<meta name="twitter:description" content="Using our tool Geneva, we have discovered how to circumvent censorship from the server-side: with no client participation whatsoever. This opens up new avenues for helping people evade censorship, even if they didn&rsquo;t realize they were being censored in the first place."/>
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WM3D2KZ64S"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-WM3D2KZ64S');
+        </script>
+    </head>
+
+    <body class="ma0 avenir bg-color">
+
+        
+   
+  
+
+
+
+  
+  
+  <header class="cover bg-top" style="background-image: url('https://geneva.cs.umd.edu/server-side-cover.jpg');">
+
+    <script src="/particles.js"></script>
+    <div class="pb3-m pb6-l bg-black-60" id='particle-container'>
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+    <div class="flex-l justify-between items-center center">
+        <a href="https://geneva.cs.umd.edu" class="subtext f3 fw2 hover-white no-underline white-90 dib">
+            censorship.ai
+        </a>
+        <div class="flex-l items-center">
+            
+            <ul class="pl0 mr3">
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/about/" title="About Geneva page">About</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/people/" title="People page">People</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/posts/" title="Posts page">Posts</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/code/" title="Code &amp; Data page">Code</a>
+                </li>
+                
+                <li class="list f5 f4-ns fw4 dib pr3">
+                    <a class="hover-white no-underline white-90" href="/papers/" title="Papers page">Papers</a>
+                </li>
+                
+            </ul>
+            
+
+
+
+                
+
+
+
+
+            <div class="hideonmobile">
+            
+
+
+
+
+
+
+
+
+<a href="https://github.com/kkevsterrr/geneva" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+
+            </div>
+
+            
+            <button class="color-mode__btn light--hidden" aria-label="Toggle light mode">
+                <svg aria-hidden="true">
+                    <use href="#sun">
+                        <svg id="sun" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                    </use>
+                </svg>
+            </button>
+
+            
+            <button class="color-mode__btn dark--hidden" aria-label="Toggle dark mode">
+                <svg aria-hidden="true">
+                    <use href="#moon">
+                        <svg viewBox="0 0 24 24" id="moon">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </use>
+                </svg>
+            </button>
+            <script type='text/javascript'> 
+                const toggleColorMode = function(e) {
+                    
+                    if (e.currentTarget.classList.contains("light--hidden")) {
+                        
+                        document.documentElement.setAttribute("color-mode", "light");
+
+                        
+                        localStorage.setItem("color-mode", "light");
+                        return;
+                    }
+                
+                    
+
+                    document.documentElement.setAttribute("color-mode", "dark");
+
+                    
+                    localStorage.setItem("color-mode", "dark");
+                };
+
+            
+            const toggleColorButtons = document.querySelectorAll(".color-mode__btn");
+
+            
+            toggleColorButtons.forEach(btn => {
+                btn.addEventListener("click", toggleColorMode);
+            });
+
+            
+            if (
+                 
+                localStorage.getItem('color-mode') === 'dark' ||
+                (window.matchMedia('(prefers-color-scheme: dark)').matches &&
+                 !localStorage.getItem('color-mode'))
+            ) {
+                
+                document.documentElement.setAttribute('color-mode', 'dark')
+            }
+        </script>
+        </div>
+    </div>
+</nav>
+
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title" style="font-weight:normal">Evading Censorship from the Server-side</h1>
+          
+        
+      </div>
+    </div>
+    
+
+  </header>
+
+
+
+        <main class="pb7" role="main">
+            
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked light-gray">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=https://geneva.cs.umd.edu/posts/server-side/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=https://geneva.cs.umd.edu/posts/server-side/&amp;text=Evading%20Censorship%20from%20the%20Server-side" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://geneva.cs.umd.edu/posts/server-side/&amp;title=Evading%20Censorship%20from%20the%20Server-side" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+
+      
+      
+      
+      <time class="f6 mv4 dib tracked light-gray" datetime="2020-09-08T00:00:00-04:00">September 8, 2020</time>
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy avenir f4 nested-links nested-img light-gray pr4-l"><h1 id="evading-censorship-from-the-server-side">Evading Censorship from the Server-side</h1>
+<p><strong>Summary:  Using our tool Geneva, we have discovered how to circumvent censorship from the server-side: <em>with no client participation whatsoever</em>. This opens up new avenues for helping people evade censorship, even if they didn&rsquo;t realize they were being censored in the first place.</strong></p>
+<p><strong>This is the first in a series of blog posts on <a href="https://geneva.cs.umd.edu/papers/come-as-you-are.pdf">our most recent paper on server-side evasion</a> where we will be covering: what it means to evade censorship from the server-side, specific server-side evasion strategies, and what new things it allows us to learn about censors.</strong></p>
+<hr>
+<p>All existing censorship evasion tools and techniques have involved some involvement from the client. This seems intuitive: to evade censorship, shouldn&rsquo;t the client have to do <em>something</em>? Regardless of the approach, be it Tor, proxies, VPNs, protocol obfuscation, or even <a href="https://geneva.cs.umd.edu/papers/geneva_ccs19.pdf">Geneva&rsquo;s previous strategies</a> (to name a few), the client has always been required to install some extra software.</p>
+<p>Unfortunately, active participation on the part of clients can limit the reach of censorship evasion techniques. In some scenarios, installing anti-censorship software can put <a href="https://www.nytimes.com/2009/05/01/technology/01filter.html">users at risk</a>. For users who are willing to take on this risk, it can be difficult to bootstrap censorship evasion, as the anti-censorship tools themselves <a href="https://blog.torproject.org/internet-censorship-iran-findings-2014-2017">may be censored</a>. Worse yet, there are many users who do not seek out tools to evade censorship because they <a href="https://www.nytimes.com/2018/08/06/technology/china-generation-blocked-internet.html">do not even know they are being censored</a>.</p>
+<h1 id="server-side-evasion-can-help">Server-side evasion can help</h1>
+<p>Consider what <em>server-side</em> evasion would look like: suppose a server <em>outside</em> a censoring regime could alter its traffic in a way that lets censored clients access content without having to install any extra software. Server-side evasion would allow servers located outside of a censoring regime to subvert censorship <em>on behalf of clients.</em></p>
+<p>In this work, we specifically examine server-side evasion techniques against DPI-based censorship in China, India, Iran and Kazakhstan. With DPI-based censorship this model, clients and servers can communicate, but the censor will step in and teardown the connection if forbidden content is exchanged. Many other countries use DPI, as well, and we expect our approach to generalize. However, these techniques do not necessarily extend to a censor directly blocking IP addresses.</p>
+<h1 id="-but-it-shouldnt-be-possible">&hellip; but it shouldn&rsquo;t be possible</h1>
+<p>Unfortunately, at first glance, defeating censorship purely from the server-side seems impossible. The server would have to somehow subvert the censor before the client sends the forbidden request. The challenge is that the server does almost <em>nothing</em> before then. To see this, consider the packets that are exchanged leading up to a forbidden HTTP <code>GET</code> request.</p>
+<figure>
+    <img src="/server-side-handshake.png"
+         alt="A censored HTTP GET request sends the forbidden keyword immediately following the TCP three-way handshake."/> <figcaption>
+            <p>A censored HTTP GET request sends the forbidden keyword immediately following the TCP three-way handshake.</p>
+        </figcaption>
+</figure>
+
+<p>First, the client would initiate a TCP three-way handshake, during which the client sends a <code>SYN</code>, the server responds with a <code>SYN+ACK</code>, and the client responds with an <code>ACK</code>. Then, the client would send a <code>PSH+ACK</code> packet containing the HTTP request with the censored keyword, at which point the censor would tear down the connection (e.g., by injecting <code>RST</code> packets to both the client and the server). The <em>only</em> packet a server sends before a typical censorship event is just a <code>SYN+ACK</code>—this would seem to leave very little room for a censorship evasion strategy.</p>
+<p>It is tempting to assume we can re-use client-side strategies from prior work (such as <a href="https://geneva.cs.umd.edu/papers/geneva_ccs19.pdf">those found by Geneva</a>). Unfortunately, we find that client-side strategies do not generalize to server-side. Packets from clients and servers are treated differently, and shortcomings in censors identified in the past from the client-side do not necessarily lend insight to server-side evasion. (See <a href="https://geneva.cs.umd.edu/papers/come-as-you-are.pdf">our paper</a> for more details on how we tested this.) Evading from the server-side required a blank-slate approach.</p>
+<h1 id="training-geneva">Training Geneva</h1>
+<div class="callout callout-blue" style="">
+  <div></div>
+	<div class="callout-inner">
+<p><strong>Geneva</strong> (<strong>Gen</strong>etic <strong>Eva</strong>sion) is a genetic algorithm we developed that discovers censorship evasion strategies against a censor. Unlike most anti-censorship systems, it does not require deployment at both ends of the connection: it runs exclusively at one side (client or server) and defeats censorship by manipulating the packet stream to confuse the censor without impacting the underlying connection. A censorship evasion strategy describes how that traffic should be modified. Since Geneva will be evolving these strategies, they are expressed in a domain-specific language. (For a full rundown of Geneva’s strategy syntax, see <a href="https://github.com/Kkevsterrr/geneva">our GitHub page</a> or <a href="http://geneva.readthedocs.io/">our documentation</a>).</p>
+<p>Geneva is comprised of two main components. First, the genetic algorithm, which can evolve new ways to defeat a censorship system given an application that experiences censorship and a fitness function. Second, the strategy engine, which applies a given strategy to modify active network traffic.</p>
+  </div>
+</div>
+<p>We modified Geneva so it could run from the server-side and added plugins to train with DNS-over-TCP, FTP, HTTPS, and SMTP.</p>
+<p>Over the span of five months, we ran Geneva server-side in six countries—Australia, Germany, Ireland, Japan, South Korea, and the US—on five protocols: DNS (over TCP), FTP, HTTP, HTTPS, and SMTP (all over IPv4). We used unmodified clients within four nation state censors—China, India, Iran, and Kazakhstan—to connect to our servers. For each nation-state censor, we trained on each protocol for which we were able to trigger censorship; all four countries censored HTTP, but only China censored all five protocols.</p>
+<h1 id="server-side-evasion-is-possible">Server side evasion is possible!</h1>
+<p>In total, we found <strong>11 strategies</strong> in <a href="https://geneva.cs.umd.edu/papers/come-as-you-are.pdf">our original study</a> (and another 4 server-side strategies against <a href="https://geneva.cs.umd.edu/posts/china-censors-esni/esni">China&rsquo;s new ESNI censorship system</a>) spanning China, India, Iran, and Kazakhstan across every protocol they censor (HTTPS, HTTP, DNS, FTP, SMTP).</p>
+<p>To see how server-side evasion can work, let&rsquo;s examine one of the strategies from our paper that successfully circumvents censorship in Kazakhstan: the <code>Double Benign GET</code>.</p>
+<figure>
+    <img src="/server-side-benign-get.png"
+         alt="A server-side evasion strategy that is successful in Kazakhstan. The server&amp;rsquo;s strange data-bearing SYN/ACKs confuse the censor."/> <figcaption>
+            <p>A server-side evasion strategy that is successful in Kazakhstan. The server&rsquo;s strange data-bearing SYN/ACKs confuse the censor.</p>
+        </figcaption>
+</figure>
+
+<p>During the three-way handshake, instead of sending one <code>SYN/ACK</code> packet like usual, the server sends <em>two</em> <code>SYN/ACK</code> packets. On each packet, it attaches a payload: a well-formed HTTP GET request for some benign resource (<code>GET / HTTP/1.1\r\nHost: example.com\r\n\r\n</code>). This evaded Kazakhstan&rsquo;s censorship with 100% success rate in our tests.</p>
+<p>Why does this work? As we understand it, the two <code>GET</code> requests confuse the censor as to who is the client and who is the server. The <code>GET</code> requests lead the censor to believe the server is actually the client, and because the Kazakhstani censor ignores requests from (who it believes to be) the server, it subsequently ignores the <em>actual</em> client&rsquo;s real request. For the rest of this connection, the client can freely communicate through the censor.</p>
+<p>If this confuses censors, does it also confuse clients? We tested on many flavors of Windows, Mac, Linux, and mobile devices, and all of the strategies worked for all clients, with a small number of exceptions for Windows: We found only one type of strategy that did not work on Windows, but after slight modification, we can support Windows end hosts. There appears to be a large space of strategies that exploit bugs and errors in middleboxes that don&rsquo;t exist in the endhosts, and by training on real machines against real censors, Geneva can find them.</p>
+<h1 id="up-next">Up next</h1>
+<p>In this post—the first in a series—we have shown that server-side censorship evasion is possible without any extra client-side software whatsoever. In the next posts, we&rsquo;ll delve deeper into some of the server-side evasion strategies we discovered in China and what they teach us about how censorship operates.</p>
+<h1 id="try-it-yourself">Try it yourself</h1>
+<p>Geneva is open-source <a href="https://github.com/Kkevsterrr/geneva">on our GitHub page</a>. If you want to try these strategies out yourself, it is simple to do so. Using the strategy engine (<code>engine.py</code>), you can run the strategies in front of an existing server to make it more resilient to censorship. Follow the instructions on <a href="https://github.com/kkevsterrr/geneva">our Github page</a>.</p>
+<div class="callout callout-red" style="">
+  <div></div>
+	<div class="callout-inner">
+<p>Disclaimer: Geneva&rsquo;s strategies intentionally take overt action on the network to interfere with the normal operation of censors. The genetic algorithm in Geneva trains against a live adversary, so when running the genetic algorithm to evolve new censorship strategies, it will intentionally trigger censorship many times during training. Understand the risks of using Geneva in your country before trying it.</p>
+  </div>
+</div>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+        </main>
+        <footer class="surface3 bottom-0 w-100 pa3" role="contentinfo">
+    <div class="flex justify-between">
+        <span class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3">
+            <a class='no-underline' href="https://geneva.cs.umd.edu" >
+                &copy;  censorship.ai 2023, proud member of <a href='https://breakerspace.io'>Breakerspace</a>
+        </span>
+        
+
+
+
+
+
+
+
+
+<a href="https://github.com/kkevsterrr/geneva" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+        
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+    </body>
+</html>

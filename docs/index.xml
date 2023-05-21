@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Geneva: Evolving Censorship Evasion on censorship.ai</title>
+    <link>https://geneva.cs.umd.edu/</link>
+    <description>Recent content in Geneva: Evolving Censorship Evasion on censorship.ai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Thu, 12 Aug 2021 03:53:38 -0500</lastBuildDate><atom:link href="https://geneva.cs.umd.edu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Weaponizing Middleboxes for TCP Reflected Amplification</title>
+      <link>https://geneva.cs.umd.edu/posts/usenix21-weaponizing-censors/</link>
+      <pubDate>Thu, 12 Aug 2021 03:53:38 -0500</pubDate>
+      
+      <guid>https://geneva.cs.umd.edu/posts/usenix21-weaponizing-censors/</guid>
+      <description>Censors pose an even greater threat to the Internet than previously understood. We demonstrate an off-path attack that exploits &lt;em&gt;residual censorship&lt;/em&gt;, a feature by which a censor continues blocking traffic between two end-hosts for some time after a censorship event. Our attack sends spoofed packets with censored content, keeping two victim end-hosts separated by a censor from being able to communicate with one another. This attack allows anyone to weaponize censorship infrastructure to perform their own blocking.</description>
+    </item>
+    
+    <item>
+      <title>Weaponizing Censorship Infrastructure for Availability Attacks</title>
+      <link>https://geneva.cs.umd.edu/posts/woot21-weaponizing-availability/</link>
+      <pubDate>Wed, 11 Aug 2021 03:53:38 -0500</pubDate>
+      
+      <guid>https://geneva.cs.umd.edu/posts/woot21-weaponizing-availability/</guid>
+      <description>We discover it is possible for an attacker to weaponize a censor to prevent &lt;em&gt;any pair&lt;/em&gt; of hosts from communicating across its borders by abusing a little known feature of many censorship systems: &lt;em&gt;residual censorship&lt;/em&gt;.</description>
+    </item>
+    
+    <item>
+      <title>Evading SNI Filtering in India with Geneva</title>
+      <link>https://geneva.cs.umd.edu/posts/india-sni-filtering/</link>
+      <pubDate>Tue, 27 Jul 2021 00:00:00 -0400</pubDate>
+      
+      <guid>https://geneva.cs.umd.edu/posts/india-sni-filtering/</guid>
+      <description>In July of 2020, the Open Observatory of Network Interference (OONI) team &lt;a href=&#34;https://ooni.org/post/2020-tls-blocking-india/&#34;&gt;discovered&lt;/a&gt; that Indian ISPs (Airtel and Reliance Jio) had started filtering HTTPS websites using the Server Name Indication (SNI) field in TLS. A year later, we revisit Airtel&amp;rsquo;s HTTPS censorship system, show how we trained Geneva against the new censorship system to discover evasion strategies, and learn more about how the censorship systems operate.</description>
+    </item>
+    
+    <item>
+      <title>Evading Censorship from the Server-side</title>
+      <link>https://geneva.cs.umd.edu/posts/server-side/</link>
+      <pubDate>Tue, 08 Sep 2020 00:00:00 -0400</pubDate>
+      
+      <guid>https://geneva.cs.umd.edu/posts/server-side/</guid>
+      <description>Using our tool Geneva, we have discovered how to circumvent censorship from the server-side: with no client participation whatsoever. This opens up new avenues for helping people evade censorship, even if they didn&amp;rsquo;t realize they were being censored in the first place.</description>
+    </item>
+    
+    <item>
+      <title>Exposing and Circumventing China&#39;s Censorship of ESNI</title>
+      <link>https://geneva.cs.umd.edu/posts/china-censors-esni/esni/</link>
+      <pubDate>Fri, 07 Aug 2020 00:00:00 -0400</pubDate>
+      
+      <guid>https://geneva.cs.umd.edu/posts/china-censors-esni/esni/</guid>
+      <description>The Great Firewall (GFW) of China has recently begun blocking ESNI—one of the foundational features of TLS 1.3 and HTTPS. We empirically demonstrate what triggers this censorship and how long residual censorship lasts. We also present several evasion strategies discovered by Geneva that can be run either client-side or server-side to evade blocking.</description>
+    </item>
+    
+    <item>
+      <title>Geneva Code Release</title>
+      <link>https://geneva.cs.umd.edu/posts/code-release/</link>
+      <pubDate>Sun, 12 Jul 2020 09:53:38 -0500</pubDate>
+      
+      <guid>https://geneva.cs.umd.edu/posts/code-release/</guid>
+      <description>We&amp;rsquo;re excited to announce the full code base of Geneva is now public! Click to read more about the code, how to use it, and why we are releasing it.</description>
+    </item>
+    
+    <item>
+      <title>Geneva @ OONI Internet Measurement Village</title>
+      <link>https://geneva.cs.umd.edu/posts/ooni-talk/</link>
+      <pubDate>Sat, 27 Jun 2020 03:53:38 -0500</pubDate>
+      
+      <guid>https://geneva.cs.umd.edu/posts/ooni-talk/</guid>
+      <description>Tune in to our talk with the OONI Internet Measurement Village!</description>
+    </item>
+    
+    <item>
+      <title>Iran: A New Model for Censorship</title>
+      <link>https://geneva.cs.umd.edu/posts/iran-whitelister/</link>
+      <pubDate>Wed, 18 Mar 2020 09:53:38 -0500</pubDate>
+      
+      <guid>https://geneva.cs.umd.edu/posts/iran-whitelister/</guid>
+      <description>Ahead of its February 21st elections and amidst the chaos of COVID-19, Iran quietly deployed a second censorship system: a &lt;em&gt;protocol whitelister&lt;/em&gt;. Click read more to learn about how the protocol whitelister works and how we can circumvent it.</description>
+    </item>
+    
+    <item>
+      <title>Geneva @ Bluehat IL</title>
+      <link>https://geneva.cs.umd.edu/posts/bluehat/</link>
+      <pubDate>Mon, 10 Feb 2020 09:53:38 -0500</pubDate>
+      
+      <guid>https://geneva.cs.umd.edu/posts/bluehat/</guid>
+      <description>Kevin and George spoke at BlueHat IL in Tel Aviv. Click read more to see their talk and slides.</description>
+    </item>
+    
+    <item>
+      <title>Geneva @ CCS</title>
+      <link>https://geneva.cs.umd.edu/posts/ccs_london/</link>
+      <pubDate>Fri, 22 Nov 2019 09:53:38 -0500</pubDate>
+      
+      <guid>https://geneva.cs.umd.edu/posts/ccs_london/</guid>
+      <description>Kevin spoke at CCS in London. Click read more to see their talk and slides.</description>
+    </item>
+    
+  </channel>
+</rss>
