@@ -1,7 +1,7 @@
 ---
 title: "Geneva: Evolving Censorship Evasion"
 featured_color: "red"
-description: "Join us and learn about our fight to defeat censorship around the world."
+description: "Join us and learn about our fight against internet censorship around the world."
 ---
 
 
@@ -10,7 +10,7 @@ description: "Join us and learn about our fight to defeat censorship around the 
 
 {{% callout color=yellow %}}
 
-### *NEW*: Censors pose a threat to the entire Internet. See how attackers can [weaponize censorship infrastructure](/weaponizing/).
+### *NEW*: We present the largest measurement study to date of [Turkmenistan’s web censorship](/papers), with a new Geneva-assisted measurement tool, and discover over 100,000 blocked domains.
 
 {{% /callout %}}
 
@@ -66,6 +66,9 @@ Geneva composes four basic packet-level actions (drop, duplicate, fragment, tamp
 
 {{% flex-column %}}
 Geneva has been deployed against real-world censors in China, India, Iran, and Kazahkstan. It has discovered dozens of strategies to defeat censorship, and found previously unknown bugs in censors. 
+
+Note that Geneva is a **research prototype**, and does not offer anonymization, encryption, or other protection from censors. Understand the risks in your country
+before trying to run Geneva. 
 
 All of these strategies and Geneva's strategy engine and are open source: check them out on our [Github page](http://github.com/kkevsterrr/geneva).
 
