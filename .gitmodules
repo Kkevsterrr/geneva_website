@@ -1,0 +1,3 @@
+[submodule "docs/country-flags"]
+	path = docs/country-flags
+	url = https://github.com/hampusborgos/country-flags
